@@ -44,21 +44,14 @@ export default function ContactSection() {
                         <div className="mt-4 space-y-3 text-base text-[#595959]">
                             <p>
                                 <a
-                                    href="tel:0123456789"
+                                    href="tel:0751126402"
                                     className="font-medium transition hover:text-[#1F3A5F]"
                                 >
-                                    01 23 45 67 89
+                                    07 51 12 64 02
                                 </a>
                             </p>
 
-                            <p>
-                                <a
-                                    href="mailto:info@monsite.fr"
-                                    className="font-medium transition hover:text-[#1F3A5F]"
-                                >
-                                    info@monsite.fr
-                                </a>
-                            </p>
+
                         </div>
 
                         <div className="mt-6 flex gap-3">
