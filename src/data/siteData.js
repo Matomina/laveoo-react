@@ -90,20 +90,12 @@ export const siteData = {
                     "Intervention à domicile : aspiration profonde, sièges et moquettes détachés, plastiques désinfectés et ravivés, avec finitions détaillées pour un habitacle propre et rafraîchi.",
             },
             {
-                id: "ce-qui-est-inclus",
-                eyebrow: "Détail",
-                icon: "✨",
-                title: "Ce qui est inclus",
-                description:
-                    "Aspiration profonde, shampoing sièges et moquettes, désinfection de tous les plastiques, finition et protection des plastiques, vitres intérieures et extérieures, traitement des mauvaises odeurs et finition premium.",
-            },
-            {
                 id: "horaire",
                 eyebrow: "Disponibilité",
                 icon: "🕒",
                 title: "Horaires d’intervention",
                 description:
-                    "7j/7 de 8h à 21h. Intervention sur rendez-vous avec un temps de prestation moyen de 2h selon l’état du véhicule.",
+                    "7j/7 de 8h à 21h. Intervention sur rendez-vous avec un temps de prestation moyen de 2h.",
             },
             {
                 id: "pourquoi-laveoo",

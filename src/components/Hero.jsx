@@ -2,7 +2,7 @@ import heroImage from "../assets/hero-laveoo.jpg";
 import { siteData } from "../data/siteData";
 
 export default function Hero() {
-    const { brand, contact, cta, hero, offer, included, businessHours } = siteData;
+    const { brand, contact, cta, hero, offer, included } = siteData;
 
     const primaryCta = cta?.primary ?? {
         label: "Appeler maintenant",
@@ -42,19 +42,6 @@ export default function Hero() {
                         <p className="reveal-card mx-auto mt-6 max-w-2xl text-base leading-8 text-[#595959] sm:text-lg lg:mx-0">
                             {hero?.subtitle ?? brand?.description ?? ""}
                         </p>
-
-                        <div className="reveal-card mt-5 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-                            <span className="inline-flex rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-[#1F3A5F] shadow-sm backdrop-blur">
-                                {businessHours?.title ?? "Horaires d’intervention"} :{" "}
-                                {businessHours?.display ?? ""}
-                            </span>
-
-                            {businessHours?.duration ? (
-                                <span className="inline-flex rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-[#1F3A5F] shadow-sm backdrop-blur">
-                                    {businessHours.duration}
-                                </span>
-                            ) : null}
-                        </div>
 
                         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
                             <a
