@@ -1,28 +1,48 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export default function useRevealOnScroll() {
     useEffect(() => {
-        const elements = document.querySelectorAll('.reveal-card');
+        const elements = document.querySelectorAll(".reveal-card");
 
         if (!elements.length) return;
 
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
         const observer = new IntersectionObserver(
-            (entries) => {
+            (entries, obs) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
+                        entry.target.classList.add("is-visible");
+                        obs.unobserve(entry.target);
                     }
                 });
             },
             {
-                threshold: 0.16,
-                rootMargin: '0px 0px -40px 0px',
+                threshold: 0.18,
+                rootMargin: "0px 0px -60px 0px",
             }
         );
 
-        elements.forEach((element, index) => {
-            element.style.setProperty('--reveal-delay', `${index * 110}ms`);
+        elements.forEach((element) => {
+            const parent = element.closest("section");
+
+            if (!parent) {
+                observer.observe(element);
+                return;
+            }
+
+            const siblings = Array.from(
+                parent.querySelectorAll(".reveal-card")
+            );
+
+            const index = siblings.indexOf(element);
+
+            const delay = prefersReducedMotion ? 0 : index * 90;
+
+            element.style.setProperty("--reveal-delay", `${delay}ms`);
+
             observer.observe(element);
         });
 

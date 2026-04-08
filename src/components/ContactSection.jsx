@@ -14,8 +14,7 @@ export default function ContactSection() {
         href: `tel:${contact?.phone ?? ""}`,
     };
 
-    const mapQuery = encodeURIComponent(contact?.addressFull ?? "");
-    const addressLines = [contact?.addressLine1, contact?.addressLine2].filter(Boolean);
+    const mapQuery = encodeURIComponent(contact?.mapQuery ?? "Yerres 91330");
 
     return (
         <section
@@ -52,23 +51,19 @@ export default function ContactSection() {
                         </div>
 
                         <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#1F3A5F]/60">
-                            Localisation
+                            Zone desservie
                         </p>
 
                         <h3 className="mt-3 text-2xl font-bold text-[#1F3A5F]">
-                            Adresse
+                            Intervention à domicile
                         </h3>
 
-                        <address className="mt-4 not-italic text-base leading-8 text-[#595959]">
-                            {addressLines.map((line) => (
-                                <span key={line} className="block">
-                                    {line}
-                                </span>
-                            ))}
-                        </address>
+                        <p className="mt-4 text-base leading-8 text-[#595959]">
+                            {contact?.serviceArea ?? ""}
+                        </p>
 
                         <p className="mt-4 text-sm leading-7 text-[#595959]">
-                            Intervention à domicile sur {contact?.serviceArea ?? ""}
+                            LAVEOO intervient directement chez vous pour le nettoyage intérieur de votre véhicule, sur rendez-vous, à Yerres et dans les environs.
                         </p>
 
                         <a
@@ -76,9 +71,9 @@ export default function ContactSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="mt-6 inline-flex text-sm font-semibold text-[#1F3A5F] transition hover:opacity-80"
-                            aria-label={`Ouvrir l’adresse de ${brand?.name ?? "LAVEOO"} dans Google Maps`}
+                            aria-label={`Ouvrir la zone d’intervention de ${brand?.name ?? "LAVEOO"} dans Google Maps`}
                         >
-                            Voir l’adresse sur la carte
+                            Voir la zone d’intervention
                         </a>
                     </article>
 
@@ -152,7 +147,7 @@ export default function ContactSection() {
                 <div className="reveal-card mt-10 rounded-[2rem] bg-[#F5F5F5] p-4 shadow-[0_12px_34px_rgba(31,58,95,0.08)] transition-all duration-300 hover:shadow-[0_20px_44px_rgba(31,58,95,0.12)] sm:p-6">
                     <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white">
                         <iframe
-                            title={`Carte Google Maps de ${brand?.name ?? "LAVEOO"}`}
+                            title={`Zone d’intervention Google Maps de ${brand?.name ?? "LAVEOO"}`}
                             src={contact?.mapEmbedUrl ?? ""}
                             className="h-[420px] w-full border-0"
                             loading="lazy"

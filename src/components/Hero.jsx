@@ -34,13 +34,15 @@ export default function Hero() {
 
                         <h1
                             id="hero-title"
-                            className="reveal-card mt-6 text-4xl font-black leading-[1.05] tracking-tight text-[#1F3A5F] sm:text-5xl lg:text-6xl"
+                            className="reveal-card mt-6 text-4xl font-black leading-[1.02] tracking-tight text-[#1F3A5F] sm:text-5xl lg:text-6xl"
                         >
-                            {hero?.title ?? "Nettoyage intérieur de voiture à domicile"}
+                            {hero?.title ?? "Nettoyage voiture à domicile à Yerres"}
                         </h1>
 
                         <p className="reveal-card mx-auto mt-6 max-w-2xl text-base leading-8 text-[#595959] sm:text-lg lg:mx-0">
-                            {hero?.subtitle ?? brand?.description ?? ""}
+                            {hero?.subtitle ??
+                                brand?.description ??
+                                "Service professionnel de nettoyage intérieur automobile à domicile à Yerres et dans les environs."}
                         </p>
 
                         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
@@ -82,7 +84,7 @@ export default function Hero() {
                                 />
                             </div>
 
-                            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                            <div className="mt-5 grid gap-4">
                                 <div
                                     id={offer?.anchorId ?? "offre"}
                                     className="rounded-[1.5rem] bg-[#F8FAFC] p-5 text-center shadow-[0_10px_30px_rgba(31,58,95,0.06)] sm:text-left"
@@ -91,11 +93,13 @@ export default function Hero() {
                                         {offer?.label ?? "Offre actuelle"}
                                     </p>
 
-                                    <p className="mt-3 text-4xl font-black text-[#1F3A5F]">
-                                        {offer?.price ?? "69€"}
-                                    </p>
+                                    <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                                        <p className="text-4xl font-black text-[#1F3A5F]">
+                                            {offer?.price ?? "69€"}
+                                        </p>
+                                    </div>
 
-                                    <p className="mt-2 text-sm leading-7 text-[#595959]">
+                                    <p className="mt-3 text-sm leading-7 text-[#595959]">
                                         {offer?.description ?? ""}
                                     </p>
                                 </div>
@@ -105,7 +109,7 @@ export default function Hero() {
                                         {included?.title ?? "Ce qui est inclus"}
                                     </p>
 
-                                    <ul className="mt-4 space-y-2.5 text-sm leading-7 text-[#595959]">
+                                    <ul className="mt-4 grid gap-2.5 text-sm leading-7 text-[#595959] sm:grid-cols-2">
                                         {(included?.items ?? []).map((item) => (
                                             <li
                                                 key={item}

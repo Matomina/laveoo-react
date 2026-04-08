@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 300" role="img" aria-label="Logo Laveoo">
+  <title>Laveoo</title>
+  <path d="M155 118 L335 114 L470 60 L680 60 L825 118 L905 118"
+        fill="none" stroke="#A3B8E0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M265 124 L705 115 L785 124"
+        fill="none" stroke="#A3B8E0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="65" y="230"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="170"
+        font-style="italic"
+        font-weight="800"
+        fill="#1F3A5F">Laveoo</text>
+  <path d="M860 138 C882 158, 889 191, 882 224 C874 246, 864 260, 849 277"
+        fill="none" stroke="#A3B8E0" stroke-width="8" stroke-linecap="round"/>
+</svg>
