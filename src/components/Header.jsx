@@ -18,16 +18,16 @@ export default function Header() {
                     <div className="min-w-0 shrink-0">
                         <a
                             href="#accueil"
-                            className="inline-flex items-center"
+                            className="inline-flex items-center shrink-0"
                             aria-label={`Retour à l'accueil ${brand?.name ?? "LAVEOO"}`}
                             onClick={() => setIsMenuOpen(false)}
                         >
                             <img
-                                src="/logo-laveoo.svg"
+                                src="/logo-laveoo.jpg"
                                 alt={`Logo ${brand?.name ?? "LAVEOO"}`}
-                                width="170"
-                                height="48"
-                                className="h-10 w-auto object-contain transition duration-300 hover:opacity-85 sm:h-11 lg:h-12"
+                                width="220"
+                                height="70"
+                                className="h-11 w-auto max-w-[220px] object-contain transition duration-300 hover:opacity-85 sm:h-12 sm:max-w-[240px] lg:h-14 lg:max-w-[280px]"
                                 loading="eager"
                                 decoding="async"
                             />
