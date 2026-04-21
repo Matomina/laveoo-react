@@ -1,16 +1,68 @@
-# React + Vite
+# LAVEOO — Site vitrine React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site vitrine développé pour **LAVEOO**, entreprise de **nettoyage automobile à domicile**.
 
-Currently, two official plugins are available:
+## Présentation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Ce projet a été conçu pour répondre à plusieurs objectifs concrets :
 
-## React Compiler
+- présenter clairement l’offre de l’entreprise
+- renforcer l’image de marque
+- favoriser les prises de contact
+- améliorer la visibilité locale sur Google
+- proposer une base front propre, maintenable et évolutive
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Le site cible principalement une clientèle locale autour de **Yerres** et des communes voisines.
 
-## Expanding the ESLint configuration
+## Objectifs du projet
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- mettre en avant un service de nettoyage automobile à domicile
+- rassurer les visiteurs avec une interface claire et professionnelle
+- pousser à l’action via des CTA visibles
+- travailler le référencement local
+- disposer d’une base technique réutilisable pour des évolutions futures
+
+## Stack technique
+
+- **React**
+- **Vite**
+- **JavaScript**
+- **CSS**
+- **ESLint**
+
+## Fonctionnalités actuelles
+
+- page vitrine single-page
+- structure modulaire en composants React
+- contenu centralisé
+- sections services / offre / contact / footer
+- animations d’apparition au scroll
+- métadonnées SEO
+- balisage structuré local business
+
+## SEO
+
+Le projet intègre une première base SEO avec :
+
+- balises `title` et `meta description`
+- balises Open Graph
+- canonical
+- favicon et assets web
+- données structurées `LocalBusiness`
+
+## Structure du projet
+
+```text
+laveoo-react/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── data/
+│   ├── hooks/
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── package.json
+└── vite.config.js
