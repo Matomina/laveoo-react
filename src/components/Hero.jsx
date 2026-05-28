@@ -83,11 +83,25 @@ export default function Hero() {
                             className="reveal-card flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/70 bg-white/85 p-5 shadow-[0_24px_70px_rgba(31,58,95,0.14)] backdrop-blur sm:p-6"
                         >
                             <div className="overflow-hidden rounded-[1.5rem]">
-                                <img
-                                    src={heroImage}
-                                    alt={hero?.imageAlt ?? "Nettoyage intérieur automobile à domicile"}
-                                    className="h-[230px] w-full object-cover sm:h-[280px]"
-                                />
+                                {currentOffer.media?.type === "video" ? (
+                                    <video
+                                        className="h-[230px] w-full object-cover sm:h-[280px]"
+                                        controls
+                                        muted
+                                        playsInline
+                                        preload="metadata"
+                                        aria-label={currentOffer.media.label ?? currentOffer.label}
+                                    >
+                                        <source src={currentOffer.media.src} type="video/mp4" />
+                                        Votre navigateur ne prend pas en charge la lecture vidéo.
+                                    </video>
+                                ) : (
+                                    <img
+                                        src={heroImage}
+                                        alt={hero?.imageAlt ?? "Nettoyage intérieur automobile à domicile"}
+                                        className="h-[230px] w-full object-cover sm:h-[280px]"
+                                    />
+                                )}
                             </div>
 
                             <div className="mt-5 flex flex-1 flex-col gap-4">
