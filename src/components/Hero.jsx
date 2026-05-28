@@ -102,6 +102,12 @@ export default function Hero() {
                                         </p>
                                     ) : null}
 
+                                    {currentOffer.estimatedDuration ? (
+                                        <p className="mt-2 inline-flex rounded-full border border-[#1F3A5F]/10 bg-white px-3 py-1 text-xs font-semibold text-[#1F3A5F] shadow-sm">
+                                            {currentOffer.estimatedDuration}
+                                        </p>
+                                    ) : null}
+
                                     <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                                         <p className="text-4xl font-black text-[#1F3A5F]">
                                             {currentOffer.price ?? "69€"}
