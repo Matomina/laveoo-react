@@ -86,7 +86,8 @@ export default function Hero() {
                                 {currentOffer.media?.type === "video" ? (
                                     <video
                                         className="h-[230px] w-full object-cover sm:h-[280px]"
-                                        controls
+                                        autoPlay
+                                        loop
                                         muted
                                         playsInline
                                         preload="metadata"
