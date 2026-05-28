@@ -97,6 +97,54 @@ export const siteData = {
         ],
     },
 
+    method: {
+        anchorId: "methode",
+        eyebrow: "Méthode professionnelle",
+        title: "Notre méthode de travail",
+        intro:
+            "Chaque intervention suit une méthode précise pour traiter l’habitacle étape par étape : inspection, aspiration, shampoing, désinfection, finitions et contrôle du rendu avant restitution du véhicule.",
+        steps: [
+            {
+                title: "Préparation du véhicule",
+                description:
+                    "Nous commençons par vérifier l’état de l’habitacle, retirer les éléments gênants et préparer les zones à traiter.",
+            },
+            {
+                title: "Nettoyage en profondeur",
+                description:
+                    "Aspiration, shampoing des textiles, nettoyage des plastiques et traitement des surfaces sont réalisés avec du matériel professionnel.",
+            },
+            {
+                title: "Finitions soignées",
+                description:
+                    "Les plastiques, vitres, détails et zones visibles sont finalisés pour obtenir un rendu propre, net et agréable.",
+            },
+            {
+                title: "Contrôle du rendu",
+                description:
+                    "Avant la fin de l’intervention, nous contrôlons les finitions afin de livrer une prestation propre et cohérente.",
+            },
+        ],
+        videos: [
+            {
+                src: "/videos/methode-preparation.mp4",
+                label: "Préparation et inspection",
+            },
+            {
+                src: "/videos/methode-aspiration.mp4",
+                label: "Aspiration et nettoyage",
+            },
+            {
+                src: "/videos/methode-shampoing.mp4",
+                label: "Shampoing des textiles",
+            },
+            {
+                src: "/videos/methode-finitions.mp4",
+                label: "Finitions et contrôle",
+            },
+        ],
+    },
+
     services: {
         title: "Nos services",
         intro:
