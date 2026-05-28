@@ -16,7 +16,7 @@ export default function Footer() {
                             className="inline-flex items-center justify-center lg:justify-start"
                         >
                             <img
-                                src="/logo-laveoo.svg"
+                                src="/logo-laveoo.png"
                                 alt={`Logo ${brand?.name ?? "LAVEOO"}`}
                                 width="180"
                                 height="52"
