@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import MethodSection from "./components/MethodSection";
 import ServicesSection from "./components/ServicesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
@@ -21,6 +22,7 @@ export default function App() {
 
       <main id="main-content" className="overflow-x-hidden">
         <Hero />
+        <MethodSection />
         <ServicesSection />
         <ContactSection />
       </main>
