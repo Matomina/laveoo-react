@@ -23,7 +23,7 @@ export default function Header() {
                             onClick={() => setIsMenuOpen(false)}
                         >
                             <img
-                                src="/logo-laveoo.jpg"
+                                src="/logo-laveoo.png"
                                 alt={`Logo ${brand?.name ?? "LAVEOO"}`}
                                 width="260"
                                 height="82"
