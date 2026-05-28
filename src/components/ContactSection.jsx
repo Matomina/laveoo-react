@@ -4,7 +4,15 @@ const cardClass =
     "reveal-card group h-full rounded-[2rem] border border-white/70 bg-[#F8F8F8] p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(31,58,95,0.12)] lg:p-10 lg:text-left";
 
 const iconClass =
-    "mx-auto mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EAF2FB] text-2xl shadow-sm transition-transform duration-300 group-hover:scale-105 lg:mx-0";
+    "mx-auto mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EAF2FB] text-2xl font-black text-[#1F3A5F] shadow-sm transition-transform duration-300 group-hover:scale-105 lg:mx-0";
+
+const serviceArea = "Sud de l'Ile-de-France autour de Yerres";
+const contactIntro =
+    "Besoin d'un nettoyage interieur de voiture a domicile autour de Yerres ou dans le sud de l'Ile-de-France ? Contactez LAVEOO pour fixer rapidement votre rendez-vous.";
+const contactInfoNote =
+    "7j/7 de 8h a 21h - Intervention dans le sud de l'Ile-de-France autour de Yerres";
+const serviceAreaDescription =
+    "LAVEOO intervient directement chez vous pour le nettoyage interieur de votre vehicule, sur rendez-vous, autour de Yerres et dans le sud de l'Ile-de-France.";
 
 export default function ContactSection() {
     const { brand, contact, businessHours, contactSection, cta } = siteData;
@@ -36,18 +44,18 @@ export default function ContactSection() {
                     </h2>
 
                     <p className="mt-6 text-lg leading-8 text-[#595959]">
-                        {contactSection?.intro ?? ""}
+                        {contactIntro}
                     </p>
 
                     <p className="mt-4 text-sm font-medium text-[#1F3A5F]">
-                        {contactSection?.infoNote ?? ""}
+                        {contactInfoNote}
                     </p>
                 </header>
 
                 <div className="mt-14 grid gap-6 lg:grid-cols-3">
                     <article className={cardClass}>
                         <div className={iconClass} aria-hidden="true">
-                            📍
+                            01
                         </div>
 
                         <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#1F3A5F]/60">
@@ -55,15 +63,15 @@ export default function ContactSection() {
                         </p>
 
                         <h3 className="mt-3 text-2xl font-bold text-[#1F3A5F]">
-                            Intervention à domicile
+                            Intervention a domicile
                         </h3>
 
                         <p className="mt-4 text-base leading-8 text-[#595959]">
-                            {contact?.serviceArea ?? ""}
+                            {serviceArea}
                         </p>
 
                         <p className="mt-4 text-sm leading-7 text-[#595959]">
-                            LAVEOO intervient directement chez vous pour le nettoyage intérieur de votre véhicule, sur rendez-vous, à Yerres et dans les environs.
+                            {serviceAreaDescription}
                         </p>
 
                         <a
@@ -71,19 +79,19 @@ export default function ContactSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="mt-6 inline-flex text-sm font-semibold text-[#1F3A5F] transition hover:opacity-80"
-                            aria-label={`Ouvrir la zone d’intervention de ${brand?.name ?? "LAVEOO"} dans Google Maps`}
+                            aria-label={`Ouvrir la zone d'intervention de ${brand?.name ?? "LAVEOO"} dans Google Maps`}
                         >
-                            Voir la zone d’intervention
+                            Voir la zone d'intervention
                         </a>
                     </article>
 
                     <article className={cardClass}>
                         <div className={iconClass} aria-hidden="true">
-                            📞
+                            02
                         </div>
 
                         <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#1F3A5F]/60">
-                            Échange rapide
+                            Echange rapide
                         </p>
 
                         <h3 className="mt-3 text-2xl font-bold text-[#1F3A5F]">
@@ -105,7 +113,7 @@ export default function ContactSection() {
                                 <a
                                     href={`mailto:${contact?.email ?? ""}`}
                                     className="break-all font-medium transition hover:text-[#1F3A5F]"
-                                    aria-label={`Envoyer un email à ${brand?.name ?? "LAVEOO"}`}
+                                    aria-label={`Envoyer un email a ${brand?.name ?? "LAVEOO"}`}
                                 >
                                     {contact?.email ?? ""}
                                 </a>
@@ -123,19 +131,19 @@ export default function ContactSection() {
 
                     <article className={cardClass}>
                         <div className={iconClass} aria-hidden="true">
-                            🕒
+                            03
                         </div>
 
                         <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#1F3A5F]/60">
-                            Disponibilité
+                            Disponibilite
                         </p>
 
                         <h3 className="mt-3 text-2xl font-bold text-[#1F3A5F]">
-                            {businessHours?.title ?? "Horaires d’intervention"}
+                            {businessHours?.title ?? "Horaires d'intervention"}
                         </h3>
 
                         <p className="mt-4 text-base leading-8 text-[#595959]">
-                            {businessHours?.display ?? "7j/7 de 8h à 21h"}
+                            {businessHours?.display ?? "7j/7 de 8h a 21h"}
                         </p>
 
                         <p className="mt-6 text-sm leading-7 text-[#595959]">
@@ -147,7 +155,7 @@ export default function ContactSection() {
                 <div className="reveal-card mt-10 rounded-[2rem] bg-[#F5F5F5] p-4 shadow-[0_12px_34px_rgba(31,58,95,0.08)] transition-all duration-300 hover:shadow-[0_20px_44px_rgba(31,58,95,0.12)] sm:p-6">
                     <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white">
                         <iframe
-                            title={`Zone d’intervention Google Maps de ${brand?.name ?? "LAVEOO"}`}
+                            title={`Zone d'intervention Google Maps de ${brand?.name ?? "LAVEOO"}`}
                             src={contact?.mapEmbedUrl ?? ""}
                             className="h-[420px] w-full border-0"
                             loading="lazy"
