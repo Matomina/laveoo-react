@@ -71,6 +71,11 @@ export const siteData = {
             vehicleType: "SUV, monospace et break",
             estimatedDuration: "Temps de travail estimé : 3h",
             price: "89€",
+            media: {
+                type: "video",
+                src: "/videos/suv.mp4",
+                label: "Nettoyage intérieur d’un grand véhicule par LAVEOO",
+            },
             description:
                 "La même prestation complète pour les véhicules au-dessus de la taille d’une berline, avec le temps et le soin adaptés au gabarit.",
         },
