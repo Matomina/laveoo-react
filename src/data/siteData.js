@@ -53,6 +53,27 @@ export const siteData = {
         ],
     },
 
+    offers: [
+        {
+            id: "offre-berline",
+            anchorId: "offre",
+            label: "Offre berline",
+            vehicleType: "Citadine et berline",
+            price: "69€",
+            description:
+                "Une prestation claire, pratique et professionnelle pour les véhicules jusqu’à la taille d’une berline, directement à domicile.",
+        },
+        {
+            id: "offre-grand-vehicule",
+            anchorId: "offre-grand-vehicule",
+            label: "Offre grand véhicule",
+            vehicleType: "SUV, monospace et break",
+            price: "89€",
+            description:
+                "La même prestation complète pour les véhicules au-dessus de la taille d’une berline, avec le temps et le soin adaptés au gabarit.",
+        },
+    ],
+
     offer: {
         anchorId: "offre",
         label: "Offre actuelle",
