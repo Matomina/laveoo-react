@@ -59,6 +59,7 @@ export const siteData = {
             anchorId: "offre",
             label: "Offre berline",
             vehicleType: "Citadine et berline",
+            estimatedDuration: "Temps de travail estimé : 2h",
             price: "69€",
             description:
                 "Une prestation claire, pratique et professionnelle pour les véhicules jusqu’à la taille d’une berline, directement à domicile.",
@@ -68,6 +69,7 @@ export const siteData = {
             anchorId: "offre-grand-vehicule",
             label: "Offre grand véhicule",
             vehicleType: "SUV, monospace et break",
+            estimatedDuration: "Temps de travail estimé : 3h",
             price: "89€",
             description:
                 "La même prestation complète pour les véhicules au-dessus de la taille d’une berline, avec le temps et le soin adaptés au gabarit.",
