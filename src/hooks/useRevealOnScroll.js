@@ -14,14 +14,16 @@ export default function useRevealOnScroll() {
             (entries, obs) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("is-visible");
-                        obs.unobserve(entry.target);
+                        window.requestAnimationFrame(() => {
+                            entry.target.classList.add("is-visible");
+                            obs.unobserve(entry.target);
+                        });
                     }
                 });
             },
             {
-                threshold: 0.18,
-                rootMargin: "0px 0px -60px 0px",
+                threshold: 0.12,
+                rootMargin: "0px 0px -40px 0px",
             }
         );
 
@@ -39,7 +41,7 @@ export default function useRevealOnScroll() {
 
             const index = siblings.indexOf(element);
 
-            const delay = prefersReducedMotion ? 0 : index * 90;
+            const delay = prefersReducedMotion ? 0 : Math.min(index * 110, 660);
 
             element.style.setProperty("--reveal-delay", `${delay}ms`);
 
