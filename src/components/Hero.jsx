@@ -25,10 +25,6 @@ export default function Hero() {
 
             <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
                 <div className="mx-auto max-w-4xl text-center">
-                    <div className="reveal-card inline-flex rounded-full border border-white/80 bg-white/85 px-4 py-2 text-sm font-semibold text-[#1F3A5F] shadow-sm backdrop-blur">
-                        {hero?.badge ?? "Service professionnel à domicile"}
-                    </div>
-
                     <h1
                         id="hero-title"
                         className="reveal-card mx-auto mt-6 max-w-3xl text-4xl font-black leading-[1.02] tracking-tight text-[#1F3A5F] sm:text-5xl lg:text-6xl"
@@ -45,6 +41,8 @@ export default function Hero() {
                             <a
                                 key={action.label}
                                 href={action.href}
+                                target={action.external ? "_blank" : undefined}
+                                rel={action.external ? "noopener noreferrer" : undefined}
                                 className={`reveal-card inline-flex min-h-[58px] items-center justify-center rounded-full px-8 py-4 text-center text-base font-semibold transition duration-300 ${actionClassByVariant[action.variant] ?? actionClassByVariant.secondary}`}
                             >
                                 {action.label}

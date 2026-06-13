@@ -7,8 +7,9 @@ export default function Header() {
 
     const navLinks = navigation ?? [];
     const primaryCta = {
-        label: "Réserver",
-        href: "#contact",
+        label: "WhatsApp",
+        href: `https://wa.me/${contact?.whatsapp ?? "33751126402"}`,
+        external: true,
     };
 
     const mobileCta = {
@@ -57,6 +58,8 @@ export default function Header() {
                     <div className="flex items-center gap-2.5 sm:gap-3">
                         <a
                             href={primaryCta.href}
+                            target={primaryCta.external ? "_blank" : undefined}
+                            rel={primaryCta.external ? "noopener noreferrer" : undefined}
                             aria-label={`${primaryCta.label} ${brand?.name ?? "LAVEOO"}`}
                             className="premium-button hidden min-h-[54px] items-center justify-center rounded-full bg-[#1F3A5F] px-6 py-3 text-center text-sm font-semibold text-white shadow-[0_14px_34px_rgba(31,58,95,0.22)] transition duration-300 hover:bg-[#183250] hover:shadow-[0_22px_46px_rgba(31,58,95,0.30)] sm:inline-flex"
                         >
@@ -125,6 +128,8 @@ export default function Header() {
 
                         <a
                             href={primaryCta.href}
+                            target={primaryCta.external ? "_blank" : undefined}
+                            rel={primaryCta.external ? "noopener noreferrer" : undefined}
                             onClick={() => setIsMenuOpen(false)}
                             className="premium-button mt-2 inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-[#1F3A5F] px-4 py-3 text-center text-sm font-semibold text-white shadow-[0_14px_30px_rgba(31,58,95,0.18)] transition duration-300 hover:bg-[#16304f]"
                         >

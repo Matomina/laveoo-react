@@ -21,13 +21,9 @@ export default function ServicesSection() {
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="reveal-card mx-auto max-w-3xl text-center">
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#1F3A5F]">
-                        Services
-                    </p>
-
                     <h2
                         id="services-title"
-                        className="mt-4 text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
+                        className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
                     >
                         {servicesBlock.title ?? "Nos services"}
                     </h2>
@@ -47,7 +43,7 @@ export default function ServicesSection() {
                         return (
                             <article
                                 key={displayedService.id}
-                                className="reveal-card group h-full rounded-[2rem] border border-white/70 bg-white p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_rgba(31,58,95,0.14)] md:p-10 md:text-left"
+                                className="reveal-card group h-full rounded-[2rem] border border-[#22D3EE] bg-white p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_rgba(31,58,95,0.14)] md:p-10 md:text-left"
                             >
                                 <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF2FB] text-3xl shadow-sm transition duration-300 group-hover:scale-105">
                                     {displayedService.icon ?? "•"}

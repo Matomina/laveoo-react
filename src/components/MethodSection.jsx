@@ -55,13 +55,9 @@ export default function MethodSection() {
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-3xl text-center">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1F3A5F]">
-                        {method.eyebrow ?? "Nos méthodes"}
-                    </p>
-
                     <h2
                         id="method-title"
-                        className="mt-4 text-3xl font-black tracking-tight text-[#1F3A5F] sm:text-4xl lg:text-5xl"
+                        className="text-3xl font-black tracking-tight text-[#1F3A5F] sm:text-4xl lg:text-5xl"
                     >
                         {method.title ?? "Nos méthodes de nettoyage"}
                     </h2>
@@ -75,7 +71,7 @@ export default function MethodSection() {
                     {items.map((item, index) => (
                         <article
                             key={item.title}
-                            className="rounded-[1.75rem] border border-white/80 bg-white p-3 shadow-[0_18px_50px_rgba(31,58,95,0.08)]"
+                            className="rounded-[1.75rem] border border-[#22D3EE] bg-white p-3 shadow-[0_18px_50px_rgba(31,58,95,0.08)]"
                         >
                             <div className="overflow-hidden rounded-[1.35rem] bg-[#EAF2FB]">
                                 <video

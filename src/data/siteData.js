@@ -45,13 +45,13 @@ export const siteData = {
             "Finition premium",
         ],
         actions: [
-            { label: "Réserver", href: "#contact", variant: "primary" },
+            { label: "Appeler", href: "tel:0751126402", variant: "primary" },
             {
-                label: "Demander un devis",
-                href: "mailto:contact@laveoo.com?subject=Demande%20de%20devis%20LAVEOO",
-                variant: "secondary",
+                label: "WhatsApp",
+                href: "https://wa.me/33751126402",
+                variant: "primary",
+                external: true,
             },
-            { label: "Appeler", href: "tel:0751126402", variant: "ghost" },
         ],
     },
 
@@ -65,7 +65,7 @@ export const siteData = {
                 label: "Petite voiture / Berline",
                 vehicleType: "Citadine et berline",
                 estimatedDuration: "Temps de travail estimé : 2h",
-                price: "79,99€",
+                price: "79€",
                 media: {
                     type: "image",
                     alt: "Nettoyage intérieur d’une petite voiture ou berline par LAVEOO",
@@ -78,7 +78,7 @@ export const siteData = {
                 label: "SUV / Monospace",
                 vehicleType: "SUV, monospace et break",
                 estimatedDuration: "Temps de travail estimé : 3h",
-                price: "99,99€",
+                price: "99€",
                 media: {
                     type: "video",
                     src: "/videos/suv.mp4",
@@ -253,16 +253,11 @@ export const siteData = {
             "Besoin d’un nettoyage intérieur de voiture à domicile à Yerres ou dans les alentours ? Contactez LAVEOO pour fixer rapidement votre rendez-vous.",
         infoNote: "7j/7 de 8h à 21h · Temps de prestation moyen : 2h",
         actions: [
-            {
-                label: "Réserver maintenant",
-                href: "mailto:contact@laveoo.com?subject=Reservation%20LAVEOO",
-                variant: "primary",
-            },
-            { label: "Téléphone", href: "tel:0751126402", variant: "secondary" },
+            { label: "Appeler", href: "tel:0751126402", variant: "primary" },
             {
                 label: "WhatsApp",
                 href: "https://wa.me/33751126402",
-                variant: "ghost",
+                variant: "primary",
                 external: true,
             },
         ],

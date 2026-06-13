@@ -1,7 +1,7 @@
 import { siteData } from "../data/siteData";
 
 const cardClass =
-    "reveal-card premium-card group h-full rounded-[2rem] border border-white/70 bg-[#F8F8F8] p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] lg:p-10 lg:text-left";
+    "reveal-card premium-card group h-full rounded-[2rem] border border-[#22D3EE] bg-white p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] lg:p-10 lg:text-left";
 
 const iconClass =
     "mx-auto mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EAF2FB] text-2xl font-black text-[#1F3A5F] shadow-sm transition-transform duration-300 group-hover:scale-105 lg:mx-0";
@@ -27,13 +27,9 @@ export default function ContactSection() {
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <header className="reveal-card mx-auto max-w-3xl text-center">
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#1F3A5F]">
-                        Dernier appel à l’action
-                    </p>
-
                     <h2
                         id="contact-title"
-                        className="mt-4 text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
+                        className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
                     >
                         {contactSection?.title ?? "Réserver maintenant"}
                     </h2>

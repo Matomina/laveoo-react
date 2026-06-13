@@ -11,13 +11,9 @@ export default function FaqSection() {
         >
             <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                 <div className="reveal-card mx-auto max-w-3xl text-center">
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#1F3A5F]">
-                        Questions fréquentes
-                    </p>
-
                     <h2
                         id="faq-title"
-                        className="mt-4 text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
+                        className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
                     >
                         {faq?.title ?? "FAQ"}
                     </h2>
@@ -27,7 +23,7 @@ export default function FaqSection() {
                     {(faq?.items ?? []).map((item) => (
                         <details
                             key={item.question}
-                            className="reveal-card group rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-[0_16px_44px_rgba(31,58,95,0.08)]"
+                            className="reveal-card group rounded-[1.75rem] border border-[#22D3EE] bg-white p-6 shadow-[0_16px_44px_rgba(31,58,95,0.08)]"
                         >
                             <summary className="cursor-pointer list-none text-lg font-bold text-[#1F3A5F] marker:hidden">
                                 <span className="flex items-center justify-between gap-4">

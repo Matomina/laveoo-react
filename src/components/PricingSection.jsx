@@ -12,13 +12,9 @@ export default function PricingSection() {
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="reveal-card mx-auto max-w-3xl text-center">
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#1F3A5F]">
-                        Tarifs
-                    </p>
-
                     <h2
                         id="pricing-title"
-                        className="mt-4 text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
+                        className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
                     >
                         {pricing?.title ?? "Tarifs"}
                     </h2>
@@ -32,7 +28,7 @@ export default function PricingSection() {
                     {(pricing?.items ?? []).map((item) => (
                         <article
                             key={item.id}
-                            className="reveal-card premium-card group flex h-full flex-col rounded-[2rem] border border-white/70 bg-white/85 p-5 shadow-[0_24px_70px_rgba(31,58,95,0.14)] backdrop-blur sm:p-6"
+                            className="reveal-card premium-card group flex h-full flex-col rounded-[2rem] border border-[#22D3EE] bg-white p-5 shadow-[0_24px_70px_rgba(31,58,95,0.14)] sm:p-6"
                         >
                             <div className="overflow-hidden rounded-[1.5rem]">
                                 {item.media?.type === "video" ? (

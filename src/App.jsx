@@ -5,7 +5,6 @@ import ResultsSection from "./components/ResultsSection";
 import MethodSection from "./components/MethodSection";
 import SeoSection from "./components/SeoSection";
 import FaqSection from "./components/FaqSection";
-import ReviewsSection from "./components/ReviewsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import useRevealOnScroll from "./hooks/useRevealOnScroll";
@@ -31,7 +30,6 @@ export default function App() {
                 <MethodSection />
                 <SeoSection />
                 <FaqSection />
-                <ReviewsSection />
                 <ContactSection />
             </main>
 
