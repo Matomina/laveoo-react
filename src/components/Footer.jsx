@@ -48,7 +48,7 @@ export default function Footer() {
                                 <p>
                                     <a
                                         href={`tel:${contact.phone}`}
-                                        className="font-medium transition duration-300 hover:text-[#1F3A5F]"
+                                        className="premium-link font-medium transition duration-300 hover:text-[#1F3A5F]"
                                     >
                                         {contact?.phoneDisplay ?? contact.phone}
                                     </a>
@@ -59,7 +59,7 @@ export default function Footer() {
                                 <p>
                                     <a
                                         href={`mailto:${contact.email}`}
-                                        className="font-medium transition duration-300 hover:text-[#1F3A5F]"
+                                        className="premium-link font-medium transition duration-300 hover:text-[#1F3A5F]"
                                     >
                                         {contact.email}
                                     </a>
@@ -83,7 +83,7 @@ export default function Footer() {
                                 <a
                                     key={`${link.label}-${link.href}`}
                                     href={link.href}
-                                    className="text-sm font-medium text-[#595959] transition duration-300 hover:text-[#1F3A5F]"
+                                    className="premium-link text-sm font-medium text-[#595959] transition duration-300 hover:text-[#1F3A5F]"
                                 >
                                     {link.label}
                                 </a>

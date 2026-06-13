@@ -2,12 +2,17 @@ import { useState } from "react";
 import { siteData } from "../data/siteData";
 
 export default function Header() {
-    const { brand, contact, navigation, cta } = siteData;
+    const { brand, contact, navigation } = siteData;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navLinks = navigation ?? [];
-    const primaryCta = cta?.primary ?? {
-        label: "Appeler maintenant",
+    const primaryCta = {
+        label: "Réserver",
+        href: "#contact",
+    };
+
+    const mobileCta = {
+        label: "Appeler",
         href: `tel:${contact?.phone ?? ""}`,
     };
 
@@ -42,7 +47,7 @@ export default function Header() {
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="relative text-sm font-semibold tracking-[0.01em] text-slate-700 transition duration-300 hover:text-[#1F3A5F]"
+                                className="premium-link relative text-sm font-semibold tracking-[0.01em] text-slate-700 transition duration-300 hover:text-[#1F3A5F]"
                             >
                                 {link.label}
                             </a>
@@ -53,15 +58,15 @@ export default function Header() {
                         <a
                             href={primaryCta.href}
                             aria-label={`${primaryCta.label} ${brand?.name ?? "LAVEOO"}`}
-                            className="hidden min-h-[54px] items-center justify-center rounded-full bg-[#1F3A5F] px-6 py-3 text-center text-sm font-semibold text-white shadow-[0_14px_34px_rgba(31,58,95,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#183250] hover:shadow-[0_18px_42px_rgba(31,58,95,0.28)] sm:inline-flex"
+                            className="premium-button hidden min-h-[54px] items-center justify-center rounded-full bg-[#1F3A5F] px-6 py-3 text-center text-sm font-semibold text-white shadow-[0_14px_34px_rgba(31,58,95,0.22)] transition duration-300 hover:bg-[#183250] hover:shadow-[0_22px_46px_rgba(31,58,95,0.30)] sm:inline-flex"
                         >
                             {primaryCta.label}
                         </a>
 
                         <a
-                            href={primaryCta.href}
-                            aria-label={`${primaryCta.label} ${brand?.name ?? "LAVEOO"}`}
-                            className="inline-flex min-h-[46px] items-center justify-center rounded-full bg-[#1F3A5F] px-5 py-2 text-center text-sm font-semibold text-white shadow-[0_12px_28px_rgba(31,58,95,0.20)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#183250] hover:shadow-[0_16px_34px_rgba(31,58,95,0.24)] sm:hidden"
+                            href={mobileCta.href}
+                            aria-label={`${mobileCta.label} ${brand?.name ?? "LAVEOO"}`}
+                            className="premium-button inline-flex min-h-[46px] items-center justify-center rounded-full bg-[#1F3A5F] px-5 py-2 text-center text-sm font-semibold text-white shadow-[0_12px_28px_rgba(31,58,95,0.20)] transition duration-300 hover:bg-[#183250] hover:shadow-[0_18px_38px_rgba(31,58,95,0.26)] sm:hidden"
                         >
                             Appeler
                         </a>
@@ -121,7 +126,7 @@ export default function Header() {
                         <a
                             href={primaryCta.href}
                             onClick={() => setIsMenuOpen(false)}
-                            className="mt-2 inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-[#1F3A5F] px-4 py-3 text-center text-sm font-semibold text-white shadow-[0_14px_30px_rgba(31,58,95,0.18)] transition duration-300 hover:bg-[#16304f]"
+                            className="premium-button mt-2 inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-[#1F3A5F] px-4 py-3 text-center text-sm font-semibold text-white shadow-[0_14px_30px_rgba(31,58,95,0.18)] transition duration-300 hover:bg-[#16304f]"
                         >
                             {primaryCta.label}
                         </a>

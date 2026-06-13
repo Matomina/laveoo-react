@@ -1,20 +1,16 @@
-import heroImage from "../assets/hero-laveoo.jpg";
 import { siteData } from "../data/siteData";
 
+const actionClassByVariant = {
+    primary:
+        "premium-button bg-[#1F3A5F] text-white shadow-[0_14px_34px_rgba(31,58,95,0.18)] hover:shadow-[0_24px_52px_rgba(31,58,95,0.28)]",
+    secondary:
+        "premium-button border border-[#1F3A5F]/12 bg-white/90 text-[#1F3A5F] shadow-[0_10px_24px_rgba(31,58,95,0.08)] backdrop-blur hover:bg-white hover:shadow-[0_20px_40px_rgba(31,58,95,0.16)]",
+    ghost:
+        "premium-button border border-[#1F3A5F]/18 bg-[#EAF2FB] text-[#1F3A5F] shadow-[0_10px_24px_rgba(31,58,95,0.06)] hover:shadow-[0_18px_38px_rgba(31,58,95,0.12)]",
+};
+
 export default function Hero() {
-    const { brand, contact, cta, hero, offers, offer, included } = siteData;
-
-    const primaryCta = cta?.primary ?? {
-        label: "Appeler maintenant",
-        href: `tel:${contact?.phone ?? ""}`,
-    };
-
-    const secondaryCta = cta?.secondary ?? {
-        label: "Voir nos services",
-        href: "#services",
-    };
-
-    const displayedOffers = offers?.length ? offers : [offer].filter(Boolean);
+    const { hero } = siteData;
 
     return (
         <section
@@ -37,30 +33,23 @@ export default function Hero() {
                         id="hero-title"
                         className="reveal-card mx-auto mt-6 max-w-3xl text-4xl font-black leading-[1.02] tracking-tight text-[#1F3A5F] sm:text-5xl lg:text-6xl"
                     >
-                        {hero?.title ?? "Nettoyage voiture à domicile à Yerres"}
+                        {hero?.title ?? "Nettoyage automobile à domicile à Yerres"}
                     </h1>
 
-                    <p className="reveal-card mx-auto mt-6 max-w-2xl text-base leading-8 text-[#595959] sm:text-lg">
-                        {hero?.subtitle ??
-                            brand?.description ??
-                            "Service professionnel de nettoyage intérieur automobile à domicile à Yerres et dans les environs."}
+                    <p className="reveal-card mx-auto mt-6 max-w-3xl text-base leading-8 text-[#595959] sm:text-lg">
+                        {hero?.subtitle}
                     </p>
 
-                    <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                        <a
-                            href={primaryCta.href}
-                            className="reveal-card inline-flex min-h-[58px] items-center justify-center rounded-full bg-[#1F3A5F] px-8 py-4 text-center text-base font-semibold text-white shadow-[0_14px_34px_rgba(31,58,95,0.18)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(31,58,95,0.24)]"
-                            aria-label={`${primaryCta.label} ${brand?.name ?? "LAVEOO"} au ${contact?.phoneDisplay ?? ""}`}
-                        >
-                            {primaryCta.label}
-                        </a>
-
-                        <a
-                            href={secondaryCta.href}
-                            className="reveal-card inline-flex min-h-[58px] items-center justify-center rounded-full border border-[#1F3A5F]/12 bg-white/90 px-8 py-4 text-center text-base font-semibold text-[#1F3A5F] shadow-[0_10px_24px_rgba(31,58,95,0.08)] backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_34px_rgba(31,58,95,0.12)]"
-                        >
-                            {secondaryCta.label}
-                        </a>
+                    <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
+                        {(hero?.actions ?? []).map((action) => (
+                            <a
+                                key={action.label}
+                                href={action.href}
+                                className={`reveal-card inline-flex min-h-[58px] items-center justify-center rounded-full px-8 py-4 text-center text-base font-semibold transition duration-300 ${actionClassByVariant[action.variant] ?? actionClassByVariant.secondary}`}
+                            >
+                                {action.label}
+                            </a>
+                        ))}
                     </div>
 
                     <div className="mt-8 flex flex-col gap-3 text-sm text-[#595959] sm:flex-row sm:flex-wrap sm:justify-center">
@@ -73,87 +62,6 @@ export default function Hero() {
                             </span>
                         ))}
                     </div>
-                </div>
-
-                <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:items-stretch">
-                    {displayedOffers.map((currentOffer) => (
-                        <article
-                            key={currentOffer.id ?? currentOffer.label}
-                            id={currentOffer.anchorId}
-                            className="reveal-card flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/70 bg-white/85 p-5 shadow-[0_24px_70px_rgba(31,58,95,0.14)] backdrop-blur sm:p-6"
-                        >
-                            <div className="overflow-hidden rounded-[1.5rem]">
-                                {currentOffer.media?.type === "video" ? (
-                                    <video
-                                        className="h-[230px] w-full object-cover sm:h-[280px]"
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        preload="metadata"
-                                        aria-label={currentOffer.media.label ?? currentOffer.label}
-                                    >
-                                        <source src={currentOffer.media.src} type="video/mp4" />
-                                        Votre navigateur ne prend pas en charge la lecture vidéo.
-                                    </video>
-                                ) : (
-                                    <img
-                                        src={heroImage}
-                                        alt={hero?.imageAlt ?? "Nettoyage intérieur automobile à domicile"}
-                                        className="h-[230px] w-full object-cover sm:h-[280px]"
-                                    />
-                                )}
-                            </div>
-
-                            <div className="mt-5 flex flex-1 flex-col gap-4">
-                                <div className="rounded-[1.5rem] bg-[#F8FAFC] p-5 text-center shadow-[0_10px_30px_rgba(31,58,95,0.06)] sm:text-left">
-                                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1F3A5F]">
-                                        {currentOffer.label ?? "Offre actuelle"}
-                                    </p>
-
-                                    {currentOffer.vehicleType ? (
-                                        <p className="mt-2 text-sm font-semibold text-[#595959]">
-                                            {currentOffer.vehicleType}
-                                        </p>
-                                    ) : null}
-
-                                    {currentOffer.estimatedDuration ? (
-                                        <p className="mt-2 inline-flex rounded-full border border-[#1F3A5F]/10 bg-white px-3 py-1 text-xs font-semibold text-[#1F3A5F] shadow-sm">
-                                            {currentOffer.estimatedDuration}
-                                        </p>
-                                    ) : null}
-
-                                    <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                                        <p className="text-4xl font-black text-[#1F3A5F]">
-                                            {currentOffer.price ?? "69€"}
-                                        </p>
-                                    </div>
-
-                                    <p className="mt-3 text-sm leading-7 text-[#595959]">
-                                        {currentOffer.description ?? ""}
-                                    </p>
-                                </div>
-
-                                <div className="flex-1 rounded-[1.5rem] bg-[#EAF2FB] p-5 text-left shadow-[0_10px_30px_rgba(31,58,95,0.06)]">
-                                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1F3A5F]">
-                                        {included?.title ?? "Ce qui est inclus"}
-                                    </p>
-
-                                    <ul className="mt-4 grid gap-2.5 text-sm leading-7 text-[#595959] sm:grid-cols-2">
-                                        {(included?.items ?? []).map((item) => (
-                                            <li
-                                                key={`${currentOffer.id}-${item}`}
-                                                className="flex items-start gap-2.5"
-                                            >
-                                                <span className="mt-[8px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#1F3A5F]" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                    ))}
                 </div>
             </div>
         </section>
