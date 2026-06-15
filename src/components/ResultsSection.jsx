@@ -37,7 +37,7 @@ export default function ResultsSection() {
                             {column.map((item) => (
                                 <article
                                     key={item.id}
-                                    className="reveal-card premium-card group rounded-[2rem] border border-[#22D3EE] bg-white p-6 shadow-[0_16px_44px_rgba(31,58,95,0.08)]"
+                                    className="reveal-card premium-card group rounded-[2rem] border border-[#93B8D8] bg-white p-6 shadow-[0_16px_44px_rgba(31,58,95,0.08)]"
                                 >
                                     <div className="overflow-hidden rounded-[1.5rem]">
                                         <img

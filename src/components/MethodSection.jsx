@@ -97,8 +97,8 @@ export default function MethodSection() {
                                 key={item.title}
                                 className={`rounded-[1.75rem] border bg-white p-3 shadow-[0_18px_50px_rgba(31,58,95,0.08)] transition-all duration-300 ${
                                     isActive
-                                        ? "border-[#22D3EE] shadow-[0_24px_60px_rgba(34,211,238,0.18)]"
-                                        : "border-[#22D3EE]/40"
+                                        ? "border-[#93B8D8] shadow-[0_24px_60px_rgba(147,184,216,0.18)]"
+                                        : "border-[#93B8D8]/40"
                                 }`}
                             >
                                 <div className="relative overflow-hidden rounded-[1.35rem] bg-[#EAF2FB]">
@@ -124,7 +124,7 @@ export default function MethodSection() {
                                     </video>
 
                                     {isActive && (
-                                        <span className="absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#22D3EE]/90 shadow">
+                                        <span className="absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#93B8D8]/90 shadow">
                                             <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-white" />
                                         </span>
                                     )}

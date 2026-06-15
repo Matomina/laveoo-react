@@ -1,7 +1,7 @@
 import { siteData } from "../data/siteData";
 
 const cardClass =
-    "reveal-card premium-card group h-full rounded-[2rem] border border-[#22D3EE] bg-white p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] lg:p-10 lg:text-left";
+    "reveal-card premium-card group h-full rounded-[2rem] border border-[#93B8D8] bg-white p-8 text-center shadow-[0_12px_34px_rgba(31,58,95,0.08)] lg:p-10 lg:text-left";
 
 const iconClass =
     "mx-auto mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EAF2FB] text-2xl font-black text-[#1F3A5F] shadow-sm transition-transform duration-300 group-hover:scale-105 lg:mx-0";

@@ -23,7 +23,7 @@ export default function FaqSection() {
                     {(faq?.items ?? []).map((item) => (
                         <details
                             key={item.question}
-                            className="reveal-card group rounded-[1.75rem] border border-[#22D3EE] bg-white p-6 shadow-[0_16px_44px_rgba(31,58,95,0.08)]"
+                            className="reveal-card group rounded-[1.75rem] border border-[#93B8D8] bg-white p-6 shadow-[0_16px_44px_rgba(31,58,95,0.08)]"
                         >
                             <summary className="cursor-pointer list-none text-lg font-bold text-[#1F3A5F] marker:hidden">
                                 <span className="flex items-center justify-between gap-4">
@@ -34,9 +34,13 @@ export default function FaqSection() {
                                 </span>
                             </summary>
 
-                            <p className="mt-4 text-base leading-8 text-[#595959]">
-                                {item.answer}
-                            </p>
+                            <div className="mt-4 space-y-3">
+                                {item.answer.split("\n\n").map((para, i) => (
+                                    <p key={i} className="text-base leading-8 text-[#595959]">
+                                        {para}
+                                    </p>
+                                ))}
+                            </div>
                         </details>
                     ))}
                 </div>

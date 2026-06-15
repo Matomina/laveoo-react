@@ -15,7 +15,7 @@ export default function ReviewsSection() {
                     </h2>
                 </div>
 
-                <div className="reveal-card mt-14 rounded-[2rem] border border-[#22D3EE] bg-white p-8 text-center shadow-[0_18px_50px_rgba(31,58,95,0.08)] sm:p-10">
+                <div className="reveal-card mt-14 rounded-[2rem] border border-[#93B8D8] bg-white p-8 text-center shadow-[0_18px_50px_rgba(31,58,95,0.08)] sm:p-10">
                     <p className="text-base leading-8 text-[#595959]">
                         {reviews?.emptyState}
                     </p>

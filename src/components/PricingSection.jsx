@@ -28,7 +28,7 @@ export default function PricingSection() {
                     {(pricing?.items ?? []).map((item) => (
                         <article
                             key={item.id}
-                            className="reveal-card premium-card group flex h-full flex-col rounded-[2rem] border border-[#22D3EE] bg-white p-5 shadow-[0_24px_70px_rgba(31,58,95,0.14)] sm:p-6"
+                            className="reveal-card premium-card group flex h-full flex-col rounded-[2rem] border border-[#93B8D8] bg-white p-5 shadow-[0_24px_70px_rgba(31,58,95,0.14)] sm:p-6"
                         >
                             <div className="overflow-hidden rounded-[1.5rem]">
                                 {item.media?.type === "video" ? (
@@ -46,9 +46,9 @@ export default function PricingSection() {
                                     </video>
                                 ) : (
                                     <img
-                                        src={heroImage}
+                                        src={item.media?.src ?? heroImage}
                                         alt={item.media?.alt ?? item.label}
-                                        className="premium-media h-[230px] w-full object-cover sm:h-[260px]"
+                                        className="premium-media h-[260px] w-full object-contain bg-white sm:h-[290px]"
                                     />
                                 )}
                             </div>
