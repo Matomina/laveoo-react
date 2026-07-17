@@ -13,8 +13,8 @@ export const pricingPlans = [
         id: "citadines",
         icon: "🚗",
         label: "Citadines",
-        shortLabel: "Petite voiture / Berline",
-        vehicleType: "Citadines et petites berlines",
+        shortLabel: "Citadine",
+        vehicleType: "Citadines",
         examplesShort: "Clio • 208 • Polo • Yaris • Sandero",
         examples:
             "Clio • 208 • C3 • Polo • Yaris • Sandero • DS 3 • Corsa • Fiesta • Ibiza • Fabia • Mazda 2 • Micra • Rio • i20",
@@ -25,14 +25,14 @@ export const pricingPlans = [
             alt: "Nettoyage intérieur d’une citadine à domicile",
         },
         description:
-            "Nettoyage intérieur complet adapté aux citadines et aux petites berlines.",
+            "Nettoyage intérieur complet adapté aux citadines.",
     },
     {
         id: "compactes-berlines-suv-compacts",
         icon: "🚙",
         label: "Compactes, berlines & SUV compacts",
-        shortLabel: "SUV compact / Berline +",
-        vehicleType: "Berlines et SUV compacts",
+        shortLabel: "Compactes, berlines & SUV compacts",
+        vehicleType: "Compactes, berlines et SUV compacts",
         examplesShort: "Mégane • 308 • Golf • Classe C • Q3",
         examples:
             "Mégane • 308 • Golf • Corolla • Focus • Astra • Leon • Octavia • Classe A • Série 1 • A3 • 508 • Talisman • Passat • A4 • Série 3 • Classe C • 2008 • Captur • C-HR • Qashqai • T-Roc • Q3 • X1 • GLA",
@@ -49,16 +49,16 @@ export const pricingPlans = [
         id: "suv-familiaux-monospaces-breaks",
         icon: "🚐",
         label: "SUV familiaux, monospaces & breaks",
-        shortLabel: "Grand SUV / Familiale",
-        vehicleType: "SUV, monospaces et véhicules familiaux",
+        shortLabel: "SUV familiaux, monospaces & breaks",
+        vehicleType: "SUV familiaux, monospaces et breaks",
         examplesShort: "3008 • X3 • Q5 • Scénic • GLC",
         examples:
             "3008 • 5008 • Austral • Espace • Scénic • Grand Scénic • Tiguan • Touareg • RAV4 • Tucson • Sportage • Kuga • Q5 • Q7 • X3 • X5 • X6 • GLC • GLE • GLS",
         estimatedDuration: "3 h",
         price: 119,
         media: {
-            src: "/nettoyage-suv-domicile-yerres.jpeg",
-            alt: "Nettoyage intérieur d’un grand SUV familial à domicile",
+            src: "/nettoyage-monospace-domicile-laveoo.png",
+            alt: "Monospace familial correspondant au forfait Laveoo à domicile",
         },
         description:
             "Nettoyage intérieur complet adapté aux grands SUV, monospaces, breaks et véhicules familiaux.",
@@ -96,7 +96,7 @@ export const siteData = {
         { label: "Contact", href: "/contact" },
     ],
     hero: {
-        title: "Laveoo, spécialiste du nettoyage automobile à domicile",
+        title: "Professionnelle du nettoyage automobile à domicile, Laveoo",
         subtitle:
             "Spécialiste du nettoyage intérieur automobile, Laveoo a développé une méthode professionnelle qui rend l’esthétique automobile haut de gamme accessible à tous, directement à votre domicile. Nous intervenons dans le sud de l’Île-de-France, en Essonne (91), dans le Val-de-Marne (94) et en Seine-et-Marne (77).",
         highlights: [
@@ -140,6 +140,13 @@ export const siteData = {
             { id: "comparison-1", title: "Siège avant", before: "/results/avant-01.jpeg", after: "/results/apres-01.jpeg", alt: "Avant-après du nettoyage d’un siège avant de voiture" },
             { id: "comparison-2", title: "Banquette arrière", before: "/results/avant-02.jpeg", after: "/results/apres-02.jpeg", alt: "Avant-après du nettoyage d’une banquette arrière de voiture" },
             { id: "comparison-3", title: "Sol et moquette", before: "/results/avant-03.jpeg", after: "/results/apres-03.jpeg", alt: "Avant-après du nettoyage du sol et de la moquette d’une voiture" },
+            { id: "comparison-4", title: "Habitacle clair", before: "/results/avant-04.jpeg", after: "/results/apres-04.jpeg", alt: "Avant-après du nettoyage d’un habitacle automobile clair" },
+            { id: "comparison-5", title: "Poste de conduite", before: "/results/avant-05.jpeg", after: "/results/apres-05.jpeg", alt: "Avant-après du nettoyage d’un poste de conduite automobile" },
+            { id: "comparison-6", title: "Console centrale", before: "/results/avant-06.jpeg", after: "/results/apres-06.jpeg", alt: "Avant-après du nettoyage d’une console centrale automobile" },
+            { id: "comparison-7", title: "Banquette arrière", before: "/results/avant-07.jpeg", after: "/results/apres-07.jpeg", alt: "Avant-après du nettoyage d’une banquette arrière en tissu" },
+            { id: "comparison-8", title: "Assise arrière", before: "/results/avant-08.jpeg", after: "/results/apres-08.jpeg", alt: "Avant-après du nettoyage d’une assise arrière automobile" },
+            { id: "comparison-9", title: "Sièges avant", before: "/results/avant-09.jpeg", after: "/results/apres-09.jpeg", alt: "Avant-après du nettoyage des sièges avant d’une voiture" },
+            { id: "comparison-10", title: "Habitacle complet", before: "/results/avant-010.jpeg", after: "/results/apres-010.jpeg", alt: "Avant-après du nettoyage complet d’un habitacle automobile clair" },
         ],
     },
     method: {
