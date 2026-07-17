@@ -22,7 +22,7 @@ body {
   will-change: opacity, transform, filter;
 }
 
-.reveal-card.is-visible {
+.reveal-card[data-revealed="true"] {
   opacity: 1;
   transform: none;
   filter: none;

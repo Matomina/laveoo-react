@@ -15,7 +15,7 @@ export default function useRevealOnScroll(dependency) {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         window.requestAnimationFrame(() => {
-                            entry.target.classList.add("is-visible");
+                            entry.target.dataset.revealed = "true";
                             obs.unobserve(entry.target);
                         });
                     }
