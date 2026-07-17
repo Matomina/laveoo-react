@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useRevealOnScroll() {
+export default function useRevealOnScroll(dependency) {
     useEffect(() => {
         const elements = document.querySelectorAll(".reveal-card");
 
@@ -15,7 +15,7 @@ export default function useRevealOnScroll() {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         window.requestAnimationFrame(() => {
-                            entry.target.classList.add("is-visible");
+                            entry.target.dataset.revealed = "true";
                             obs.unobserve(entry.target);
                         });
                     }
@@ -49,5 +49,5 @@ export default function useRevealOnScroll() {
         });
 
         return () => observer.disconnect();
-    }, []);
+    }, [dependency]);
 }

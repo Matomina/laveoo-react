@@ -1,4 +1,5 @@
 import { siteData } from "../data/siteData";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     const { brand, footer, contact, businessHours } = siteData;
@@ -10,8 +11,8 @@ export default function Footer() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.9fr] lg:gap-12 lg:items-start">
                     <div className="text-center lg:text-left">
-                        <a
-                            href="#accueil"
+                        <Link
+                            to="/"
                             aria-label={`Retour à l'accueil ${brand?.name ?? "LAVEOO"}`}
                             className="inline-flex items-center justify-center lg:justify-start"
                         >
@@ -24,7 +25,7 @@ export default function Footer() {
                                 loading="lazy"
                                 decoding="async"
                             />
-                        </a>
+                        </Link>
 
                         <p className="mt-4 text-sm font-medium uppercase tracking-[0.18em] text-[#595959]">
                             {brand?.tagline ?? "Nettoyage voiture à domicile"}
@@ -80,13 +81,13 @@ export default function Footer() {
                             aria-label="Navigation pied de page"
                         >
                             {footerLinks.map((link) => (
-                                <a
+                                <Link
                                     key={`${link.label}-${link.href}`}
-                                    href={link.href}
+                                    to={link.href}
                                     className="premium-link text-sm font-medium text-[#595959] transition duration-300 hover:text-[#1F3A5F]"
                                 >
                                     {link.label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
                     </div>
@@ -95,7 +96,7 @@ export default function Footer() {
                 <div className="mt-10 border-t border-slate-200 pt-6 sm:mt-12 sm:pt-7">
                     <div className="flex flex-col items-center gap-2 text-center">
                         <p className="text-sm text-[#595959]">
-                            Nettoyage voiture à domicile à Yerres et alentours
+                            Nettoyage automobile à domicile dans le sud de l’Île-de-France
                         </p>
 
                         <p className="text-sm text-[#595959]">
