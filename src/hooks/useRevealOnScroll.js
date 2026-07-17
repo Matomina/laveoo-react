@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useRevealOnScroll() {
+export default function useRevealOnScroll(dependency) {
     useEffect(() => {
         const elements = document.querySelectorAll(".reveal-card");
 
@@ -49,5 +49,5 @@ export default function useRevealOnScroll() {
         });
 
         return () => observer.disconnect();
-    }, []);
+    }, [dependency]);
 }
