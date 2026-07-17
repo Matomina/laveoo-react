@@ -21,15 +21,17 @@ export default function HomePage() {
 
             <section className="bg-[#F5F5F5] py-20 lg:py-24" aria-labelledby="home-method-title">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-                        <div className="reveal-card overflow-hidden rounded-[2rem] border border-[#93B8D8]/55 bg-white p-3 shadow-[0_22px_65px_rgba(31,58,95,0.12)]">
-                            <img src="/results/apres-02.jpeg" alt="Habitacle après un nettoyage intérieur automobile professionnel Laveoo" className="aspect-[4/3] w-full rounded-[1.5rem] object-cover" loading="lazy" />
-                        </div>
-                        <div className="reveal-card">
+                    <div className="grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-x-10 lg:gap-y-7">
+                        <div className="reveal-card lg:col-start-2 lg:row-start-1">
                             <p className="text-xs font-black uppercase tracking-[0.22em] text-[#1F3A5F]/60">Notre savoir-faire</p>
                             <h2 id="home-method-title" className="mt-4 text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl">{method.title}</h2>
                             <p className="mt-6 text-lg leading-8 text-[#595959]">{method.intro}</p>
-                            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                        </div>
+                        <div className="reveal-card overflow-hidden rounded-[2rem] border border-[#93B8D8]/55 bg-white p-3 shadow-[0_22px_65px_rgba(31,58,95,0.12)] lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
+                            <img src="/results/apres-02.jpeg" alt="Habitacle après un nettoyage intérieur automobile professionnel Laveoo" className="aspect-[4/3] w-full rounded-[1.5rem] object-cover" loading="lazy" />
+                        </div>
+                        <div className="reveal-card lg:col-start-2 lg:row-start-2">
+                            <div className="grid gap-3 sm:grid-cols-2">
                                 {method.items.map((item) => <div key={item.title} className="rounded-2xl bg-white p-5 shadow-[0_10px_28px_rgba(31,58,95,0.06)]"><h3 className="font-black text-[#1F3A5F]">{item.title}</h3><p className="mt-2 text-sm leading-6 text-[#595959]">{item.description}</p></div>)}
                             </div>
                             <Link to="/nos-methodes-de-nettoyage" className="premium-button mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-[#1F3A5F] px-6 py-3 font-semibold text-white">Découvrir notre méthode</Link>
