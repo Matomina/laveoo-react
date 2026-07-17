@@ -7,13 +7,16 @@ import Seo from "../components/Seo";
 import { siteData } from "../data/siteData";
 
 export default function HomePage() {
-    const { method, whyChoose, faq } = siteData;
+    const { method, whyChoose, faq, results } = siteData;
+    const featuredComparisons = results.comparisons.filter(({ id }) =>
+        ["comparison-4", "comparison-5", "comparison-6", "comparison-7"].includes(id),
+    );
     return (
         <>
             <Seo title="Nettoyage automobile à domicile | Laveoo" description="Nettoyage intérieur automobile professionnel à domicile dans le sud de l’Île-de-France. Trois forfaits transparents à 79 €, 99 € et 119 €." path="/" />
             <Hero />
             <PricingSection />
-            <ResultsSection />
+            <ResultsSection comparisons={featuredComparisons} columns={4} />
             <SectionCta title="Découvrez davantage de transformations" text="Consultez les comparaisons avant-après et faites glisser le curseur pour voir le résultat." label="Voir tous les résultats" to="/resultats" />
 
             <section className="bg-[#F5F5F5] py-20 lg:py-24" aria-labelledby="home-method-title">

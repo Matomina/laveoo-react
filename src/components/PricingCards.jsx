@@ -27,7 +27,7 @@ export default function PricingCards({ compact = false }) {
                             <button type="button" onClick={() => togglePlan(plan.id)} aria-expanded={isOpen} aria-controls={`plan-${plan.id}`} className="block w-full p-5 text-left sm:p-6">
                                 <div className={`relative flex items-center justify-center overflow-hidden rounded-[1.4rem] bg-white transition-[height] duration-500 ${isOpen ? "h-24 sm:h-32" : "h-44 sm:h-48"}`}>
                                     <span className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF2FB] text-xs font-black text-[#1F3A5F]">0{index + 1}</span>
-                                    <img src={plan.media.src} alt={plan.media.alt} className={`h-full w-full object-contain transition duration-500 ${index === 2 ? "scale-110" : ""}`} loading="lazy" />
+                                    <img src={plan.media.src} alt={plan.media.alt} className={`h-full w-full object-contain transition duration-500 ${index === 2 ? "scale-[1.3]" : ""}`} loading="lazy" />
                                 </div>
 
                                 <div className="mt-5 border-t-2 border-[#93B8D8] pt-5">

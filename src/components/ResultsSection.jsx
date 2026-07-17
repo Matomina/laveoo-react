@@ -1,8 +1,9 @@
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import { siteData } from "../data/siteData";
 
-export default function ResultsSection() {
+export default function ResultsSection({ comparisons, columns = 3 }) {
     const { results } = siteData;
+    const displayedComparisons = comparisons ?? results?.comparisons ?? [];
 
     return (
         <section
@@ -27,8 +28,8 @@ export default function ResultsSection() {
                     </p>
                 </div>
 
-                <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {(results?.comparisons ?? []).map((comparison) => (
+                <div className={`mt-14 grid gap-6 sm:grid-cols-2 ${columns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
+                    {displayedComparisons.map((comparison) => (
                         <BeforeAfterSlider
                             key={comparison.id}
                             before={comparison.before}
