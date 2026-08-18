@@ -73,9 +73,9 @@ export const siteData = {
             "Spécialiste du nettoyage intérieur automobile à domicile dans le sud de l’Île-de-France.",
     },
     contact: {
-        phone: "0751126402",
-        phoneDisplay: "07 51 12 64 02",
-        whatsapp: "33751126402",
+        phone: "0607112279",
+        phoneDisplay: "06 07 11 22 79",
+        whatsapp: "33607112279",
         email: "laveoocontact@gmail.com",
         serviceArea: "Essonne (91), Val-de-Marne (94) et Seine-et-Marne (77)",
         mapQuery: "Sud de l’Île-de-France",
