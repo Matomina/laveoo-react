@@ -5,6 +5,7 @@ import ResultsSection from "../components/ResultsSection";
 import SectionCta from "../components/SectionCta";
 import Seo from "../components/Seo";
 import { siteData } from "../data/siteData";
+import { villes } from "../data/villes";
 
 export default function HomePage() {
     const { method, whyChoose, faq, results } = siteData;
@@ -59,6 +60,22 @@ export default function HomePage() {
                         {faq.items.slice(0, 4).map((item) => <details key={item.question} className="reveal-card group rounded-[1.5rem] border border-[#93B8D8]/65 bg-white p-6 shadow-[0_12px_34px_rgba(31,58,95,0.06)]"><summary className="flex cursor-pointer list-none items-start justify-between gap-5 font-bold text-[#1F3A5F]"><span>{item.question}</span><span className="text-xl transition group-open:rotate-45">+</span></summary><p className="mt-4 border-t border-slate-100 pt-4 leading-8 text-[#595959]">{item.answer}</p></details>)}
                     </div>
                     <SectionCta title="Vous avez encore une question ?" text="La FAQ complète répond aux questions sur la préparation, les matériaux, les taches, le séchage et la réservation." label="Consulter la FAQ complète" to="/faq" secondaryLabel="Nous contacter" secondaryTo="/contact" />
+                </div>
+            </section>
+
+            <section className="bg-white py-16 lg:py-20" aria-labelledby="zones-title">
+                <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+                    <div className="reveal-card rounded-[2rem] bg-[#EAF2FB] p-8 text-center lg:p-10">
+                        <h2 id="zones-title" className="text-2xl font-black text-[#1F3A5F] sm:text-3xl">Nos zones d'intervention</h2>
+                        <p className="mt-3 text-[#595959]">Laveoo intervient dans plusieurs communes du sud de l'Île-de-France</p>
+                        <div className="mt-6 flex flex-wrap justify-center gap-3">
+                            {villes.map((ville) => (
+                                <Link key={ville.slug} to={`/nettoyage-auto/${ville.slug}`} className="rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#1769E8] shadow-sm transition hover:shadow-md">
+                                    Nettoyage auto à {ville.nom}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
 
