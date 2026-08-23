@@ -1,0 +1,80 @@
+.vehicle-search {
+  max-width: 620px;
+  margin: 0 auto 42px;
+  padding: 32px;
+  text-align: center;
+  font-family: inherit;
+  background: transparent;
+  border: 1px solid #0b3a78;
+  border-radius: 18px;
+}
+
+.vehicle-search__eyebrow {
+  margin: 0 0 10px;
+  color: #0b3a78;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.vehicle-search h3 {
+  margin: 0;
+  color: #69b9ef;
+  font-size: 28px;
+}
+
+.vehicle-search__text {
+  margin: 12px 0 22px;
+  color: #0b3a78;
+  line-height: 1.6;
+}
+
+.vehicle-search input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px 16px;
+  color: #0b3a78;
+  font: inherit;
+  background: transparent;
+  border: 1px solid #0b3a78;
+  border-radius: 10px;
+  outline: none;
+}
+
+.vehicle-search input::placeholder {
+  color: #5c95bf;
+}
+
+.vehicle-search input:focus {
+  border-color: #69b9ef;
+  box-shadow: 0 0 0 3px rgba(105, 185, 239, 0.2);
+}
+
+.vehicle-search__result {
+  margin: 18px 0 0;
+  color: #0b3a78;
+  font-weight: 700;
+}
+
+.vehicle-search__suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.vehicle-search__suggestion {
+  padding: 10px 14px;
+  color: #0b3a78;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #0b3a78;
+  border-radius: 8px;
+}
+
+.vehicle-search__suggestion:hover {
+  color: #ffffff;
+  background: #0b3a78;
+}
