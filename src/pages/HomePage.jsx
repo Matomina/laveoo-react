@@ -14,7 +14,7 @@ export default function HomePage() {
     );
     return (
         <>
-            <Seo title="Nettoyage automobile à domicile | Laveoo" description="Nettoyage intérieur automobile professionnel à domicile dans le sud de l’Île-de-France. Trois forfaits transparents à 79 €, 99 € et 119 €." path="/" />
+         <Seo title="Nettoyage automobile à domicile 91/94/77 | Laveoo" description="Nettoyage intérieur automobile professionnel à domicile en Essonne, Val-de-Marne et Seine-et-Marne. Forfaits dès 79 €, déplacement inclus. Réservez en quelques clics." path="/" />
             <Hero />
             <PricingSection />
             <ResultsSection comparisons={featuredComparisons} columns={4} />

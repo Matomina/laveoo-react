@@ -96,7 +96,7 @@ export const siteData = {
         { label: "Contact", href: "/contact" },
     ],
     hero: {
-        title: "Professionnelle du nettoyage automobile à domicile, Laveoo",
+        title: "Nettoyage de voiture à domicile Essonne 91, Val-de-Marne 94, Seine-et-Marne 77",
         subtitle:
             "Spécialiste du nettoyage intérieur automobile, Laveoo a développé une méthode professionnelle qui rend l’esthétique automobile haut de gamme accessible à tous, directement à votre domicile. Nous intervenons dans le sud de l’Île-de-France, en Essonne (91), dans le Val-de-Marne (94) et en Seine-et-Marne (77).",
         highlights: [
