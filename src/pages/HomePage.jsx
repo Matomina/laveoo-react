@@ -6,19 +6,37 @@ import SectionCta from "../components/SectionCta";
 import Seo from "../components/Seo";
 import { siteData } from "../data/siteData";
 import { villes } from "../data/villes";
+import renderWithLinks from "../utils/renderWithLinks";
 
 export default function HomePage() {
-    const { method, whyChoose, faq, results } = siteData;
+    const { method, whyChoose, faq, results, process } = siteData;
     const featuredComparisons = results.comparisons.filter(({ id }) =>
         ["comparison-4", "comparison-5", "comparison-6", "comparison-7"].includes(id),
     );
     return (
         <>
-         <Seo title="Nettoyage automobile à domicile 91/94/77 | Laveoo" description="Nettoyage intérieur automobile professionnel à domicile en Essonne, Val-de-Marne et Seine-et-Marne. Forfaits dès 79 €, déplacement inclus. Réservez en quelques clics." path="/" />
+            <Seo title="Nettoyage automobile à domicile 91/94/77 | Laveoo" description="Nettoyage intérieur automobile professionnel à domicile en Essonne, Val-de-Marne et Seine-et-Marne. Forfaits dès 79 €, déplacement inclus. Réservez en quelques clics." path="/" />
             <Hero />
             <PricingSection />
             <ResultsSection comparisons={featuredComparisons} columns={4} />
             <SectionCta title="Découvrez davantage de transformations" text="Consultez les comparaisons avant-après et faites glisser le curseur pour voir le résultat." label="Voir tous les résultats" to="/resultats" />
+
+            <section className="bg-white py-20 lg:py-24" aria-labelledby="process-title">
+                <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+                    <header className="reveal-card mx-auto max-w-3xl text-center">
+                        <h2 id="process-title" className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl">{process.title}</h2>
+                    </header>
+                    <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                        {process.steps.map((step, index) => (
+                            <article key={step.title} className="reveal-card premium-card rounded-[1.75rem] border border-[#93B8D8]/55 bg-[#F8FAFC] p-6 shadow-[0_14px_40px_rgba(31,58,95,0.07)]">
+                                <span className="text-xs font-black text-[#1769E8]">0{index + 1}</span>
+                                <h3 className="mt-4 text-xl font-black text-[#1F3A5F]">{step.title}</h3>
+                                <p className="mt-3 text-sm leading-7 text-[#595959]">{step.description}</p>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             <section className="bg-[#F5F5F5] py-20 lg:py-24" aria-labelledby="home-method-title">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -26,7 +44,7 @@ export default function HomePage() {
                         <div className="reveal-card lg:col-start-2 lg:row-start-1">
                             <p className="text-xs font-black uppercase tracking-[0.22em] text-[#1F3A5F]/60">Notre savoir-faire</p>
                             <h2 id="home-method-title" className="mt-4 text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl">{method.title}</h2>
-                            <p className="mt-6 text-lg leading-8 text-[#595959]">{method.intro}</p>
+                            <p className="mt-6 text-lg leading-8 text-[#595959]">{renderWithLinks(method.intro, "method-intro")}</p>
                         </div>
                         <div className="reveal-card overflow-hidden rounded-[2rem] border border-[#93B8D8]/55 bg-white p-3 shadow-[0_22px_65px_rgba(31,58,95,0.12)] lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
                             <img src="/results/apres-02.jpeg" alt="Habitacle après un nettoyage intérieur automobile professionnel Laveoo" className="aspect-[4/3] w-full rounded-[1.5rem] object-cover" loading="lazy" />
@@ -34,6 +52,9 @@ export default function HomePage() {
                         <div className="reveal-card lg:col-start-2 lg:row-start-2">
                             <div className="grid gap-3 sm:grid-cols-2">
                                 {method.items.map((item) => <div key={item.title} className="rounded-2xl bg-white p-5 shadow-[0_10px_28px_rgba(31,58,95,0.06)]"><h3 className="font-black text-[#1F3A5F]">{item.title}</h3><p className="mt-2 text-sm leading-6 text-[#595959]">{item.description}</p></div>)}
+                            </div>
+                            <div className="mt-6 space-y-3">
+                                {method.closingParagraphs.map((paragraph, index) => <p key={index} className="text-sm leading-7 text-[#595959]">{paragraph}</p>)}
                             </div>
                             <Link to="/nos-methodes-de-nettoyage" className="premium-button mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-[#1F3A5F] px-6 py-3 font-semibold text-white">Découvrir notre méthode</Link>
                         </div>

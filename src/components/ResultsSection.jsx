@@ -1,7 +1,7 @@
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import { siteData } from "../data/siteData";
 
-export default function ResultsSection({ comparisons, columns = 3 }) {
+export default function ResultsSection({ comparisons, columns = 3, title, intro }) {
     const { results } = siteData;
     const displayedComparisons = comparisons ?? results?.comparisons ?? [];
 
@@ -20,11 +20,11 @@ export default function ResultsSection({ comparisons, columns = 3 }) {
                         id="results-title"
                         className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
                     >
-                        {results?.title ?? "Nos résultats"}
+                        {title ?? results?.title ?? "Nos résultats"}
                     </h2>
 
                     <p className="mt-5 text-lg leading-8 text-[#595959]">
-                        {results?.intro}
+                        {intro ?? results?.intro}
                     </p>
                 </div>
 

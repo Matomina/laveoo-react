@@ -96,9 +96,9 @@ export const siteData = {
         { label: "Contact", href: "/contact" },
     ],
     hero: {
-        title: "Nettoyage de voiture à domicile Essonne 91, Val-de-Marne 94, Seine-et-Marne 77",
+        title: "Lavage auto à domicile – Nettoyage intérieur de voiture",
         subtitle:
-            "Spécialiste du nettoyage intérieur automobile, Laveoo a développé une méthode professionnelle qui rend l’esthétique automobile haut de gamme accessible à tous, directement à votre domicile. Nous intervenons dans le sud de l’Île-de-France, en Essonne (91), dans le Val-de-Marne (94) et en Seine-et-Marne (77).",
+            "Spécialiste du nettoyage intérieur automobile, Laveoo a développé une méthode professionnelle qui rend l’esthétique automobile haut de gamme accessible à tous, directement à votre domicile. Nous intervenons 7j/7, avec déplacement gratuit et paiement uniquement à la fin de la prestation.",
         highlights: [
             "Déplacement inclus",
             "Autonome en eau",
@@ -149,15 +149,28 @@ export const siteData = {
             { id: "comparison-10", title: "Habitacle complet", before: "/results/avant-010.jpeg", after: "/results/apres-010.jpeg", alt: "Avant-après du nettoyage complet d’un habitacle automobile clair" },
         ],
     },
+    process: {
+        title: "Comment se passe le nettoyage intérieur de voiture chez Laveoo ?",
+        steps: [
+            { title: "Contact", description: "Contactez-nous au 06 07 11 22 79 ou cliquez sur « Réserver » pour nous envoyer votre demande par e-mail. Nous vous rappelons dans l’heure." },
+            { title: "Confirmation", description: "Nous confirmons le créneau et le tarif par e-mail ou SMS." },
+            { title: "Intervention", description: "Nous réalisons le nettoyage à l’heure du rendez-vous. Nous venons avec tout le matériel nécessaire pour prendre soin de votre véhicule. Vous n’avez rien à préparer : il suffit de nous donner accès au véhicule." },
+            { title: "Paiement", description: "Vous payez uniquement une fois le véhicule propre. Votre voiture est prête à reprendre la route, propre, fraîche et agréable à retrouver." },
+        ],
+    },
     method: {
         title: "Une méthode de nettoyage automobile professionnelle",
         intro:
-            "L’esthétique automobile est notre métier. Air comprimé, vapeur, injection-extraction et gestes adaptés permettent d’obtenir un niveau de finition qu’un nettoyage classique ne peut pas offrir, tout en préservant le cuir, l’Alcantara et les surfaces sensibles.",
+    "L’esthétique automobile est notre métier. Que ce soit pour un [nettoyage auto à domicile](/nettoyage-auto-domicile) complet ou pour le [nettoyage des sièges de voiture](/nettoyage-sieges-voiture) les plus délicats, air comprimé, vapeur, injection-extraction et gestes adaptés permettent d’obtenir un niveau de finition qu’un nettoyage classique ne peut pas offrir, tout en préservant le cuir, l’Alcantara et les surfaces sensibles.",
         items: [
-            { title: "Textiles et moquettes", description: "Action mécanique et injection-extraction pour nettoyer les fibres en profondeur.", video: { src: "/videos/methode-shampoing.mp4", label: "Shampouinage professionnel des textiles automobiles" } },
-            { title: "Aspiration en profondeur", description: "L’air comprimé déloge les impuretés des coutures et des zones difficiles d’accès.", video: { src: "/videos/methode-aspiration.mp4", label: "Aspiration professionnelle d’un habitacle" } },
-            { title: "Matériaux délicats", description: "Produits et accessoires choisis selon le cuir, l’Alcantara et les finitions sensibles.", video: { src: "/videos/methode-preparation.mp4", label: "Préparation du nettoyage des matériaux délicats" } },
-            { title: "Finitions minutieuses", description: "La vapeur et les microfibres adaptées assainissent les surfaces sans les altérer.", video: { src: "/videos/methode-finitions.mp4", label: "Finitions intérieures automobiles" } },
+            { title: "Tapis et moquettes poussiéreux", description: "Même après avoir été tapés ou aspirés, la poussière et les miettes restent incrustées dans les fibres.", video: { src: "/videos/methode-shampoing.mp4", label: "Shampouinage professionnel des textiles automobiles" } },
+            { title: "Sièges tachés et marqués", description: "Auréoles de boissons, traces de nourriture, vomi d’enfant ou saletés du quotidien : les sièges textiles absorbent les taches et peuvent conserver les odeurs.", video: { src: "/videos/methode-aspiration.mp4", label: "Aspiration professionnelle d’un habitacle" } },
+            { title: "Tableau de bord et plastiques encrassés", description: "La poussière se loge dans chaque rainure, bouton et interstice. Avec le temps, les plastiques deviennent ternes, collants ou marqués par les traces.", video: { src: "/videos/methode-preparation.mp4", label: "Préparation du nettoyage des matériaux délicats" } },
+            { title: "Sièges en cuir marqués et ternis", description: "Traces d’usage, saletés incrustées, zones brillantes ou ternes : avec le temps, le cuir perd son aspect d’origine.", video: { src: "/videos/methode-finitions.mp4", label: "Finitions intérieures automobiles" } },
+        ],
+        closingParagraphs: [
+            "Nous prenons en charge ces problèmes avec un nettoyage intérieur complet : aspiration de l’habitacle et du coffre, traitement des taches de boissons, de graisse, de terre ou d’animaux, nettoyage approfondi des sièges en tissu ou entretien du cuir.",
+            "Bien plus qu’un simple coup d’aspirateur, notre intervention redonne à votre véhicule propreté, fraîcheur et confort.",
         ],
     },
     whyChoose: {
@@ -189,8 +202,8 @@ export const siteData = {
             "Contactez Laveoo par téléphone, SMS, WhatsApp ou e-mail. Nous vous confirmerons rapidement la catégorie du véhicule, la date et l’horaire d’intervention.",
         infoNote: "7j/7 de 8h à 21h · Déplacement inclus dans notre zone d’intervention",
         actions: [
-            { label: "Appeler", href: "tel:0751126402", variant: "primary" },
-            { label: "WhatsApp", href: "https://wa.me/33751126402", variant: "primary", external: true },
+            { label: "Appeler", href: "tel:0607112279", variant: "primary" },
+            { label: "WhatsApp", href: "https://wa.me/33607112279", variant: "primary", external: true },
             { label: "Envoyer un e-mail", href: "mailto:laveoocontact@gmail.com", variant: "secondary" },
         ],
     },

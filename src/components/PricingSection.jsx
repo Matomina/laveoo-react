@@ -3,7 +3,7 @@ import PricingCards from "./PricingCards";
 import { siteData } from "../data/siteData";
 import VehicleSearch from "./VehicleSearch";
 
-export default function PricingSection() {
+export default function PricingSection({ title, intro }) {
   const { pricing } = siteData;
   const [selectedPlanId, setSelectedPlanId] = useState(null);
   const [searchToken, setSearchToken] = useState(0);
@@ -71,11 +71,11 @@ export default function PricingSection() {
             id="pricing-title"
             className="text-4xl font-black tracking-tight text-[#1F3A5F] sm:text-5xl"
           >
-            {pricing.title}
+            {title ?? pricing.title}
           </h2>
 
           <p className="mt-5 text-lg leading-8 text-[#595959]">
-            {pricing.intro}
+            {intro ?? pricing.intro}
           </p>
         </header>
 
