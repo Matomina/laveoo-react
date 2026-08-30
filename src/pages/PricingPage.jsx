@@ -44,7 +44,7 @@ export default function PricingPage() {
                         <div><h2 className="text-3xl font-black text-[#1F3A5F]">Pourquoi choisir Laveoo ?</h2><ul className="mt-6 space-y-3 text-[#595959]">{["Prestation à domicile ou sur votre lieu de travail", "Tarif clair et annoncé à l’avance", "Déplacement inclus dans notre secteur", "Nettoyage réalisé avec du matériel professionnel", "Produits adaptés aux différents matériaux", "Résultat soigné jusque dans les moindres détails"].map((item) => <li key={item} className="flex gap-3 leading-7"><span className="text-[#1769E8]">✓</span>{item}</li>)}</ul></div>
                         <div><h2 className="text-3xl font-black text-[#1F3A5F]">Déplacement inclus</h2><p className="mt-6 leading-8 text-[#595959]">Nous intervenons à domicile ou sur le lieu de travail dans le sud de l’Île-de-France, en Essonne (91), dans le Val-de-Marne (94) et en Seine-et-Marne (77). Si vous avez un doute sur votre commune, contactez-nous : nous vous répondrons rapidement.</p></div>
                     </div>
-                    <SectionCta title="Réservez votre nettoyage intérieur" text="Choisissez la catégorie de votre véhicule, contactez-nous et profitez d’un nettoyage professionnel sans vous déplacer." label="Réserver maintenant" to="/contact" />
+                    <SectionCta title="Réservez votre nettoyage intérieur" text="Choisissez la catégorie de votre véhicule, réservez en ligne et profitez d’un nettoyage professionnel sans vous déplacer." label="Réserver en ligne" to="/reservation" />
                 </div>
             </section>
         </>

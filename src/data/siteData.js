@@ -94,6 +94,7 @@ export const siteData = {
         { label: "Méthodes", href: "/nos-methodes-de-nettoyage" },
         { label: "FAQ", href: "/faq" },
         { label: "Contact", href: "/contact" },
+        { label: "Réserver", href: "/reservation" },
     ],
     hero: {
         title: "Lavage auto à domicile – Nettoyage intérieur de voiture",
@@ -107,7 +108,7 @@ export const siteData = {
         ],
         actions: [
             { label: "Découvrir les tarifs", href: "/tarifs", variant: "primary" },
-            { label: "Prendre rendez-vous", href: "/contact", variant: "secondary" },
+            { label: "Réserver en ligne", href: "/reservation", variant: "secondary" },
         ],
     },
     pricing: {
@@ -215,6 +216,7 @@ export const siteData = {
             { label: "Méthodes", href: "/nos-methodes-de-nettoyage" },
             { label: "FAQ", href: "/faq" },
             { label: "Contact", href: "/contact" },
+            { label: "Réserver", href: "/reservation" },
             { label: "Nettoyage à domicile", href: "/nettoyage-auto-domicile" },
             { label: "Nettoyage des sièges", href: "/nettoyage-sieges-voiture" },
         ],

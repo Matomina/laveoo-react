@@ -8,6 +8,7 @@ import ResultsPage from "./pages/ResultsPage";
 import MethodsPage from "./pages/MethodsPage";
 import FaqPage from "./pages/FaqPage";
 import ContactPage from "./pages/ContactPage";
+import ReservationPage from "./pages/ReservationPage";
 import SeoContentPage from "./pages/SeoContentPage";
 import VillePage from "./pages/VillePage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path="nos-methodes-de-nettoyage" element={<MethodsPage />} />
                 <Route path="faq" element={<FaqPage />} />
                 <Route path="contact" element={<ContactPage />} />
+                <Route path="reservation" element={<ReservationPage />} />
                 <Route path="nettoyage-auto/:slug" element={<VillePage />} />
                 <Route path="nettoyage-auto-domicile" element={<SeoContentPage eyebrow="Service mobile" title="Nettoyage auto à domicile" intro="Retrouvez un habitacle propre sans perdre de temps : Laveoo intervient directement à votre domicile ou sur votre lieu de travail avec des produits et du matériel professionnels." description="Nettoyage intérieur de voiture à domicile dans le sud de l’Île-de-France avec Laveoo. Intervention professionnelle, déplacement inclus et matériel adapté." path="/nettoyage-auto-domicile" raw={autoCleaningRaw} />} />
                 <Route path="nettoyage-sieges-voiture" element={<SeoContentPage eyebrow="Textile, cuir et Alcantara" title="Nettoyage des sièges de voiture" intro="Laveoo nettoie vos sièges de voiture à domicile avec des produits et des méthodes adaptés à chaque revêtement." description="Nettoyage des sièges de voiture à domicile par Laveoo : tissu, cuir, cuir perforé, Alcantara, taches, odeurs et salissures du quotidien." path="/nettoyage-sieges-voiture" raw={seatsCleaningRaw} />} />

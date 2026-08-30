@@ -19,7 +19,7 @@ export default function HomePage() {
             <Hero />
             <PricingSection />
             <ResultsSection comparisons={featuredComparisons} columns={4} />
-            <SectionCta title="Découvrez davantage de transformations" text="Consultez les comparaisons avant-après et faites glisser le curseur pour voir le résultat." label="Voir tous les résultats" to="/resultats" />
+            <SectionCta title="Découvrez davantage de transformations" text="Consultez les comparaisons avant-après et faites glisser le curseur pour voir le résultat." label="Voir tous les résultats" to="/resultats" secondaryLabel="Réserver en ligne" secondaryTo="/reservation" />
 
             <section className="bg-white py-20 lg:py-24" aria-labelledby="process-title">
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -102,7 +102,7 @@ export default function HomePage() {
 
             <section className="bg-white py-20 lg:py-24">
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                    <SectionCta title="Votre habitacle mérite un nettoyage professionnel" text="Appelez-nous ou envoyez-nous un message pour choisir votre forfait et convenir d’un rendez-vous à domicile." label="Prendre rendez-vous" to="/contact" secondaryLabel="Voir les tarifs" secondaryTo="/tarifs" />
+                    <SectionCta title="Votre habitacle mérite un nettoyage professionnel" text="Choisissez votre forfait et réservez en ligne en quelques clics pour un rendez-vous à domicile." label="Réserver en ligne" to="/reservation" secondaryLabel="Voir les tarifs" secondaryTo="/tarifs" />
                 </div>
             </section>
         </>

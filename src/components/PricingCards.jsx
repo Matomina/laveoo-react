@@ -26,7 +26,7 @@ export default function PricingCards({
 
   return (
     <div>
-      <div className="grid items-start gap-6 lg:grid-cols-3">
+      <div className="grid items-stretch gap-6 lg:grid-cols-3">
         {plans.map((plan, index) => {
           const isOpen = openId === plan.id;
 
@@ -34,7 +34,7 @@ export default function PricingCards({
             <article
               id={`pricing-${plan.id}`}
               key={plan.id}
-              className={`reveal-card overflow-hidden rounded-[2rem] border bg-white shadow-[0_18px_55px_rgba(31,58,95,0.10)] transition duration-300 ${
+              className={`reveal-card flex h-full flex-col overflow-hidden rounded-[2rem] border bg-white shadow-[0_18px_55px_rgba(31,58,95,0.10)] transition duration-300 ${
                 isOpen
                   ? "border-[#387EE8] shadow-[0_24px_65px_rgba(56,126,232,0.18)]"
                   : "border-[#93B8D8]/45"
@@ -45,7 +45,7 @@ export default function PricingCards({
                 onClick={() => togglePlan(plan.id)}
                 aria-expanded={isOpen}
                 aria-controls={`plan-${plan.id}`}
-                className="block w-full p-5 text-left sm:p-6"
+                className="block w-full flex-1 p-5 text-left sm:p-6"
               >
                 <div
                   className={`relative flex items-center justify-center overflow-hidden rounded-[1.4rem] bg-white transition-[height] duration-500 ${
@@ -104,6 +104,15 @@ export default function PricingCards({
                 </div>
               </button>
 
+              <div className="px-5 pb-5 sm:px-6 sm:pb-6">
+                <Link
+                  to={`/reservation?vehicule=${plan.id}`}
+                  className="premium-button inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#1769E8] px-5 py-3 font-bold text-white shadow-[0_12px_30px_rgba(23,105,232,0.22)]"
+                >
+                  Réserver ce forfait
+                </Link>
+              </div>
+
               <div
                 id={`plan-${plan.id}`}
                 className={`grid transition-[grid-template-rows] duration-500 ease-out ${
@@ -155,13 +164,6 @@ export default function PricingCards({
                         finitions plus minutieuses.
                       </p>
                     </div>
-
-                    <Link
-                      to={`/contact?forfait=${plan.id}`}
-                      className="premium-button mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#1769E8] px-5 py-3 font-bold text-white shadow-[0_12px_30px_rgba(23,105,232,0.22)]"
-                    >
-                      Réserver ce forfait
-                    </Link>
                   </div>
                 </div>
               </div>

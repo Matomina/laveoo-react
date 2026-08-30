@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { vehicles } from "../data/vehicles";
 
 const normalize = (text) =>
@@ -144,19 +145,28 @@ export default function VehicleSearch({ onVehicleFound }) {
       )}
 
       {confirmed && vehicle && (
-        <div className="mx-auto mt-5 flex w-fit items-center gap-2 rounded-full bg-[#EAF2FB] px-5 py-2.5 text-sm font-semibold text-[#1F3A5F]">
-          <svg
-            className="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <div className="mt-5 flex flex-col items-center gap-4">
+          <div className="flex w-fit items-center gap-2 rounded-full bg-[#EAF2FB] px-5 py-2.5 text-sm font-semibold text-[#1F3A5F]">
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Votre forfait s’affiche juste en dessous.
+          </div>
+
+          <Link
+            to={`/reservation?vehicule=${vehicle.category === 1 ? "citadines" : vehicle.category === 2 ? "compactes-berlines-suv-compacts" : "suv-familiaux-monospaces-breaks"}`}
+            className="premium-button inline-flex min-h-12 items-center justify-center rounded-full bg-[#1769E8] px-6 py-3 font-bold text-white shadow-[0_12px_30px_rgba(23,105,232,0.22)]"
           >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Votre forfait s’affiche juste en dessous.
+            Réserver ce forfait
+          </Link>
         </div>
       )}
     </div>

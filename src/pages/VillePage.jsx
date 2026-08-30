@@ -84,7 +84,7 @@ export default function VillePage() {
 
             <section className="bg-white py-20 lg:py-24">
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                    <SectionCta title={`Votre habitacle mérite un nettoyage professionnel à ${ville.nom}`} text="Contactez-nous pour choisir votre forfait et convenir d'un rendez-vous à domicile." label="Prendre rendez-vous" to="/contact" secondaryLabel="Voir les tarifs" secondaryTo="/tarifs" />
+                    <SectionCta title={`Votre habitacle mérite un nettoyage professionnel à ${ville.nom}`} text="Choisissez votre forfait et réservez en ligne en quelques clics pour un rendez-vous à domicile." label="Réserver en ligne" to="/reservation" secondaryLabel="Voir les tarifs" secondaryTo="/tarifs" />
                 </div>
             </section>
         </>
