@@ -12,6 +12,12 @@ import ReservationPage from "./pages/ReservationPage";
 import SeoContentPage from "./pages/SeoContentPage";
 import VillePage from "./pages/VillePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import AdminFacturesListPage from "./pages/admin/AdminFacturesListPage";
+import AdminNewFacturePage from "./pages/admin/AdminNewFacturePage";
+import RequireAuth from "./components/RequireAuth";
 import useRevealOnScroll from "./hooks/useRevealOnScroll";
 import autoCleaningRaw from "./content/nettoyage-auto-domicile.txt?raw";
 import seatsCleaningRaw from "./content/nettoyage-sieges.txt?raw";
@@ -46,6 +52,15 @@ export default function App() {
                 <Route path="nettoyage-auto-domicile" element={<SeoContentPage eyebrow="Service mobile" title="Nettoyage auto à domicile" intro="Retrouvez un habitacle propre sans perdre de temps : Laveoo intervient directement à votre domicile ou sur votre lieu de travail avec des produits et du matériel professionnels." description="Nettoyage intérieur de voiture à domicile dans le sud de l’Île-de-France avec Laveoo. Intervention professionnelle, déplacement inclus et matériel adapté." path="/nettoyage-auto-domicile" raw={autoCleaningRaw} />} />
                 <Route path="nettoyage-sieges-voiture" element={<SeoContentPage eyebrow="Textile, cuir et Alcantara" title="Nettoyage des sièges de voiture" intro="Laveoo nettoie vos sièges de voiture à domicile avec des produits et des méthodes adaptés à chaque revêtement." description="Nettoyage des sièges de voiture à domicile par Laveoo : tissu, cuir, cuir perforé, Alcantara, taches, odeurs et salissures du quotidien." path="/nettoyage-sieges-voiture" raw={seatsCleaningRaw} />} />
                 <Route path="*" element={<NotFoundPage />} />
+            </Route>
+
+            <Route path="admin/login" element={<AdminLoginPage />} />
+            <Route element={<RequireAuth />}>
+                <Route path="admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboardPage />} />
+                    <Route path="factures" element={<AdminFacturesListPage />} />
+                    <Route path="factures/nouvelle" element={<AdminNewFacturePage />} />
+                </Route>
             </Route>
         </Routes>
     );

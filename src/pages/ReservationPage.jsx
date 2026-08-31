@@ -4,6 +4,7 @@ import Seo from "../components/Seo";
 import PageHero from "../components/PageHero";
 import { siteData } from "../data/siteData";
 import { vehicles } from "../data/vehicles";
+import { supabase } from "../lib/supabaseClient";
 
 const WEB3FORMS_ACCESS_KEY = "2aef2f48-9238-48a3-ba23-a989714ee633";
 
@@ -410,6 +411,31 @@ export default function ReservationPage() {
             .join("\n");
 
         const message = `Nouvelle demande de réservation Laveoo\n\n${vehiclesSummary}\n\nTotal estimé : ${totalPrice} €\n\nNom : ${form.nom}\nAdresse d'intervention : ${form.adresse}\nEmail : ${form.email}\nTéléphone : ${form.telephone}\nDate souhaitée : ${formattedDate}\nCréneau souhaité : ${selectedSlot}`;
+
+        const vehiculesPayload = vehiclesList.map((v) => {
+            const plan = getPlan(v.categoryId);
+            return {
+                plan: plan?.shortLabel ?? "",
+                prix: plan?.price ?? 0,
+                option1h: v.option1h,
+            };
+        });
+
+        supabase
+            .from("reservations")
+            .insert({
+                nom: form.nom,
+                email: form.email,
+                telephone: form.telephone,
+                adresse: form.adresse,
+                date_souhaitee: selectedDate ? selectedDate.toISOString().slice(0, 10) : null,
+                creneau: selectedSlot,
+                vehicules: vehiculesPayload,
+                total_estime: totalPrice,
+            })
+            .then(({ error }) => {
+                if (error) console.error("Erreur enregistrement Supabase :", error);
+            });
 
         try {
             const response = await fetch("https://api.web3forms.com/submit", {
