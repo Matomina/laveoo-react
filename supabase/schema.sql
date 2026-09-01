@@ -6,6 +6,7 @@ create table public.reservations (
   email text not null,
   telephone text not null,
   adresse text not null,
+  siret text,
   date_souhaitee date,
   creneau text,
   vehicules jsonb not null default '[]'::jsonb,

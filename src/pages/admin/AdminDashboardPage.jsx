@@ -87,6 +87,7 @@ export default function AdminDashboardPage() {
                                         <p className="font-semibold text-[#1F3A5F]">{r.nom}</p>
                                         <p className="text-xs text-[#595959]">{r.email}</p>
                                         <p className="text-xs text-[#595959]">{r.telephone}</p>
+                                        {r.siret && <p className="text-xs text-[#595959]">SIRET : {r.siret}</p>}
                                     </td>
                                     <td className="px-4 py-3 text-[#595959]">{r.adresse}</td>
                                     <td className="whitespace-nowrap px-4 py-3">

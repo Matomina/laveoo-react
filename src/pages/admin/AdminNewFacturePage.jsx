@@ -41,6 +41,7 @@ export default function AdminNewFacturePage() {
                 setClientEmail(data.email ?? "");
                 setClientAdresse(data.adresse ?? "");
                 setClientTelephone(data.telephone ?? "");
+                setClientSiret(data.siret ?? "");
                 setDatePrestation(data.date_souhaitee ?? "");
 
                 const vehiculeLignes = (data.vehicules ?? []).map((v) => {

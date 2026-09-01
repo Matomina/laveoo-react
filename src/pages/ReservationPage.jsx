@@ -343,7 +343,7 @@ export default function ReservationPage() {
         makeEmptyVehicle(preselectedPlan ? preselectedPlan.id : plans[0]?.id),
     ]);
 
-    const [form, setForm] = useState({ nom: "", adresse: "", email: "", telephone: "" });
+    const [form, setForm] = useState({ nom: "", adresse: "", email: "", telephone: "", siret: "" });
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
 
@@ -410,7 +410,7 @@ export default function ReservationPage() {
             })
             .join("\n");
 
-        const message = `Nouvelle demande de réservation Laveoo\n\n${vehiclesSummary}\n\nTotal estimé : ${totalPrice} €\n\nNom : ${form.nom}\nAdresse d'intervention : ${form.adresse}\nEmail : ${form.email}\nTéléphone : ${form.telephone}\nDate souhaitée : ${formattedDate}\nCréneau souhaité : ${selectedSlot}`;
+        const message = `Nouvelle demande de réservation Laveoo\n\n${vehiclesSummary}\n\nTotal estimé : ${totalPrice} €\n\nNom : ${form.nom}\nAdresse d'intervention : ${form.adresse}\nEmail : ${form.email}\nTéléphone : ${form.telephone}${form.siret ? `\nSIRET : ${form.siret}` : ""}\nDate souhaitée : ${formattedDate}\nCréneau souhaité : ${selectedSlot}`;
 
         const vehiculesPayload = vehiclesList.map((v) => {
             const plan = getPlan(v.categoryId);
@@ -428,6 +428,7 @@ export default function ReservationPage() {
                 email: form.email,
                 telephone: form.telephone,
                 adresse: form.adresse,
+                siret: form.siret.trim() || null,
                 date_souhaitee: selectedDate ? selectedDate.toISOString().slice(0, 10) : null,
                 creneau: selectedSlot,
                 vehicules: vehiculesPayload,
@@ -624,6 +625,17 @@ export default function ReservationPage() {
                                             type="tel"
                                             value={form.telephone}
                                             onChange={(e) => setForm((f) => ({ ...f, telephone: e.target.value }))}
+                                            className="mt-1.5 w-full rounded-xl border border-[#93B8D8]/50 bg-[#F8FAFC] px-4 py-3 outline-none focus:border-[#1769E8] focus:bg-white"
+                                        />
+                                    </div>
+                                    <div className="sm:col-span-2">
+                                        <label className="text-sm font-semibold text-[#1F3A5F]">
+                                            N° SIRET <span className="font-normal text-[#595959]">(si vous êtes un professionnel, facultatif)</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={form.siret}
+                                            onChange={(e) => setForm((f) => ({ ...f, siret: e.target.value }))}
                                             className="mt-1.5 w-full rounded-xl border border-[#93B8D8]/50 bg-[#F8FAFC] px-4 py-3 outline-none focus:border-[#1769E8] focus:bg-white"
                                         />
                                     </div>
