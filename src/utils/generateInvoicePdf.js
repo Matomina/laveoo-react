@@ -79,6 +79,7 @@ export async function generateInvoicePdf(facture) {
     doc.setTextColor(89, 89, 89);
     const clientLines = [facture.client_nom];
     if (facture.client_adresse) clientLines.push(facture.client_adresse);
+    if (facture.client_siret) clientLines.push(`SIRET : ${facture.client_siret}`);
     if (facture.client_telephone) clientLines.push(facture.client_telephone);
     if (facture.client_email) clientLines.push(facture.client_email);
     doc.text(clientLines, clientX, y + 6);

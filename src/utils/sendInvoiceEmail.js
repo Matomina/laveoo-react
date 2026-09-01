@@ -12,7 +12,7 @@ export async function sendInvoiceEmail(facture) {
     const { data: sessionData } = await supabase.auth.getSession();
     const accessToken = sessionData.session?.access_token;
 
-    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-invoice-email`, {
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/dynamic-processor`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

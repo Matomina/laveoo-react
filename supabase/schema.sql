@@ -63,6 +63,7 @@ create table public.factures (
   client_email text not null,
   client_adresse text,
   client_telephone text,
+  client_siret text,
   lignes jsonb not null default '[]'::jsonb,
   montant_total numeric not null default 0,
   date_prestation date,

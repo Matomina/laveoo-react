@@ -17,6 +17,7 @@ export default function AdminNewFacturePage() {
     const [clientEmail, setClientEmail] = useState("");
     const [clientAdresse, setClientAdresse] = useState("");
     const [clientTelephone, setClientTelephone] = useState("");
+    const [clientSiret, setClientSiret] = useState("");
     const [datePrestation, setDatePrestation] = useState("");
     const [lignes, setLignes] = useState([makeEmptyLigne()]);
     const [saving, setSaving] = useState(false);
@@ -80,6 +81,7 @@ export default function AdminNewFacturePage() {
             client_email: clientEmail.trim() || null,
             client_adresse: clientAdresse.trim() || null,
             client_telephone: clientTelephone.trim() || null,
+            client_siret: clientSiret.trim() || null,
             date_prestation: datePrestation || null,
             lignes: lignes.map((l) => ({ description: l.description.trim(), montant: Number(l.montant) })),
             montant_total: total,
@@ -167,6 +169,16 @@ export default function AdminNewFacturePage() {
                                 type="date"
                                 value={datePrestation}
                                 onChange={(e) => setDatePrestation(e.target.value)}
+                                className="mt-1.5 w-full rounded-xl border border-[#93B8D8]/50 bg-[#F8FAFC] px-4 py-3 outline-none focus:border-[#1769E8] focus:bg-white"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-sm font-semibold text-[#1F3A5F]">SIRET du client (si professionnel)</label>
+                            <input
+                                type="text"
+                                placeholder="Optionnel"
+                                value={clientSiret}
+                                onChange={(e) => setClientSiret(e.target.value)}
                                 className="mt-1.5 w-full rounded-xl border border-[#93B8D8]/50 bg-[#F8FAFC] px-4 py-3 outline-none focus:border-[#1769E8] focus:bg-white"
                             />
                         </div>
