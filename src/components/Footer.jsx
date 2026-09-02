@@ -126,6 +126,21 @@ export default function Footer() {
                             © {currentYear} {brand?.name ?? "LAVEOO"} ·{" "}
                             {footer?.copyrightLabel ?? "Tous droits réservés"}
                         </p>
+
+                        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                            <Link
+                                to="/mentions-legales"
+                                className="premium-link text-sm text-[#595959] transition duration-300 hover:text-[#1F3A5F]"
+                            >
+                                Mentions légales
+                            </Link>
+                            <Link
+                                to="/politique-de-confidentialite"
+                                className="premium-link text-sm text-[#595959] transition duration-300 hover:text-[#1F3A5F]"
+                            >
+                                Politique de confidentialité
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
