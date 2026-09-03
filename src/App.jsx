@@ -1,28 +1,30 @@
+import { lazy, Suspense } from "react";
 import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./pages/HomePage";
-import PricingPage from "./pages/PricingPage";
-import ResultsPage from "./pages/ResultsPage";
-import MethodsPage from "./pages/MethodsPage";
-import FaqPage from "./pages/FaqPage";
-import ContactPage from "./pages/ContactPage";
-import ReservationPage from "./pages/ReservationPage";
-import SeoContentPage from "./pages/SeoContentPage";
-import VillePage from "./pages/VillePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import MentionsLegalesPage from "./pages/MentionsLegalesPage";
-import PolitiqueConfidentialitePage from "./pages/PolitiqueConfidentialitePage";
-import AdminLoginPage from "./pages/admin/AdminLoginPage";
-import AdminLayout from "./pages/admin/AdminLayout";
-import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
-import AdminFacturesListPage from "./pages/admin/AdminFacturesListPage";
-import AdminNewFacturePage from "./pages/admin/AdminNewFacturePage";
-import RequireAuth from "./components/RequireAuth";
 import useRevealOnScroll from "./hooks/useRevealOnScroll";
 import autoCleaningRaw from "./content/nettoyage-auto-domicile.txt?raw";
 import seatsCleaningRaw from "./content/nettoyage-sieges.txt?raw";
+
+const PricingPage = lazy(() => import("./pages/PricingPage"));
+const ResultsPage = lazy(() => import("./pages/ResultsPage"));
+const MethodsPage = lazy(() => import("./pages/MethodsPage"));
+const FaqPage = lazy(() => import("./pages/FaqPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const ReservationPage = lazy(() => import("./pages/ReservationPage"));
+const SeoContentPage = lazy(() => import("./pages/SeoContentPage"));
+const VillePage = lazy(() => import("./pages/VillePage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const MentionsLegalesPage = lazy(() => import("./pages/MentionsLegalesPage"));
+const PolitiqueConfidentialitePage = lazy(() => import("./pages/PolitiqueConfidentialitePage"));
+const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
+const AdminDashboardPage = lazy(() => import("./pages/admin/AdminDashboardPage"));
+const AdminFacturesListPage = lazy(() => import("./pages/admin/AdminFacturesListPage"));
+const AdminNewFacturePage = lazy(() => import("./pages/admin/AdminNewFacturePage"));
+const RequireAuth = lazy(() => import("./components/RequireAuth"));
 
 function SiteLayout() {
     const { pathname } = useLocation();
@@ -33,7 +35,11 @@ function SiteLayout() {
             <ScrollToTop />
             <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[999] focus:rounded-full focus:bg-[#1F3A5F] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">Aller au contenu principal</a>
             <Header />
-            <main id="main-content" className="overflow-x-hidden"><Outlet /></main>
+            <main id="main-content" className="overflow-x-hidden">
+                <Suspense fallback={null}>
+                    <Outlet />
+                </Suspense>
+            </main>
             <Footer />
         </div>
     );
@@ -58,12 +64,12 @@ export default function App() {
                 <Route path="*" element={<NotFoundPage />} />
             </Route>
 
-            <Route path="admin/login" element={<AdminLoginPage />} />
-            <Route element={<RequireAuth />}>
-                <Route path="admin" element={<AdminLayout />}>
-                    <Route index element={<AdminDashboardPage />} />
-                    <Route path="factures" element={<AdminFacturesListPage />} />
-                    <Route path="factures/nouvelle" element={<AdminNewFacturePage />} />
+            <Route path="admin/login" element={<Suspense fallback={null}><AdminLoginPage /></Suspense>} />
+            <Route element={<Suspense fallback={null}><RequireAuth /></Suspense>}>
+                <Route path="admin" element={<Suspense fallback={null}><AdminLayout /></Suspense>}>
+                    <Route index element={<Suspense fallback={null}><AdminDashboardPage /></Suspense>} />
+                    <Route path="factures" element={<Suspense fallback={null}><AdminFacturesListPage /></Suspense>} />
+                    <Route path="factures/nouvelle" element={<Suspense fallback={null}><AdminNewFacturePage /></Suspense>} />
                 </Route>
             </Route>
         </Routes>
