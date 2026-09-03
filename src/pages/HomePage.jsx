@@ -47,7 +47,7 @@ export default function HomePage() {
                             <p className="mt-6 text-lg leading-8 text-[#595959]">{renderWithLinks(method.intro, "method-intro")}</p>
                         </div>
                         <div className="reveal-card overflow-hidden rounded-[2rem] border border-[#93B8D8]/55 bg-white p-3 shadow-[0_22px_65px_rgba(31,58,95,0.12)] lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
-                            <img src="/results/apres-02.jpeg" alt="Habitacle après un nettoyage intérieur automobile professionnel Laveoo" className="aspect-[4/3] w-full rounded-[1.5rem] object-cover" loading="lazy" />
+                            <img src="/results/apres-02.webp" alt="Habitacle après un nettoyage intérieur automobile professionnel Laveoo" className="aspect-[4/3] w-full rounded-[1.5rem] object-cover" loading="lazy" />
                         </div>
                         <div className="reveal-card lg:col-start-2 lg:row-start-2">
                             <div className="grid gap-3 sm:grid-cols-2">

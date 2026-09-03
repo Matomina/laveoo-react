@@ -21,7 +21,7 @@ export const pricingPlans = [
         estimatedDuration: "2 h",
         price: 79,
         media: {
-            src: "/nettoyage-citadine-domicile-yerres.jpeg",
+            src: "/nettoyage-citadine-domicile-yerres.webp",
             alt: "Nettoyage intérieur d’une citadine à domicile",
         },
         description:
@@ -39,7 +39,7 @@ export const pricingPlans = [
         estimatedDuration: "2 h 30",
         price: 99,
         media: {
-            src: "/nettoyage-suv-domicile-yerres.jpeg",
+            src: "/nettoyage-suv-domicile-yerres.webp",
             alt: "Nettoyage intérieur d’un SUV compact à domicile",
         },
         description:
@@ -57,7 +57,7 @@ export const pricingPlans = [
         estimatedDuration: "3 h",
         price: 119,
         media: {
-            src: "/nettoyage-monospace-domicile-laveoo.png",
+            src: "/nettoyage-monospace-domicile-laveoo.webp",
             alt: "Monospace familial correspondant au forfait Laveoo à domicile",
         },
         description:
@@ -138,16 +138,16 @@ export const siteData = {
         intro:
             "Découvrez en images le résultat de nos prestations de nettoyage intérieur automobile à domicile.",
         comparisons: [
-            { id: "comparison-1", title: "Siège avant", before: "/results/avant-01.jpeg", after: "/results/apres-01.jpeg", alt: "Avant-après du nettoyage d’un siège avant de voiture" },
-            { id: "comparison-2", title: "Banquette arrière", before: "/results/avant-02.jpeg", after: "/results/apres-02.jpeg", alt: "Avant-après du nettoyage d’une banquette arrière de voiture" },
-            { id: "comparison-3", title: "Sol et moquette", before: "/results/avant-03.jpeg", after: "/results/apres-03.jpeg", alt: "Avant-après du nettoyage du sol et de la moquette d’une voiture" },
-            { id: "comparison-4", title: "Habitacle clair", before: "/results/avant-04.jpeg", after: "/results/apres-04.jpeg", alt: "Avant-après du nettoyage d’un habitacle automobile clair" },
-            { id: "comparison-5", title: "Poste de conduite", before: "/results/avant-05.jpeg", after: "/results/apres-05.jpeg", alt: "Avant-après du nettoyage d’un poste de conduite automobile" },
-            { id: "comparison-6", title: "Console centrale", before: "/results/avant-06.jpeg", after: "/results/apres-06.jpeg", alt: "Avant-après du nettoyage d’une console centrale automobile" },
-            { id: "comparison-7", title: "Banquette arrière", before: "/results/avant-07.jpeg", after: "/results/apres-07.jpeg", alt: "Avant-après du nettoyage d’une banquette arrière en tissu" },
-            { id: "comparison-8", title: "Assise arrière", before: "/results/avant-08.jpeg", after: "/results/apres-08.jpeg", alt: "Avant-après du nettoyage d’une assise arrière automobile" },
-            { id: "comparison-9", title: "Sièges avant", before: "/results/avant-09.jpeg", after: "/results/apres-09.jpeg", alt: "Avant-après du nettoyage des sièges avant d’une voiture" },
-            { id: "comparison-10", title: "Habitacle complet", before: "/results/avant-010.jpeg", after: "/results/apres-010.jpeg", alt: "Avant-après du nettoyage complet d’un habitacle automobile clair" },
+            { id: "comparison-1", title: "Siège avant", before: "/results/avant-01.webp", after: "/results/apres-01.webp", alt: "Avant-après du nettoyage d’un siège avant de voiture" },
+            { id: "comparison-2", title: "Banquette arrière", before: "/results/avant-02.webp", after: "/results/apres-02.webp", alt: "Avant-après du nettoyage d’une banquette arrière de voiture" },
+            { id: "comparison-3", title: "Sol et moquette", before: "/results/avant-03.webp", after: "/results/apres-03.webp", alt: "Avant-après du nettoyage du sol et de la moquette d’une voiture" },
+            { id: "comparison-4", title: "Habitacle clair", before: "/results/avant-04.webp", after: "/results/apres-04.webp", alt: "Avant-après du nettoyage d’un habitacle automobile clair" },
+            { id: "comparison-5", title: "Poste de conduite", before: "/results/avant-05.webp", after: "/results/apres-05.webp", alt: "Avant-après du nettoyage d’un poste de conduite automobile" },
+            { id: "comparison-6", title: "Console centrale", before: "/results/avant-06.webp", after: "/results/apres-06.webp", alt: "Avant-après du nettoyage d’une console centrale automobile" },
+            { id: "comparison-7", title: "Banquette arrière", before: "/results/avant-07.webp", after: "/results/apres-07.webp", alt: "Avant-après du nettoyage d’une banquette arrière en tissu" },
+            { id: "comparison-8", title: "Assise arrière", before: "/results/avant-08.webp", after: "/results/apres-08.webp", alt: "Avant-après du nettoyage d’une assise arrière automobile" },
+            { id: "comparison-9", title: "Sièges avant", before: "/results/avant-09.webp", after: "/results/apres-09.webp", alt: "Avant-après du nettoyage des sièges avant d’une voiture" },
+            { id: "comparison-10", title: "Habitacle complet", before: "/results/avant-010.webp", after: "/results/apres-010.webp", alt: "Avant-après du nettoyage complet d’un habitacle automobile clair" },
         ],
     },
     process: {
