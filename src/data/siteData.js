@@ -138,6 +138,7 @@ export const siteData = {
         intro:
             "Découvrez en images le résultat de nos prestations de nettoyage intérieur automobile à domicile.",
         comparisons: [
+            { id: "comparison-11", title: "Volant et poste de conduite", before: "/results/avant-011.webp", after: "/results/apres-011.webp", alt: "Avant-après du nettoyage d’un volant et d’un poste de conduite automobile", objectPosition: "center 25%" },
             { id: "comparison-1", title: "Siège avant", before: "/results/avant-01.webp", after: "/results/apres-01.webp", alt: "Avant-après du nettoyage d’un siège avant de voiture" },
             { id: "comparison-2", title: "Banquette arrière", before: "/results/avant-02.webp", after: "/results/apres-02.webp", alt: "Avant-après du nettoyage d’une banquette arrière de voiture" },
             { id: "comparison-3", title: "Sol et moquette", before: "/results/avant-03.webp", after: "/results/apres-03.webp", alt: "Avant-après du nettoyage du sol et de la moquette d’une voiture" },

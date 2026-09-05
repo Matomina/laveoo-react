@@ -36,6 +36,7 @@ export default function ResultsSection({ comparisons, columns = 3, title, intro 
                             after={comparison.after}
                             alt={comparison.alt}
                             title={comparison.title}
+                            objectPosition={comparison.objectPosition}
                         />
                     ))}
                 </div>

@@ -17,7 +17,7 @@ export default function VillePage() {
 
     const { faq, results } = siteData;
     const featuredComparisons = results.comparisons.filter(({ id }) =>
-        ["comparison-4", "comparison-5", "comparison-6", "comparison-7"].includes(id),
+        ["comparison-11", "comparison-4", "comparison-5", "comparison-6", "comparison-7"].includes(id),
     );
     const villesProches = ville.villesProches
         .map((s) => villes.find((v) => v.slug === s))

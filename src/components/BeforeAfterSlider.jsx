@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function BeforeAfterSlider({ before, after, alt, title }) {
+export default function BeforeAfterSlider({ before, after, alt, title, objectPosition = "center" }) {
     const [position, setPosition] = useState(50);
     const containerRef = useRef(null);
     const overlayRef = useRef(null);
@@ -80,6 +80,7 @@ export default function BeforeAfterSlider({ before, after, alt, title }) {
         WebkitTouchCallout: "none",
         WebkitUserSelect: "none",
         userSelect: "none",
+        objectPosition,
     };
 
     return (
@@ -168,14 +169,6 @@ export default function BeforeAfterSlider({ before, after, alt, title }) {
                     onPointerUp={handlePointerUp}
                     onPointerLeave={handlePointerUp}
                 />
-            </div>
-
-            {/* ── Footer: title + hint ── */}
-            <div className="flex items-center justify-between px-5 py-3.5">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#1F3A5F]">
-                    {title}
-                </p>
-                <p className="text-xs text-[#595959]/55">Glissez pour comparer</p>
             </div>
         </article>
     );

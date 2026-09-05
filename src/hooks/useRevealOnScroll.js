@@ -2,15 +2,11 @@ import { useEffect } from "react";
 
 export default function useRevealOnScroll(dependency) {
     useEffect(() => {
-        const elements = document.querySelectorAll(".reveal-card");
-
-        if (!elements.length) return;
-
         const prefersReducedMotion = window.matchMedia(
             "(prefers-reduced-motion: reduce)"
         ).matches;
 
-        const observer = new IntersectionObserver(
+        const intersectionObserver = new IntersectionObserver(
             (entries, obs) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -27,27 +23,41 @@ export default function useRevealOnScroll(dependency) {
             }
         );
 
-        elements.forEach((element) => {
+        const observeElement = (element) => {
             const parent = element.closest("section");
 
-            if (!parent) {
-                observer.observe(element);
-                return;
+            if (parent) {
+                const siblings = Array.from(
+                    parent.querySelectorAll(".reveal-card")
+                );
+                const index = siblings.indexOf(element);
+                const delay = prefersReducedMotion ? 0 : Math.min(index * 110, 660);
+                element.style.setProperty("--reveal-delay", `${delay}ms`);
             }
 
-            const siblings = Array.from(
-                parent.querySelectorAll(".reveal-card")
-            );
+            intersectionObserver.observe(element);
+        };
 
-            const index = siblings.indexOf(element);
+        document.querySelectorAll(".reveal-card").forEach(observeElement);
 
-            const delay = prefersReducedMotion ? 0 : Math.min(index * 110, 660);
-
-            element.style.setProperty("--reveal-delay", `${delay}ms`);
-
-            observer.observe(element);
+        // Les pages chargées en différé (React.lazy) montent leur contenu
+        // après ce premier passage : on observe aussi le DOM pour capter
+        // les .reveal-card ajoutées une fois la page vraiment affichée.
+        const mutationObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (!(node instanceof HTMLElement)) return;
+                    if (node.matches(".reveal-card")) observeElement(node);
+                    node.querySelectorAll?.(".reveal-card").forEach(observeElement);
+                });
+            });
         });
 
-        return () => observer.disconnect();
+        mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+        return () => {
+            intersectionObserver.disconnect();
+            mutationObserver.disconnect();
+        };
     }, [dependency]);
 }
