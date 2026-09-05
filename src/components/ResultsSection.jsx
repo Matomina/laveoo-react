@@ -40,32 +40,30 @@ export default function ResultsSection({ comparisons, columns = 3, title, intro 
                 {/* ── Mobile : carrousel une photo à la fois ── */}
                 {active && (
                     <div className="mt-10 sm:hidden">
-                        <div className="flex items-center gap-3">
+                        <div className="relative">
+                            <BeforeAfterSlider
+                                key={active.id}
+                                before={active.before}
+                                after={active.after}
+                                alt={active.alt}
+                                title={active.title}
+                                objectPosition={active.objectPosition}
+                            />
+
                             <button
                                 type="button"
                                 onClick={() => goTo(activeIndex - 1)}
                                 aria-label="Photo précédente"
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#93B8D8]/60 bg-white text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.08)]"
+                                className="absolute left-2 top-1/2 z-30 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.18)] backdrop-blur-sm"
                             >
                                 ‹
                             </button>
-
-                            <div className="min-w-0 flex-1">
-                                <BeforeAfterSlider
-                                    key={active.id}
-                                    before={active.before}
-                                    after={active.after}
-                                    alt={active.alt}
-                                    title={active.title}
-                                    objectPosition={active.objectPosition}
-                                />
-                            </div>
 
                             <button
                                 type="button"
                                 onClick={() => goTo(activeIndex + 1)}
                                 aria-label="Photo suivante"
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#93B8D8]/60 bg-white text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.08)]"
+                                className="absolute right-2 top-1/2 z-30 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.18)] backdrop-blur-sm"
                             >
                                 ›
                             </button>
