@@ -1,9 +1,18 @@
+import { useState } from "react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import { siteData } from "../data/siteData";
 
 export default function ResultsSection({ comparisons, columns = 3, title, intro }) {
     const { results } = siteData;
     const displayedComparisons = comparisons ?? results?.comparisons ?? [];
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const goTo = (index) => {
+        const count = displayedComparisons.length;
+        setActiveIndex(((index % count) + count) % count);
+    };
+
+    const active = displayedComparisons[activeIndex];
 
     return (
         <section
@@ -28,7 +37,60 @@ export default function ResultsSection({ comparisons, columns = 3, title, intro 
                     </p>
                 </div>
 
-                <div className={`mt-14 grid gap-6 sm:grid-cols-2 ${columns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
+                {/* ── Mobile : carrousel une photo à la fois ── */}
+                {active && (
+                    <div className="mt-10 sm:hidden">
+                        <div className="flex items-center gap-3">
+                            <button
+                                type="button"
+                                onClick={() => goTo(activeIndex - 1)}
+                                aria-label="Photo précédente"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#93B8D8]/60 bg-white text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.08)]"
+                            >
+                                ‹
+                            </button>
+
+                            <div className="min-w-0 flex-1">
+                                <BeforeAfterSlider
+                                    key={active.id}
+                                    before={active.before}
+                                    after={active.after}
+                                    alt={active.alt}
+                                    title={active.title}
+                                    objectPosition={active.objectPosition}
+                                />
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() => goTo(activeIndex + 1)}
+                                aria-label="Photo suivante"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#93B8D8]/60 bg-white text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.08)]"
+                            >
+                                ›
+                            </button>
+                        </div>
+
+                        <div className="mt-4 flex justify-center gap-2">
+                            {displayedComparisons.map((comparison, index) => (
+                                <button
+                                    key={comparison.id}
+                                    type="button"
+                                    onClick={() => goTo(index)}
+                                    aria-label={`Voir la photo ${index + 1}`}
+                                    className={`h-2 rounded-full transition-all ${
+                                        index === activeIndex ? "w-6 bg-[#1769E8]" : "w-2 bg-[#93B8D8]/50"
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* ── Ordinateur / tablette : grille complète ── */}
+                <div
+                    className={`mt-14 hidden gap-6 sm:grid sm:grid-cols-2 ${columns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}
+                >
                     {displayedComparisons.map((comparison) => (
                         <BeforeAfterSlider
                             key={comparison.id}
