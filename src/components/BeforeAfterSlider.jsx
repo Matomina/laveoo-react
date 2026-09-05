@@ -88,7 +88,7 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
             {/* ── Slider area ── */}
             <div
                 ref={containerRef}
-                className="relative aspect-[4/3] cursor-col-resize select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#93B8D8] focus-visible:ring-offset-2"
+                className="relative aspect-[3/4] cursor-col-resize select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#93B8D8] focus-visible:ring-offset-2"
                 tabIndex={0}
                 role="slider"
                 aria-label={`Comparaison avant/après — ${title ?? alt}`}
