@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { siteData } from "../data/siteData";
 
-function PlanCard({ plan, index, included, id }) {
+function PlanCard({ plan, index, included, id, onPrev, onNext }) {
   return (
     <article
       id={id}
@@ -17,7 +17,7 @@ function PlanCard({ plan, index, included, id }) {
         </h3>
       </div>
 
-      <div className="relative mt-3 flex h-44 items-center justify-center overflow-hidden bg-white sm:h-48">
+      <div className="relative mt-3 flex h-44 touch-pan-y select-none items-center justify-center overflow-hidden bg-white sm:h-48">
         <img
           src={plan.media.src}
           alt={plan.media.alt}
@@ -25,7 +25,30 @@ function PlanCard({ plan, index, included, id }) {
             index === 2 ? "scale-[1.3]" : ""
           }`}
           loading="lazy"
+          draggable={false}
         />
+
+        {onPrev && (
+          <button
+            type="button"
+            onClick={onPrev}
+            aria-label="Forfait précédent"
+            className="absolute left-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#1F3A5F] text-lg font-black text-white shadow-[0_8px_20px_rgba(31,58,95,0.35)]"
+          >
+            ‹
+          </button>
+        )}
+
+        {onNext && (
+          <button
+            type="button"
+            onClick={onNext}
+            aria-label="Forfait suivant"
+            className="absolute right-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#1F3A5F] text-lg font-black text-white shadow-[0_8px_20px_rgba(31,58,95,0.35)]"
+          >
+            ›
+          </button>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col border-t-2 border-[#93B8D8] p-5 sm:p-6">
@@ -64,6 +87,8 @@ function PlanCard({ plan, index, included, id }) {
   );
 }
 
+const SWIPE_THRESHOLD = 45;
+
 export default function PricingCards({
   compact = false,
   selectedPlanId = null,
@@ -71,6 +96,7 @@ export default function PricingCards({
   const { pricing, included } = siteData;
   const [optionOpen, setOptionOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const swipeStart = useRef(null);
 
   const plans = selectedPlanId
     ? pricing.items.filter((plan) => plan.id === selectedPlanId)
@@ -81,6 +107,18 @@ export default function PricingCards({
     setActiveIndex(((index % count) + count) % count);
   };
 
+  const handlePointerDown = (e) => {
+    swipeStart.current = e.clientX;
+  };
+
+  const handlePointerUp = (e) => {
+    if (swipeStart.current === null) return;
+    const delta = e.clientX - swipeStart.current;
+    swipeStart.current = null;
+    if (delta > SWIPE_THRESHOLD) goTo(activeIndex - 1);
+    else if (delta < -SWIPE_THRESHOLD) goTo(activeIndex + 1);
+  };
+
   const active = plans[activeIndex];
 
   return (
@@ -88,34 +126,20 @@ export default function PricingCards({
       {/* ── Mobile : carrousel une carte à la fois ── */}
       {active && (
         <div className="sm:hidden">
-          <div className="relative">
+          <div
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={() => {
+              swipeStart.current = null;
+            }}
+          >
             <PlanCard
               plan={active}
               index={plans.indexOf(active)}
               included={included}
+              onPrev={plans.length > 1 ? () => goTo(activeIndex - 1) : undefined}
+              onNext={plans.length > 1 ? () => goTo(activeIndex + 1) : undefined}
             />
-
-            {plans.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => goTo(activeIndex - 1)}
-                  aria-label="Forfait précédent"
-                  className="absolute left-2 top-24 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.18)] backdrop-blur-sm"
-                >
-                  ‹
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => goTo(activeIndex + 1)}
-                  aria-label="Forfait suivant"
-                  className="absolute right-2 top-24 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.18)] backdrop-blur-sm"
-                >
-                  ›
-                </button>
-              </>
-            )}
           </div>
 
           {plans.length > 1 && (
