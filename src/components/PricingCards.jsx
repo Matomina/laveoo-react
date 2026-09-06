@@ -2,174 +2,151 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { siteData } from "../data/siteData";
 
+function PlanCard({ plan, index, included, id }) {
+  return (
+    <article
+      id={id}
+      className="reveal-card flex h-full flex-col overflow-hidden rounded-[2rem] border border-[#93B8D8]/45 bg-white shadow-[0_18px_55px_rgba(31,58,95,0.10)]"
+    >
+      <div className="p-5 pb-0 sm:p-6 sm:pb-0">
+        <span className="mr-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF2FB] text-xs font-black text-[#1F3A5F]">
+          0{index + 1}
+        </span>
+        <h3 className="mt-3 text-lg font-black uppercase leading-tight tracking-[0.02em] text-[#102A59]">
+          {plan.shortLabel}
+        </h3>
+      </div>
+
+      <div className="relative mt-3 flex h-44 items-center justify-center overflow-hidden bg-white sm:h-48">
+        <img
+          src={plan.media.src}
+          alt={plan.media.alt}
+          className={`h-full w-full object-contain ${
+            index === 2 ? "scale-[1.3]" : ""
+          }`}
+          loading="lazy"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col border-t-2 border-[#93B8D8] p-5 sm:p-6">
+        <p className="inline-flex w-fit rounded-full border border-[#1F3A5F]/10 bg-white px-3 py-1.5 text-xs font-bold text-[#1F3A5F] shadow-sm">
+          Temps estimé : {plan.estimatedDuration}
+        </p>
+
+        <p className="mt-4 text-xs font-black uppercase tracking-[0.16em] text-[#1F3A5F]/60">
+          {included.title}
+        </p>
+
+        <ul className="mt-3 space-y-2.5">
+          {included.items.map((item) => (
+            <li
+              key={item}
+              className="flex gap-2.5 text-sm leading-6 text-[#595959]"
+            >
+              <span className="font-black text-[#387EE8]">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-5 text-5xl font-black leading-none text-[#102A59]">
+          {plan.price} €
+        </p>
+
+        <Link
+          to={`/reservation?vehicule=${plan.id}`}
+          className="premium-button mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#1769E8] px-5 py-3 font-bold text-white shadow-[0_12px_30px_rgba(23,105,232,0.22)]"
+        >
+          Réserver ce forfait
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 export default function PricingCards({
   compact = false,
   selectedPlanId = null,
 }) {
   const { pricing, included } = siteData;
-  const [openId, setOpenId] = useState(null);
   const [optionOpen, setOptionOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const plans = selectedPlanId
     ? pricing.items.filter((plan) => plan.id === selectedPlanId)
     : pricing.items;
 
-  const togglePlan = (id) => {
-    setOptionOpen(false);
-    setOpenId((current) => (current === id ? null : id));
+  const goTo = (index) => {
+    const count = plans.length;
+    setActiveIndex(((index % count) + count) % count);
   };
 
-  const toggleOption = () => {
-    setOpenId(null);
-    setOptionOpen((current) => !current);
-  };
+  const active = plans[activeIndex];
 
   return (
     <div>
-      <div className="grid items-stretch gap-6 lg:grid-cols-3">
-        {plans.map((plan, index) => {
-          const isOpen = openId === plan.id;
+      {/* ── Mobile : carrousel une carte à la fois ── */}
+      {active && (
+        <div className="sm:hidden">
+          <div className="relative">
+            <PlanCard
+              plan={active}
+              index={plans.indexOf(active)}
+              included={included}
+            />
 
-          return (
-            <article
-              id={`pricing-${plan.id}`}
-              key={plan.id}
-              className={`reveal-card flex h-full flex-col overflow-hidden rounded-[2rem] border bg-white shadow-[0_18px_55px_rgba(31,58,95,0.10)] transition duration-300 ${
-                isOpen
-                  ? "border-[#387EE8] shadow-[0_24px_65px_rgba(56,126,232,0.18)]"
-                  : "border-[#93B8D8]/45"
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() => togglePlan(plan.id)}
-                aria-expanded={isOpen}
-                aria-controls={`plan-${plan.id}`}
-                className="block w-full flex-1 p-5 text-left sm:p-6"
-              >
-                <div
-                  className={`relative flex items-center justify-center overflow-hidden rounded-[1.4rem] bg-white transition-[height] duration-500 ${
-                    isOpen ? "h-24 sm:h-32" : "h-44 sm:h-48"
+            {plans.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => goTo(activeIndex - 1)}
+                  aria-label="Forfait précédent"
+                  className="absolute left-2 top-24 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.18)] backdrop-blur-sm"
+                >
+                  ‹
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goTo(activeIndex + 1)}
+                  aria-label="Forfait suivant"
+                  className="absolute right-2 top-24 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#1F3A5F] shadow-[0_8px_20px_rgba(31,58,95,0.18)] backdrop-blur-sm"
+                >
+                  ›
+                </button>
+              </>
+            )}
+          </div>
+
+          {plans.length > 1 && (
+            <div className="mt-4 flex justify-center gap-2">
+              {plans.map((plan, index) => (
+                <button
+                  key={plan.id}
+                  type="button"
+                  onClick={() => goTo(index)}
+                  aria-label={`Voir le forfait ${index + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    index === activeIndex ? "w-6 bg-[#1769E8]" : "w-2 bg-[#93B8D8]/50"
                   }`}
-                >
-                  <span className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF2FB] text-xs font-black text-[#1F3A5F]">
-                    0{index + 1}
-                  </span>
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
-                  <img
-                    src={plan.media.src}
-                    alt={plan.media.alt}
-                    className={`h-full w-full object-contain transition duration-500 ${
-                      index === 2 ? "scale-[1.3]" : ""
-                    }`}
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="mt-5 border-t-2 border-[#93B8D8] pt-5">
-                  <h3 className="text-lg font-black uppercase leading-tight tracking-[0.02em] text-[#102A59]">
-                    {plan.shortLabel}
-                  </h3>
-
-                  <p className="mt-2 text-sm font-medium text-[#595959]">
-                    {plan.vehicleType}
-                  </p>
-
-                  <p className="mt-4 inline-flex rounded-full border border-[#1F3A5F]/10 bg-white px-3 py-1.5 text-xs font-bold text-[#1F3A5F] shadow-sm">
-                    Temps estimé : {plan.estimatedDuration}
-                  </p>
-
-                  <div className="mt-4 flex items-end justify-between gap-4">
-                    <p className="text-5xl font-black leading-none text-[#102A59]">
-                      {plan.price} €
-                    </p>
-
-                    <span
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EAF2FB] text-xl font-black text-[#1F3A5F] transition ${
-                        isOpen ? "rotate-45" : ""
-                      }`}
-                      aria-hidden="true"
-                    >
-                      +
-                    </span>
-                  </div>
-
-                  <p className="mt-4 text-sm leading-7 text-[#595959]">
-                    {plan.description}
-                  </p>
-
-                  <p className="mt-4 text-xs font-bold uppercase tracking-[0.12em] text-[#387EE8]">
-                    {isOpen ? "Masquer le détail" : "Afficher le détail"}
-                  </p>
-                </div>
-              </button>
-
-              <div className="px-5 pb-5 sm:px-6 sm:pb-6">
-                <Link
-                  to={`/reservation?vehicule=${plan.id}`}
-                  className="premium-button inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#1769E8] px-5 py-3 font-bold text-white shadow-[0_12px_30px_rgba(23,105,232,0.22)]"
-                >
-                  Réserver ce forfait
-                </Link>
-              </div>
-
-              <div
-                id={`plan-${plan.id}`}
-                className={`grid transition-[grid-template-rows] duration-500 ease-out ${
-                  isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <div className="max-h-[29svh] overflow-y-auto border-t border-slate-100 px-5 pb-6 pt-5 sm:max-h-[52svh] sm:px-6 lg:max-h-[60vh]">
-                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1F3A5F]/60">
-                      Exemples de véhicules
-                    </p>
-
-                    <p className="mt-2 text-sm leading-7 text-[#595959]">
-                      {plan.examples}
-                    </p>
-
-                    <p className="mt-5 text-sm leading-7 text-[#595959]">
-                      Préserver votre véhicule est notre priorité. Notre
-                      méthode s’adapte à chaque matériau pour nettoyer en
-                      profondeur tout en respectant les cuirs, l’Alcantara,
-                      les plastiques sensibles et les finitions délicates.
-                    </p>
-
-                    <p className="mt-5 font-black text-[#1F3A5F]">
-                      Ce qui est inclus
-                    </p>
-
-                    <ul className="mt-3 space-y-2.5">
-                      {included.items.map((item) => (
-                        <li
-                          key={item}
-                          className="flex gap-2.5 text-sm leading-6 text-[#595959]"
-                        >
-                          <span className="font-black text-[#387EE8]">
-                            ✓
-                          </span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-5 rounded-2xl bg-[#EAF2FB] p-4">
-                      <p className="font-black text-[#1F3A5F]">
-                        Option +1 heure : +39 €
-                      </p>
-
-                      <p className="mt-1 text-sm leading-6 text-[#595959]">
-                        Recommandée pour un véhicule très sale ou des
-                        finitions plus minutieuses.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          );
-        })}
+      {/* ── Ordinateur / tablette : grille complète ── */}
+      <div className="hidden gap-6 sm:grid sm:grid-cols-1 lg:grid-cols-3 sm:items-stretch">
+        {plans.map((plan, index) => (
+          <PlanCard
+            key={plan.id}
+            plan={plan}
+            index={index}
+            included={included}
+            id={`pricing-${plan.id}`}
+          />
+        ))}
       </div>
 
       <article
@@ -179,7 +156,7 @@ export default function PricingCards({
       >
         <button
           type="button"
-          onClick={toggleOption}
+          onClick={() => setOptionOpen((current) => !current)}
           aria-expanded={optionOpen}
           aria-controls="pricing-option"
           className="flex w-full flex-col items-center gap-5 p-6 text-center sm:flex-row sm:text-left lg:p-8"

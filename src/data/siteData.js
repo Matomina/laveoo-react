@@ -1,11 +1,12 @@
 export const includedServices = [
-    "Aspiration complète et en profondeur de l’habitacle et du coffre",
-    "Shampouinage des sièges, tapis et moquettes",
-    "Nettoyage et brossage des sièges en cuir, si le véhicule en est équipé",
-    "Nettoyage minutieux du tableau de bord, de la console, des contre-portes, rangements, aérateurs et commandes",
-    "Protection des plastiques avec une finition mate, propre et non grasse",
-    "Nettoyage des contours de portes et des rails de sièges",
-    "Nettoyage des vitres intérieures et extérieures",
+    "Aspiration complète de l’habitacle et du coffre",
+    "Shampoing des sièges",
+    "Brossage des sièges en cuir",
+    "Shampoing des tapis",
+    "Nettoyage de tous les plastiques",
+    "Protection des plastiques",
+    "Nettoyage des contours de porte",
+    "Nettoyage des vitres, intérieur et extérieur",
 ];
 
 export const pricingPlans = [
