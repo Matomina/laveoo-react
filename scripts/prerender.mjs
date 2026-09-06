@@ -21,6 +21,10 @@ const staticRoutes = [
     "/reservation",
     "/mentions-legales",
     "/politique-de-confidentialite",
+    "/nos-zones-d-intervention",
+    "/nettoyage-auto-essonne",
+    "/nettoyage-auto-val-de-marne",
+    "/nettoyage-auto-seine-et-marne",
     "/nettoyage-auto-domicile",
     "/nettoyage-sieges-voiture",
 ];

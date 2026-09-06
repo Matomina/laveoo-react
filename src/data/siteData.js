@@ -92,6 +92,7 @@ export const siteData = {
         { label: "Tarifs", href: "/tarifs" },
         { label: "Résultats", href: "/resultats" },
         { label: "Méthodes", href: "/nos-methodes-de-nettoyage" },
+        { label: "Zones", href: "/nos-zones-d-intervention" },
         { label: "FAQ", href: "/faq" },
         { label: "Contact", href: "/contact" },
         { label: "Réserver", href: "/reservation" },
@@ -220,6 +221,10 @@ export const siteData = {
             { label: "Réserver", href: "/reservation" },
             { label: "Nettoyage à domicile", href: "/nettoyage-auto-domicile" },
             { label: "Nettoyage des sièges", href: "/nettoyage-sieges-voiture" },
+            { label: "Nos zones d'intervention", href: "/nos-zones-d-intervention" },
+            { label: "Nettoyage auto Essonne (91)", href: "/nettoyage-auto-essonne" },
+            { label: "Nettoyage auto Val-de-Marne (94)", href: "/nettoyage-auto-val-de-marne" },
+            { label: "Nettoyage auto Seine-et-Marne (77)", href: "/nettoyage-auto-seine-et-marne" },
         ],
     },
 };

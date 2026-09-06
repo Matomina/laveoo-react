@@ -18,6 +18,8 @@ const SeoContentPage = lazy(() => import("./pages/SeoContentPage"));
 const VillePage = lazy(() => import("./pages/VillePage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const MentionsLegalesPage = lazy(() => import("./pages/MentionsLegalesPage"));
+const ZonesInterventionPage = lazy(() => import("./pages/ZonesInterventionPage"));
+const DepartementPage = lazy(() => import("./pages/DepartementPage"));
 const PolitiqueConfidentialitePage = lazy(() => import("./pages/PolitiqueConfidentialitePage"));
 const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
@@ -57,6 +59,10 @@ export default function App() {
                 <Route path="contact" element={<ContactPage />} />
                 <Route path="reservation" element={<ReservationPage />} />
                 <Route path="mentions-legales" element={<MentionsLegalesPage />} />
+                <Route path="nos-zones-d-intervention" element={<ZonesInterventionPage />} />
+                <Route path="nettoyage-auto-essonne" element={<DepartementPage slug="essonne" />} />
+                <Route path="nettoyage-auto-val-de-marne" element={<DepartementPage slug="val-de-marne" />} />
+                <Route path="nettoyage-auto-seine-et-marne" element={<DepartementPage slug="seine-et-marne" />} />
                 <Route path="politique-de-confidentialite" element={<PolitiqueConfidentialitePage />} />
                 <Route path="nettoyage-auto/:slug" element={<VillePage />} />
                 <Route path="nettoyage-auto-domicile" element={<SeoContentPage eyebrow="Service mobile" title="Nettoyage auto à domicile" intro="Retrouvez un habitacle propre sans perdre de temps : Laveoo intervient directement à votre domicile ou sur votre lieu de travail avec des produits et du matériel professionnels." description="Nettoyage intérieur de voiture à domicile dans le sud de l’Île-de-France avec Laveoo. Intervention professionnelle, déplacement inclus et matériel adapté." path="/nettoyage-auto-domicile" raw={autoCleaningRaw} />} />

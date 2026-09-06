@@ -6,6 +6,7 @@ import SectionCta from "../components/SectionCta";
 import Seo from "../components/Seo";
 import { siteData } from "../data/siteData";
 import { villes } from "../data/villes";
+import { departements } from "../data/departements";
 import renderWithLinks from "../utils/renderWithLinks";
 
 export default function HomePage() {
@@ -90,12 +91,22 @@ export default function HomePage() {
                         <h2 id="zones-title" className="text-2xl font-black text-[#1F3A5F] sm:text-3xl">Nos zones d'intervention</h2>
                         <p className="mt-3 text-[#595959]">Laveoo intervient dans plusieurs communes du sud de l'Île-de-France</p>
                         <div className="mt-6 flex flex-wrap justify-center gap-3">
+                            {departements.map((departement) => (
+                                <Link key={departement.slug} to={`/nettoyage-auto-${departement.slug}`} className="rounded-full bg-[#1F3A5F] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#102A59]">
+                                    {departement.nom} ({departement.code})
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="mt-4 flex flex-wrap justify-center gap-3">
                             {villes.map((ville) => (
                                 <Link key={ville.slug} to={`/nettoyage-auto/${ville.slug}`} className="rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#1769E8] shadow-sm transition hover:shadow-md">
                                     Nettoyage auto à {ville.nom}
                                 </Link>
                             ))}
                         </div>
+                        <Link to="/nos-zones-d-intervention" className="mt-6 inline-block text-sm font-bold text-[#1F3A5F] underline underline-offset-4">
+                            Voir toutes nos zones d'intervention
+                        </Link>
                     </div>
                 </div>
             </section>
