@@ -4,10 +4,12 @@ import PricingSection from "../components/PricingSection";
 import ResultsSection from "../components/ResultsSection";
 import SectionCta from "../components/SectionCta";
 import Seo from "../components/Seo";
+import Breadcrumbs from "../components/Breadcrumbs";
 import NotFoundPage from "./NotFoundPage";
 import { siteData } from "../data/siteData";
 import { villes } from "../data/villes";
 import { departements } from "../data/departements";
+import { companyInfo } from "../data/companyInfo";
 import renderWithLinks from "../utils/renderWithLinks";
 
 export default function DepartementPage({ slug }) {
@@ -15,13 +17,70 @@ export default function DepartementPage({ slug }) {
 
     if (!departement) return <NotFoundPage />;
 
-    const { faq, results } = siteData;
-    const featuredComparisons = results.comparisons.filter(({ id }) =>
-        ["comparison-11", "comparison-4", "comparison-5", "comparison-6", "comparison-7"].includes(id),
-    );
+    const { results } = siteData;
+    const featuredComparisons = ["comparison-11", "comparison-18", "comparison-23", "comparison-6", "comparison-7"]
+        .map((id) => results.comparisons.find((c) => c.id === id))
+        .filter(Boolean);
     const villesDuDepartement = villes.filter((v) => v.departement === departement.code);
     const autresDepartements = departements.filter((d) => d.slug !== departement.slug);
-    const generalFaqItem = faq.items[departement.faqGeneralIndex];
+
+    const breadcrumbItems = [
+        { name: "Accueil", to: "/" },
+        { name: "Nos zones d'intervention", to: "/nos-zones-d-intervention" },
+        { name: departement.nom, to: `/nettoyage-auto-${departement.slug}` },
+    ].map((item) => ({ ...item, url: `https://www.laveoo.com${item.to === "/" ? "/" : item.to}` }));
+
+    const jsonLd = [
+        {
+            "@context": "https://schema.org",
+            "@type": "AutoWash",
+            name: companyInfo.name,
+            image: `https://www.laveoo.com${companyInfo.logo}`,
+            url: `https://www.laveoo.com/nettoyage-auto-${departement.slug}`,
+            telephone: companyInfo.phoneDisplay,
+            priceRange: "79 € - 119 €",
+            offers: siteData.pricing.items.map((item) => ({
+                "@type": "Offer",
+                name: item.shortLabel,
+                price: item.price,
+                priceCurrency: "EUR",
+            })),
+            openingHoursSpecification: companyInfo.openingHoursSpecification,
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: companyInfo.streetAddress,
+                addressLocality: companyInfo.addressLocality,
+                postalCode: companyInfo.postalCode,
+                addressCountry: "FR",
+            },
+            areaServed: {
+                "@type": "AdministrativeArea",
+                name: `${departement.nom} (${departement.code})`,
+            },
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: departement.faqLocale.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: item.answer,
+                },
+            })),
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbItems.map((item, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: item.name,
+                item: item.url,
+            })),
+        },
+    ];
 
     const autresDepartementsBlock = (
         <section className="bg-[#F5F5F5] py-16 lg:py-20">
@@ -31,7 +90,7 @@ export default function DepartementPage({ slug }) {
                     <div className="mt-6 flex flex-wrap justify-center gap-3">
                         {autresDepartements.map((d) => (
                             <Link key={d.slug} to={`/nettoyage-auto-${d.slug}`} className="rounded-full bg-[#1F3A5F] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#102A59]">
-                                {d.nom} ({d.code})
+                                {`${d.nom} (${d.code})`}
                             </Link>
                         ))}
                     </div>
@@ -48,7 +107,7 @@ export default function DepartementPage({ slug }) {
                     <div className="mt-6 flex flex-wrap justify-center gap-3">
                         {villesDuDepartement.map((v) => (
                             <Link key={v.slug} to={`/nettoyage-auto/${v.slug}`} className="rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#1769E8] shadow-sm transition hover:shadow-md">
-                                Nettoyage auto à {v.nom}
+                                {`Nettoyage auto à ${v.nom}`}
                             </Link>
                         ))}
                     </div>
@@ -59,10 +118,19 @@ export default function DepartementPage({ slug }) {
 
     return (
         <>
-            <Seo title={departement.seoTitle} description={departement.seoDescription} path={`/nettoyage-auto-${departement.slug}`} />
+            <Seo title={departement.seoTitle} description={departement.seoDescription} path={`/nettoyage-auto-${departement.slug}`} jsonLd={jsonLd} />
+            <Breadcrumbs items={breadcrumbItems} />
             <Hero title={departement.h1} subtitle={departement.intro} />
             <PricingSection title={departement.tarifsTitle} />
             <ResultsSection comparisons={featuredComparisons} columns={4} title={departement.resultatsTitle} />
+            <div className="reveal-card -mt-8 flex justify-center pb-20 lg:pb-24">
+                <Link
+                    to="/resultats"
+                    className="premium-button inline-flex min-h-12 items-center justify-center rounded-full bg-[#1F3A5F] px-8 py-3 font-semibold text-white shadow-[0_12px_28px_rgba(31,58,95,0.18)]"
+                >
+                    Voir plus de photos
+                </Link>
+            </div>
 
             <section className="bg-[#F5F5F5] py-20 lg:py-24" aria-labelledby="departement-seo-title">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -75,12 +143,10 @@ export default function DepartementPage({ slug }) {
                 </div>
             </section>
 
-            {villesBlock}
-
             <section className="bg-[#F5F5F5] py-20 lg:py-24" aria-labelledby="departement-faq-title">
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                     <header className="reveal-card text-center">
-                        <h2 id="departement-faq-title" className="text-4xl font-black text-[#1F3A5F] sm:text-5xl">Questions fréquentes en {departement.nom}</h2>
+                        <h2 id="departement-faq-title" className="text-4xl font-black text-[#1F3A5F] sm:text-5xl">{`Questions fréquentes en ${departement.nom}`}</h2>
                     </header>
                     <div className="mt-10 grid gap-4">
                         {departement.faqLocale.map((item) => (
@@ -89,12 +155,6 @@ export default function DepartementPage({ slug }) {
                                 <p className="mt-4 border-t border-slate-100 pt-4 leading-8 text-[#595959]">{item.answer}</p>
                             </details>
                         ))}
-                        {generalFaqItem && (
-                            <details key={generalFaqItem.question} className="reveal-card group rounded-[1.5rem] border border-[#93B8D8]/65 bg-white p-6 shadow-[0_12px_34px_rgba(31,58,95,0.06)]">
-                                <summary className="flex cursor-pointer list-none items-start justify-between gap-5 font-bold text-[#1F3A5F]"><span>{generalFaqItem.question}</span><span className="text-xl transition group-open:rotate-45">+</span></summary>
-                                <p className="mt-4 border-t border-slate-100 pt-4 leading-8 text-[#595959]">{generalFaqItem.answer}</p>
-                            </details>
-                        )}
                     </div>
                     <SectionCta title="Vous avez encore une question ?" text="La FAQ complète répond aux questions sur la préparation, les matériaux, les taches, le séchage et la réservation." label="Consulter la FAQ complète" to="/faq" secondaryLabel="Nous contacter" secondaryTo="/contact" />
                 </div>
@@ -105,7 +165,7 @@ export default function DepartementPage({ slug }) {
 
             <section className="bg-white py-20 lg:py-24">
                 <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                    <SectionCta title={`Votre habitacle mérite un nettoyage professionnel en ${departement.nom}`} text="Choisissez votre forfait et réservez en ligne en quelques clics pour un rendez-vous à domicile." label="Réserver en ligne" to="/reservation" secondaryLabel="Voir les tarifs" secondaryTo="/tarifs" />
+                    <SectionCta title={`Votre habitacle mérite un nettoyage professionnel en ${departement.nom}`} text="Choisissez votre forfait et réservez en ligne en quelques clics, pour une intervention sur votre place de parking, dans votre allée ou au pied de votre immeuble." label="Réserver mon nettoyage" to="/reservation" secondaryLabel="Voir les tarifs" secondaryTo="/tarifs" />
                 </div>
             </section>
         </>

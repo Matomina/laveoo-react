@@ -1,6 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function BeforeAfterSlider({ before, after, alt, title, objectPosition = "center" }) {
+// Le navigateur normalise toujours object-position en sa forme longue à deux
+// valeurs (ex. "center" -> "center center", "top" -> "center top") quand on
+// relit l'attribut style. Comme le pré-rendu capture un DOM déjà passé par ce
+// navigateur, on écrit directement cette forme normalisée pour que le premier
+// rendu React côté client corresponde exactement au HTML statique.
+const OBJECT_POSITION_LONGHAND = {
+    center: "center center",
+    top: "center top",
+    bottom: "center bottom",
+    left: "left center",
+    right: "right center",
+};
+
+export default function BeforeAfterSlider({ before, after, alt, title, objectPosition = "center", aspect = "portrait", fit = "cover", bordered = true, priority = false }) {
+    const normalizedObjectPosition = OBJECT_POSITION_LONGHAND[objectPosition] ?? objectPosition;
     const [position, setPosition] = useState(50);
     const containerRef = useRef(null);
     const overlayRef = useRef(null);
@@ -15,6 +29,7 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
 
     const handlePointerDown = useCallback(
         (e) => {
+            e.stopPropagation();
             isDragging.current = true;
             e.currentTarget.setPointerCapture(e.pointerId);
             updatePosition(e.clientX);
@@ -25,12 +40,14 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
     const handlePointerMove = useCallback(
         (e) => {
             if (!isDragging.current) return;
+            e.stopPropagation();
             updatePosition(e.clientX);
         },
         [updatePosition],
     );
 
-    const handlePointerUp = useCallback(() => {
+    const handlePointerUp = useCallback((e) => {
+        e.stopPropagation();
         isDragging.current = false;
     }, []);
 
@@ -48,6 +65,7 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
         if (!node) return;
 
         const onTouchStart = (e) => {
+            e.stopPropagation();
             isDragging.current = true;
             if (e.touches[0]) updatePosition(e.touches[0].clientX);
         };
@@ -55,10 +73,12 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
         const onTouchMove = (e) => {
             if (!isDragging.current) return;
             e.preventDefault();
+            e.stopPropagation();
             if (e.touches[0]) updatePosition(e.touches[0].clientX);
         };
 
-        const onTouchEnd = () => {
+        const onTouchEnd = (e) => {
+            e.stopPropagation();
             isDragging.current = false;
         };
 
@@ -77,18 +97,25 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
 
     const imageStyle = {
         WebkitUserDrag: "none",
-        WebkitTouchCallout: "none",
+        // -webkit-touch-callout n'existe pas dans le moteur Chromium : la
+        // valeur y est toujours silencieusement ignorée (donc jamais écrite
+        // dans l'attribut style réel), alors que React s'attend quand même à
+        // la retrouver lors de l'hydratation, ce qui déclenche une erreur sur
+        // Chrome/Chromium à chaque chargement. Seul Safari en tient compte,
+        // et son avantage (désactiver le menu contextuel au appui long sur
+        // iOS) est mineur ici puisque userSelect/draggable couvrent déjà
+        // l'essentiel (empêcher la sélection/le glisser-déposer de l'image).
         WebkitUserSelect: "none",
         userSelect: "none",
-        objectPosition,
+        objectPosition: normalizedObjectPosition,
     };
 
     return (
-        <article className="reveal-card overflow-hidden rounded-[2rem] border border-[#93B8D8] bg-white shadow-[0_16px_44px_rgba(31,58,95,0.08)] transition-shadow duration-500 hover:shadow-[0_28px_64px_rgba(147,184,216,0.22)]">
+        <article className={`reveal-card overflow-hidden rounded-[2rem] ${bordered ? "border border-[#93B8D8]" : ""} bg-white shadow-[0_16px_44px_rgba(31,58,95,0.08)] transition-shadow duration-500 hover:shadow-[0_28px_64px_rgba(147,184,216,0.22)]`}>
             {/* ── Slider area ── */}
             <div
                 ref={containerRef}
-                className="relative aspect-[3/4] cursor-col-resize select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#93B8D8] focus-visible:ring-offset-2"
+                className={`relative ${aspect === "square" ? "aspect-square" : aspect === "landscape" ? "aspect-[4/3]" : "aspect-[3/4]"} ${fit === "contain" ? "bg-[#0F2444]" : ""} cursor-col-resize select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#93B8D8] focus-visible:ring-offset-2`}
                 tabIndex={0}
                 role="slider"
                 aria-label={`Comparaison avant/après — ${title ?? alt}`}
@@ -101,9 +128,10 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
                 <img
                     src={after}
                     alt={`Après — ${alt}`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className={`absolute inset-0 h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
                     style={imageStyle}
-                    loading="lazy"
+                    loading={priority ? "eager" : "lazy"}
+                    fetchPriority={priority ? "high" : "auto"}
                     decoding="async"
                     draggable={false}
                 />
@@ -112,9 +140,10 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
                 <img
                     src={before}
                     alt={`Avant — ${alt}`}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    style={{ clipPath: `inset(0 ${100 - position}% 0 0)`, ...imageStyle }}
-                    loading="lazy"
+                    className={`absolute inset-0 h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
+                    style={{ clipPath: `inset(0px ${100 - position}% 0px 0px)`, ...imageStyle }}
+                    loading={priority ? "eager" : "lazy"}
+                    fetchPriority={priority ? "high" : "auto"}
                     decoding="async"
                     draggable={false}
                 />
@@ -163,7 +192,7 @@ export default function BeforeAfterSlider({ before, after, alt, title, objectPos
                 <div
                     ref={overlayRef}
                     className="absolute inset-0 z-20 cursor-col-resize"
-                    style={{ touchAction: "none", background: "transparent" }}
+                    style={{ touchAction: "none", backgroundColor: "transparent" }}
                     onPointerDown={handlePointerDown}
                     onPointerMove={handlePointerMove}
                     onPointerUp={handlePointerUp}

@@ -2,15 +2,15 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { siteData } from "../data/siteData";
 
-function PlanCard({ plan, index, included, id, onPrev, onNext }) {
+function PlanCard({ plan, index, included, onPrev, onNext }) {
   return (
     <article
-      id={id}
+      data-plan-id={plan.id}
       className="reveal-card flex h-full flex-col overflow-hidden rounded-[2rem] border border-[#93B8D8]/45 bg-white shadow-[0_18px_55px_rgba(31,58,95,0.10)]"
     >
       <div className="p-5 pb-0 sm:p-6 sm:pb-0">
         <span className="mr-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF2FB] text-xs font-black text-[#1F3A5F]">
-          0{index + 1}
+          {`0${index + 1}`}
         </span>
         <h3 className="mt-3 text-lg font-black uppercase leading-tight tracking-[0.02em] text-[#102A59]">
           {plan.shortLabel}
@@ -51,9 +51,9 @@ function PlanCard({ plan, index, included, id, onPrev, onNext }) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col border-t-2 border-[#93B8D8] p-5 sm:p-6">
+      <div className="flex flex-1 flex-col touch-pan-y border-t-2 border-[#93B8D8] p-5 sm:p-6">
         <p className="inline-flex w-fit rounded-full border border-[#1F3A5F]/10 bg-white px-3 py-1.5 text-xs font-bold text-[#1F3A5F] shadow-sm">
-          Temps estimé : {plan.estimatedDuration}
+          {`Temps estimé : ${plan.estimatedDuration}`}
         </p>
 
         <p className="mt-4 text-xs font-black uppercase tracking-[0.16em] text-[#1F3A5F]/60">
@@ -73,7 +73,7 @@ function PlanCard({ plan, index, included, id, onPrev, onNext }) {
         </ul>
 
         <p className="mt-5 text-5xl font-black leading-none text-[#102A59]">
-          {plan.price} €
+          {`${plan.price} €`}
         </p>
 
         <Link
@@ -88,6 +88,11 @@ function PlanCard({ plan, index, included, id, onPrev, onNext }) {
 }
 
 const SWIPE_THRESHOLD = 45;
+
+// Libellés courts pour les pastilles de sélection rapide au-dessus du
+// carrousel mobile (le libellé complet du forfait est trop long pour tenir
+// dans une pastille).
+const PLAN_PILL_LABELS = ["Citadine", "Berline / SUV Compact", "Grand SUV / Monospace / Break"];
 
 export default function PricingCards({
   compact = false,
@@ -123,23 +128,57 @@ export default function PricingCards({
 
   return (
     <div>
-      {/* ── Mobile : carrousel une carte à la fois ── */}
+      {/* ── Mobile : carrousel une carte à la fois, avec effet de glissement ── */}
       {active && (
         <div className="sm:hidden">
+          {plans.length > 1 && (
+            <div className="mb-4 flex flex-col gap-2">
+              {plans.map((plan, index) => (
+                <button
+                  key={plan.id}
+                  type="button"
+                  onClick={() => goTo(index)}
+                  aria-label={`Voir le forfait ${plan.shortLabel}`}
+                  aria-pressed={index === activeIndex}
+                  className={`flex items-center gap-3 rounded-2xl border px-3 py-2 text-sm font-bold transition ${
+                    index === activeIndex
+                      ? "border-[#1769E8] bg-[#1769E8] text-white shadow-[0_8px_20px_rgba(23,105,232,0.3)]"
+                      : "border-[#93B8D8]/50 bg-white text-[#1F3A5F]"
+                  }`}
+                >
+                  <img
+                    src={plan.media.src}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-11 w-11 shrink-0 rounded-xl object-contain"
+                  />
+                  {PLAN_PILL_LABELS[index] ?? plan.shortLabel}
+                </button>
+              ))}
+            </div>
+          )}
+
           <div
+            className="overflow-hidden"
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerCancel={() => {
               swipeStart.current = null;
             }}
           >
-            <PlanCard
-              plan={active}
-              index={plans.indexOf(active)}
-              included={included}
-              onPrev={plans.length > 1 ? () => goTo(activeIndex - 1) : undefined}
-              onNext={plans.length > 1 ? () => goTo(activeIndex + 1) : undefined}
-            />
+            <div className="carousel-track" style={{ transform: `translateX(${-(activeIndex * 100)}%)` }}>
+              {plans.map((plan, index) => (
+                <div key={plan.id} className="carousel-slide px-0.5">
+                  <PlanCard
+                    plan={plan}
+                    index={index}
+                    included={included}
+                    onPrev={plans.length > 1 ? () => goTo(activeIndex - 1) : undefined}
+                    onNext={plans.length > 1 ? () => goTo(activeIndex + 1) : undefined}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           {plans.length > 1 && (
@@ -168,7 +207,6 @@ export default function PricingCards({
             plan={plan}
             index={index}
             included={included}
-            id={`pricing-${plan.id}`}
           />
         ))}
       </div>
@@ -204,7 +242,7 @@ export default function PricingCards({
 
           <div className="flex shrink-0 items-center gap-4">
             <p className="rounded-full bg-[#D9E9FF] px-6 py-3 text-3xl font-black text-[#1769E8]">
-              +{pricing.option.price} €
+              {`+${pricing.option.price} €`}
             </p>
 
             <span

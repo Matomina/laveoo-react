@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function Seo({ title, description, path = "/" }) {
+export default function Seo({ title, description, path = "/", image = "/og-image.jpg", jsonLd = null }) {
     useEffect(() => {
         const fullTitle = title.includes("Laveoo") ? title : `${title} | Laveoo`;
         document.title = fullTitle;
@@ -18,6 +18,10 @@ export default function Seo({ title, description, path = "/" }) {
         upsertMeta('meta[property="og:title"]', { property: "og:title", content: fullTitle });
         upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
         upsertMeta('meta[property="og:url"]', { property: "og:url", content: `https://www.laveoo.com${path}` });
+        upsertMeta('meta[property="og:image"]', { property: "og:image", content: `https://www.laveoo.com${image}` });
+        upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: fullTitle });
+        upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: description });
+        upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: `https://www.laveoo.com${image}` });
 
         let canonical = document.head.querySelector('link[rel="canonical"]');
         if (!canonical) {
@@ -26,7 +30,18 @@ export default function Seo({ title, description, path = "/" }) {
             document.head.appendChild(canonical);
         }
         canonical.href = `https://www.laveoo.com${path}`;
-    }, [description, path, title]);
+
+        const existingJsonLd = document.head.querySelector('script[data-seo-jsonld="true"]');
+        existingJsonLd?.remove();
+
+        if (jsonLd) {
+            const script = document.createElement("script");
+            script.type = "application/ld+json";
+            script.dataset.seoJsonld = "true";
+            script.textContent = JSON.stringify(jsonLd);
+            document.head.appendChild(script);
+        }
+    }, [description, path, title, image, jsonLd]);
 
     return null;
 }

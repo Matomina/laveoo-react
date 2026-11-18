@@ -112,7 +112,7 @@ export default function ContactSection() {
 
                             <li>
                                 <a
-                                    href={`https://wa.me/${contact?.whatsapp ?? ""}`}
+                                    href={`https://wa.me/${contact?.whatsapp ?? ""}?text=Bonjour%2C+je+souhaite+r%C3%A9server+un+nettoyage+auto+%C3%A0+domicile.`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="font-medium transition hover:text-[#1F3A5F]"

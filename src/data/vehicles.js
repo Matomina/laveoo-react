@@ -90,6 +90,18 @@ export const vehicles = [
   // Dacia
   { brand: "Dacia", model: "Spring", category: 1 },
 
+  // Citroën
+  { brand: "Citroën", model: "Ami", category: 1 },
+
+  // Honda
+  { brand: "Honda", model: "e", category: 1 },
+
+  // Mitsubishi
+  { brand: "Mitsubishi", model: "Space Star", category: 1 },
+
+  // MG
+  { brand: "MG", model: "MG3", category: 1 },
+
 
   // =========================
   // CATÉGORIE 2
@@ -222,6 +234,76 @@ export const vehicles = [
   { brand: "Volvo", model: "V40", category: 2 },
   { brand: "Volvo", model: "S60", category: 2 },
   { brand: "Volvo", model: "S90", category: 2 },
+  { brand: "Volvo", model: "EX30", category: 2 },
+
+  // Volkswagen
+  { brand: "Volkswagen", model: "T-Cross", category: 2 },
+  { brand: "Volkswagen", model: "Arteon", category: 2 },
+
+  // Kia
+  { brand: "Kia", model: "Stonic", category: 2 },
+
+  // Skoda
+  { brand: "Skoda", model: "Octavia", category: 2 },
+
+  // Nissan
+  { brand: "Nissan", model: "Leaf", category: 2 },
+  { brand: "Nissan", model: "Note", category: 2 },
+
+  // Mini
+  { brand: "Mini", model: "Countryman", category: 2 },
+  { brand: "Mini", model: "Clubman", category: 2 },
+
+  // Jeep
+  { brand: "Jeep", model: "Renegade", category: 2 },
+  { brand: "Jeep", model: "Avenger", category: 2 },
+
+  // Alfa Romeo
+  { brand: "Alfa Romeo", model: "Giulia", category: 2 },
+  { brand: "Alfa Romeo", model: "Giulietta", category: 2 },
+
+  // Citroën
+  { brand: "Citroën", model: "C4 Cactus", category: 2 },
+  { brand: "Citroën", model: "C3 Picasso", category: 2 },
+
+  // Toyota
+  { brand: "Toyota", model: "Auris", category: 2 },
+
+  // Fiat
+  { brand: "Fiat", model: "Tipo", category: 2 },
+  { brand: "Fiat", model: "500X", category: 2 },
+
+  // Hyundai
+  { brand: "Hyundai", model: "i40", category: 2 },
+
+  // Smart
+  { brand: "Smart", model: "#1", category: 2 },
+
+  // Cupra
+  { brand: "Cupra", model: "Born", category: 2 },
+
+  // Subaru
+  { brand: "Subaru", model: "XV", category: 2 },
+
+  // Suzuki
+  { brand: "Suzuki", model: "Jimny", category: 2 },
+
+  // BMW
+  { brand: "BMW", model: "i3", category: 2 },
+  { brand: "BMW", model: "i4", category: 2 },
+
+  // Saab
+  { brand: "Saab", model: "9-3", category: 2 },
+
+  // MG
+  { brand: "MG", model: "MG4", category: 2 },
+  { brand: "MG", model: "ZS", category: 2 },
+
+  // Lexus
+  { brand: "Lexus", model: "UX", category: 2 },
+
+  // BYD
+  { brand: "BYD", model: "Dolphin", category: 2 },
 
   // =========================
   // CATÉGORIE 3
@@ -384,6 +466,60 @@ export const vehicles = [
   { brand: "Cupra", model: "Formentor", category: 3 },
   { brand: "Cupra", model: "Ateca", category: 3 },
   { brand: "Cupra", model: "Tavascan", category: 3 },
+
+  // Honda
+  { brand: "Honda", model: "CR-V", category: 3 },
+
+  // Land Rover
+  { brand: "Land Rover", model: "Defender", category: 3 },
+
+  // Volkswagen
+  { brand: "Volkswagen", model: "ID.5", category: 3 },
+  { brand: "Volkswagen", model: "Multivan", category: 3 },
+
+  // Kia
+  { brand: "Kia", model: "EV9", category: 3 },
+
+  // Suzuki
+  { brand: "Suzuki", model: "Across", category: 3 },
+
+  // Porsche
+  { brand: "Porsche", model: "Taycan", category: 3 },
+
+  // Subaru
+  { brand: "Subaru", model: "Forester", category: 3 },
+  { brand: "Subaru", model: "Outback", category: 3 },
+
+  // SsangYong
+  { brand: "SsangYong", model: "Korando", category: 3 },
+  { brand: "SsangYong", model: "Torres", category: 3 },
+
+  // Saab
+  { brand: "Saab", model: "9-5", category: 3 },
+
+  // BMW
+  { brand: "BMW", model: "iX", category: 3 },
+
+  // Mercedes-Benz
+  { brand: "Mercedes-Benz", model: "EQA", category: 3 },
+  { brand: "Mercedes-Benz", model: "EQB", category: 3 },
+  { brand: "Mercedes-Benz", model: "EQC", category: 3 },
+
+  // Audi
+  { brand: "Audi", model: "Q8 e-tron", category: 3 },
+
+  // Volvo
+  { brand: "Volvo", model: "C40", category: 3 },
+
+  // MG
+  { brand: "MG", model: "HS", category: 3 },
+
+  // BYD
+  { brand: "BYD", model: "Atto 3", category: 3 },
+  { brand: "BYD", model: "Seal", category: 3 },
+
+  // Lexus
+  { brand: "Lexus", model: "NX", category: 3 },
 
   // =========================
   // BREAKS — CATÉGORIE 3

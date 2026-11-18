@@ -1,10 +1,17 @@
 import Seo from "../components/Seo";
 import PageHero from "../components/PageHero";
+import Breadcrumbs from "../components/Breadcrumbs";
+
+const breadcrumbItems = [
+    { name: "Accueil", to: "/" },
+    { name: "Politique de confidentialité", to: "/politique-de-confidentialite" },
+].map((item) => ({ ...item, url: `https://www.laveoo.com${item.to === "/" ? "/" : item.to}` }));
 
 export default function PolitiqueConfidentialitePage() {
     return (
         <>
             <Seo title="Politique de confidentialité" description="Politique de confidentialité et protection des données personnelles du site Laveoo." path="/politique-de-confidentialite" />
+            <Breadcrumbs items={breadcrumbItems} />
             <PageHero eyebrow="Protection des données" title="Politique de confidentialité" />
             <section className="bg-[#F5F5F5] py-16 lg:py-20">
                 <div className="mx-auto max-w-3xl space-y-8 px-4 text-sm leading-7 text-[#595959] sm:px-6 lg:px-8">
@@ -64,11 +71,7 @@ export default function PolitiqueConfidentialitePage() {
                     <div>
                         <h2 className="text-lg font-black text-[#1F3A5F]">Cookies et mesure d'audience</h2>
                         <p className="mt-2">
-                            Ce site utilise Google Analytics afin de mesurer la fréquentation et comprendre l'usage qui
-                            en est fait (pages visitées, provenance des visiteurs). Ces données sont anonymisées et ne
-                            permettent pas de vous identifier personnellement. Vous pouvez vous opposer à ce suivi en
-                            configurant votre navigateur pour bloquer les cookies, ou via un module de blocage dédié
-                            (par exemple{" "}
+                            {"Ce site utilise Google Analytics afin de mesurer la fréquentation et comprendre l'usage qui en est fait (pages visitées, provenance des visiteurs). Ces données sont anonymisées et ne permettent pas de vous identifier personnellement. Vous pouvez vous opposer à ce suivi en configurant votre navigateur pour bloquer les cookies, ou via un module de blocage dédié (par exemple "}
                             <a
                                 href="https://tools.google.com/dlpage/gaoptout"
                                 target="_blank"

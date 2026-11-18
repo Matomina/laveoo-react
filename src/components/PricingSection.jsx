@@ -30,7 +30,16 @@ export default function PricingSection({ title, intro }) {
     // On réessaie à chaque frame jusqu'à ce que la carte existe réellement
     // dans la page (le rendu de React n'est pas toujours immédiat).
     const tryScroll = () => {
-      const card = document.getElementById(`pricing-${selectedPlanId}`);
+      const candidates = document.querySelectorAll(
+        `[data-plan-id="${selectedPlanId}"]`
+      );
+      // Sur mobile et sur ordinateur, deux cartes existent dans le DOM
+      // (carrousel mobile + grille desktop) mais une seule est visible
+      // selon la largeur d'écran : on cible celle qui a réellement une
+      // position à l'écran (offsetParent est null si display:none).
+      const card = Array.from(candidates).find(
+        (element) => element.offsetParent !== null
+      );
 
       if (card) {
         // Cette carte est nouvellement affichée par la recherche : elle ne

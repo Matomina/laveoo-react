@@ -1,10 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import PageHero from "../components/PageHero";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { siteData } from "../data/siteData";
-import { vehicles } from "../data/vehicles";
-import { supabase } from "../lib/supabaseClient";
+import { searchVehicles } from "../utils/vehicleSearch";
+
+const breadcrumbItems = [
+    { name: "Accueil", to: "/" },
+    { name: "Réservation", to: "/reservation" },
+].map((item) => ({ ...item, url: `https://www.laveoo.com${item.to === "/" ? "/" : item.to}` }));
 
 const WEB3FORMS_ACCESS_KEY = "2aef2f48-9238-48a3-ba23-a989714ee633";
 
@@ -14,12 +19,15 @@ const CATEGORY_TO_PLAN_ID = {
     3: "suv-familiaux-monospaces-breaks",
 };
 
-const normalize = (text) =>
-    text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
+// toISOString() convertit d'abord en UTC : à minuit heure française, ça peut
+// faire reculer la date d'un jour une fois tronquée. On reconstruit la chaîne
+// YYYY-MM-DD à partir des composants locaux de la date pour éviter ce décalage.
+function toLocalDateString(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
 
 function generateTimeSlots() {
     const slots = [];
@@ -38,11 +46,12 @@ const MONTHS = [
     "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
 ];
 
-function makeEmptyVehicle(categoryId) {
+function makeEmptyVehicle(categoryId, modeleRecherche) {
     return {
         uid: Math.random().toString(36).slice(2),
         categoryId: categoryId ?? "",
         option1h: false,
+        modeleRecherche: modeleRecherche ?? null,
     };
 }
 
@@ -195,26 +204,24 @@ function Calendar({ selectedDate, onSelect }) {
     );
 }
 
-function VehicleQuickSearch({ onFound }) {
+function VehicleQuickSearch({ onFound, onSearchTextChange }) {
     const [search, setSearch] = useState("");
-    const query = normalize(search);
 
-    const suggestions =
-        query.length >= 2
-            ? vehicles
-                  .filter((item) => {
-                      const model = normalize(item.model);
-                      const brand = normalize(item.brand);
-                      const fullName = normalize(`${item.brand} ${item.model}`);
-                      return model.includes(query) || brand.includes(query) || fullName.includes(query);
-                  })
-                  .sort((a, b) => normalize(a.model).localeCompare(normalize(b.model)))
-                  .slice(0, 5)
-            : [];
+    const suggestions = searchVehicles(search, 5);
+
+    const handleChange = (text) => {
+        setSearch(text);
+        // On enregistre ce que le client tape même s'il ne clique jamais
+        // une suggestion (par ex. s'il choisit ensuite sa catégorie
+        // manuellement) : ça reste une info utile pour savoir quel véhicule
+        // il a en tête.
+        onSearchTextChange?.(text);
+    };
 
     const select = (item) => {
-        setSearch(`${item.brand} ${item.model}`);
-        onFound(CATEGORY_TO_PLAN_ID[item.category]);
+        const modele = `${item.brand} ${item.model}`;
+        setSearch(modele);
+        onFound(CATEGORY_TO_PLAN_ID[item.category], modele);
     };
 
     return (
@@ -223,8 +230,9 @@ function VehicleQuickSearch({ onFound }) {
             <input
                 type="text"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => handleChange(e.target.value)}
                 placeholder="Exemple : Peugeot 308"
+                aria-label="Rechercher votre modèle de véhicule"
                 className="mt-2 w-full rounded-xl border border-[#1F3A5F]/15 bg-white px-4 py-2.5 text-sm font-medium text-[#1F3A5F] outline-none focus:border-[#1769E8]"
             />
             {suggestions.length > 0 && (
@@ -281,7 +289,7 @@ function AddressAutocomplete({ value, onChange }) {
                 );
                 const data = await response.json();
                 setSuggestions(data.features ?? []);
-            } catch (error) {
+            } catch {
                 setSuggestions([]);
             } finally {
                 setLoading(false);
@@ -298,6 +306,7 @@ function AddressAutocomplete({ value, onChange }) {
     return (
         <div ref={wrapperRef} className="relative">
             <input
+                id="reservation-adresse"
                 type="text"
                 value={value}
                 onChange={(e) => handleChange(e.target.value)}
@@ -335,15 +344,16 @@ export default function ReservationPage() {
 
     const preselectedId = searchParams.get("vehicule");
     const preselectedPlan = plans.find((p) => p.id === preselectedId);
+    const preselectedModele = searchParams.get("modele");
 
     const [step, setStep] = useState(preselectedPlan ? 2 : 1);
     const [maxStepReached, setMaxStepReached] = useState(preselectedPlan ? 2 : 1);
 
     const [vehiclesList, setVehiclesList] = useState([
-        makeEmptyVehicle(preselectedPlan ? preselectedPlan.id : plans[0]?.id),
+        makeEmptyVehicle(preselectedPlan ? preselectedPlan.id : plans[0]?.id, preselectedModele),
     ]);
 
-    const [form, setForm] = useState({ nom: "", adresse: "", email: "", telephone: "", siret: "" });
+    const [form, setForm] = useState({ nom: "", adresse: "", email: "", telephone: "", siret: "", website: "" });
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
 
@@ -358,6 +368,13 @@ export default function ReservationPage() {
         const offset = window.scrollY + rect.top - 90; // 90px pour la hauteur du header sticky
         window.scrollTo({ top: offset, behavior: "smooth" });
     }, [step]);
+
+    // Le formulaire (long) est remplacé par le message de confirmation (court)
+    // sans navigation de page : sans ça, le navigateur garde le défilement
+    // du formulaire et le client se retrouve sous le message, pas dessus.
+    useEffect(() => {
+        if (submitted) window.scrollTo(0, 0);
+    }, [submitted]);
 
     const goToStep = (target) => {
         setStep(target);
@@ -400,6 +417,13 @@ export default function ReservationPage() {
         : "";
 
     const handleSubmit = async () => {
+        if (form.website) {
+            // Piège à robots : ce champ est invisible pour un humain. S'il est
+            // rempli, on fait croire à un envoi réussi sans rien enregistrer.
+            setSubmitted(true);
+            return;
+        }
+
         setSubmitting(true);
         setSubmitError(false);
 
@@ -418,25 +442,56 @@ export default function ReservationPage() {
                 plan: plan?.shortLabel ?? "",
                 prix: plan?.price ?? 0,
                 option1h: v.option1h,
+                modeleRecherche: v.modeleRecherche ?? null,
             };
         });
 
-        supabase
-            .from("reservations")
-            .insert({
-                nom: form.nom,
-                email: form.email,
-                telephone: form.telephone,
-                adresse: form.adresse,
-                siret: form.siret.trim() || null,
-                date_souhaitee: selectedDate ? selectedDate.toISOString().slice(0, 10) : null,
-                creneau: selectedSlot,
-                vehicules: vehiculesPayload,
-                total_estime: totalPrice,
-            })
-            .then(({ error }) => {
-                if (error) console.error("Erreur enregistrement Supabase :", error);
-            });
+        const pageSource = sessionStorage.getItem("laveoo_derniere_page_avant_reservation") ?? null;
+
+        // Chargé dynamiquement seulement à l'envoi du formulaire : le client
+        // Supabase (~200 Ko) n'a aucune raison de faire partie du JS chargé
+        // par tous les visiteurs qui ne réservent pas.
+        const reservationRecord = {
+            nom: form.nom,
+            email: form.email,
+            telephone: form.telephone,
+            adresse: form.adresse,
+            siret: form.siret.trim() || null,
+            date_souhaitee: selectedDate ? toLocalDateString(selectedDate) : null,
+            creneau: selectedSlot,
+            vehicules: vehiculesPayload,
+            total_estime: totalPrice,
+            page_source: pageSource,
+            statut: "en_attente",
+        };
+
+        // L'e-mail de confirmation est déclenché directement par le site plutôt
+        // que par un Database Webhook Supabase : la fonctionnalité de webhooks
+        // du projet est cassée côté plateforme Supabase (schéma interne
+        // "supabase_functions" manquant, indépendant de notre configuration).
+        // On appelle donc la fonction nous-mêmes, uniquement après confirmation
+        // que la ligne a bien été insérée en base.
+        import("../lib/supabaseClient").then(({ supabase }) =>
+            supabase
+                .from("reservations")
+                .insert(reservationRecord)
+                .then(({ error }) => {
+                    if (error) {
+                        console.error("Erreur enregistrement Supabase :", error);
+                        return;
+                    }
+                    fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-reservation-confirmation`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+                        },
+                        body: JSON.stringify({ record: reservationRecord }),
+                    }).catch((emailError) => {
+                        console.error("Erreur envoi e-mail de confirmation :", emailError);
+                    });
+                }),
+        );
 
         try {
             const response = await fetch("https://api.web3forms.com/submit", {
@@ -463,7 +518,7 @@ export default function ReservationPage() {
             } else {
                 setSubmitError(true);
             }
-        } catch (error) {
+        } catch {
             setSubmitError(true);
         } finally {
             setSubmitting(false);
@@ -474,17 +529,18 @@ export default function ReservationPage() {
         return (
             <>
                 <Seo title="Demande envoyée | Laveoo" description="Votre demande de réservation a bien été envoyée à Laveoo." path="/reservation" />
+                <Breadcrumbs items={breadcrumbItems} />
                 <section className="bg-white py-24">
                     <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
                         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#EAF2FB] text-4xl">✓</div>
                         <h1 className="mt-6 text-3xl font-black text-[#1F3A5F] sm:text-4xl">Votre demande a bien été envoyée</h1>
                         <p className="mt-4 text-lg leading-8 text-[#595959]">
-                            Merci {form.nom} ! Nous revenons vers vous très rapidement par téléphone ou SMS pour confirmer votre rendez-vous du {formattedDate}, créneau {selectedSlot}.
+                            {`Merci ${form.nom} ! Votre demande a bien été prise en compte. Un technicien va vous confirmer le créneau du ${formattedDate} (${selectedSlot}) dans les plus brefs délais.`}
                         </p>
                         <p className="mt-4 rounded-2xl bg-[#EAF2FB] p-4 text-sm font-semibold text-[#1F3A5F]">
                             Aucun paiement en ligne n'est nécessaire — vous réglez directement après la prestation, une fois votre véhicule propre.
                         </p>
-                        <a href="/" className="premium-button mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-[#1F3A5F] px-8 py-4 font-semibold text-white">Retour à l'accueil</a>
+                        <Link to="/" className="premium-button mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-[#1F3A5F] px-8 py-4 font-semibold text-white">Retour à l'accueil</Link>
                     </div>
                 </section>
             </>
@@ -494,6 +550,7 @@ export default function ReservationPage() {
     return (
         <>
             <Seo title="Réserver en ligne | Laveoo" description="Réservez votre nettoyage automobile à domicile en quelques clics. Choisissez votre véhicule, votre créneau, et payez uniquement après la prestation." path="/reservation" />
+            <Breadcrumbs items={breadcrumbItems} />
             <PageHero eyebrow="Réservation en ligne" title="Réservez votre nettoyage auto à domicile" intro="Choisissez votre ou vos véhicules, indiquez vos coordonnées et le créneau souhaité. Le paiement s'effectue uniquement après la prestation." />
 
             <section className="bg-[#F5F5F5] py-16 lg:py-20">
@@ -510,7 +567,7 @@ export default function ReservationPage() {
                                 return (
                                     <div key={vehicle.uid} className="rounded-[1.75rem] border border-[#93B8D8]/50 bg-white p-6 shadow-[0_12px_34px_rgba(31,58,95,0.06)]">
                                         <div className="flex items-center justify-between">
-                                            <p className="text-sm font-black uppercase tracking-[0.14em] text-[#1F3A5F]/60">Véhicule {index + 1}</p>
+                                            <p className="text-sm font-black uppercase tracking-[0.14em] text-[#1F3A5F]/60">{`Véhicule ${index + 1}`}</p>
                                             {vehiclesList.length > 1 && (
                                                 <button type="button" onClick={() => removeVehicle(vehicle.uid)} className="text-sm font-semibold text-[#595959] underline hover:text-[#1F3A5F]">
                                                     Retirer
@@ -518,7 +575,10 @@ export default function ReservationPage() {
                                             )}
                                         </div>
 
-                                        <VehicleQuickSearch onFound={(categoryId) => updateVehicle(vehicle.uid, { categoryId })} />
+                                        <VehicleQuickSearch
+                                            onFound={(categoryId, modeleRecherche) => updateVehicle(vehicle.uid, { categoryId, modeleRecherche })}
+                                            onSearchTextChange={(modeleRecherche) => updateVehicle(vehicle.uid, { modeleRecherche })}
+                                        />
 
                                         <div className="mt-4 grid gap-3 sm:grid-cols-3">
                                             {plans.map((p) => (
@@ -533,7 +593,7 @@ export default function ReservationPage() {
                                                     }`}
                                                 >
                                                     <p className="text-sm font-bold text-[#1F3A5F]">{p.shortLabel}</p>
-                                                    <p className="mt-1 text-2xl font-black text-[#102A59]">{p.price} €</p>
+                                                    <p className="mt-1 text-2xl font-black text-[#102A59]">{`${p.price} €`}</p>
                                                 </button>
                                             ))}
                                         </div>
@@ -550,7 +610,7 @@ export default function ReservationPage() {
                                                     <span className="flex-1 text-sm font-semibold text-[#1F3A5F]">
                                                         Option +1 heure de prestation
                                                     </span>
-                                                    <span className="font-black text-[#1769E8]">+{pricing.option.price} €</span>
+                                                    <span className="font-black text-[#1769E8]">{`+${pricing.option.price} €`}</span>
                                                 </label>
                                                 <p className="mt-2 pl-8 text-xs leading-5 text-[#595959]">
                                                     Recommandée pour un véhicule très sale : le technicien dispose de plus de temps pour repasser plusieurs fois sur les zones difficiles et obtenir un meilleur rendu.
@@ -572,7 +632,7 @@ export default function ReservationPage() {
                             <div className="rounded-2xl bg-[#1F3A5F] p-5 text-white">
                                 <div className="flex items-center justify-between">
                                     <p className="font-bold">Total estimé</p>
-                                    <p className="text-2xl font-black">{totalPrice} €</p>
+                                    <p className="text-2xl font-black">{`${totalPrice} €`}</p>
                                 </div>
                                 <p className="mt-1 text-xs font-medium text-white/70">Tous frais inclus, déplacement compris — à régler sur place une fois la prestation terminée.</p>
                             </div>
@@ -595,8 +655,9 @@ export default function ReservationPage() {
                                 <p className="text-sm font-black uppercase tracking-[0.14em] text-[#1F3A5F]/60">Vos coordonnées</p>
                                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                                     <div className="sm:col-span-2">
-                                        <label className="text-sm font-semibold text-[#1F3A5F]">Nom et prénom</label>
+                                        <label htmlFor="reservation-nom" className="text-sm font-semibold text-[#1F3A5F]">Nom et prénom</label>
                                         <input
+                                            id="reservation-nom"
                                             type="text"
                                             value={form.nom}
                                             onChange={(e) => setForm((f) => ({ ...f, nom: e.target.value }))}
@@ -604,15 +665,16 @@ export default function ReservationPage() {
                                         />
                                     </div>
                                     <div className="sm:col-span-2">
-                                        <label className="text-sm font-semibold text-[#1F3A5F]">Adresse d'intervention</label>
+                                        <label htmlFor="reservation-adresse" className="text-sm font-semibold text-[#1F3A5F]">Adresse d'intervention</label>
                                         <AddressAutocomplete
                                             value={form.adresse}
                                             onChange={(value) => setForm((f) => ({ ...f, adresse: value }))}
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-sm font-semibold text-[#1F3A5F]">E-mail</label>
+                                        <label htmlFor="reservation-email" className="text-sm font-semibold text-[#1F3A5F]">E-mail</label>
                                         <input
+                                            id="reservation-email"
                                             type="email"
                                             value={form.email}
                                             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
@@ -620,8 +682,9 @@ export default function ReservationPage() {
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-sm font-semibold text-[#1F3A5F]">Téléphone</label>
+                                        <label htmlFor="reservation-telephone" className="text-sm font-semibold text-[#1F3A5F]">Téléphone</label>
                                         <input
+                                            id="reservation-telephone"
                                             type="tel"
                                             value={form.telephone}
                                             onChange={(e) => setForm((f) => ({ ...f, telephone: e.target.value }))}
@@ -629,14 +692,26 @@ export default function ReservationPage() {
                                         />
                                     </div>
                                     <div className="sm:col-span-2">
-                                        <label className="text-sm font-semibold text-[#1F3A5F]">
+                                        <label htmlFor="reservation-siret" className="text-sm font-semibold text-[#1F3A5F]">
                                             N° SIRET <span className="font-normal text-[#595959]">(si vous êtes un professionnel, facultatif)</span>
                                         </label>
                                         <input
+                                            id="reservation-siret"
                                             type="text"
                                             value={form.siret}
                                             onChange={(e) => setForm((f) => ({ ...f, siret: e.target.value }))}
                                             className="mt-1.5 w-full rounded-xl border border-[#93B8D8]/50 bg-[#F8FAFC] px-4 py-3 outline-none focus:border-[#1769E8] focus:bg-white"
+                                        />
+                                    </div>
+                                    <div className="absolute left-[-9999px]" aria-hidden="true">
+                                        <label htmlFor="reservation-website">Laissez ce champ vide</label>
+                                        <input
+                                            id="reservation-website"
+                                            type="text"
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                            value={form.website}
+                                            onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))}
                                         />
                                     </div>
                                 </div>
@@ -703,17 +778,17 @@ export default function ReservationPage() {
                                         return (
                                             <div key={v.uid} className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-4 py-3">
                                                 <p className="text-sm font-semibold text-[#1F3A5F]">
-                                                    Véhicule {index + 1} — {plan?.shortLabel}
+                                                    {`Véhicule ${index + 1} — ${plan?.shortLabel ?? ""}`}
                                                     {v.option1h && <span className="text-[#595959]"> (+1h)</span>}
                                                 </p>
-                                                <p className="font-black text-[#102A59]">{vehicleTotal(v)} €</p>
+                                                <p className="font-black text-[#102A59]">{`${vehicleTotal(v)} €`}</p>
                                             </div>
                                         );
                                     })}
                                 </div>
                                 <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
                                     <p className="font-black text-[#1F3A5F]">Total estimé</p>
-                                    <p className="text-2xl font-black text-[#1769E8]">{totalPrice} €</p>
+                                    <p className="text-2xl font-black text-[#1769E8]">{`${totalPrice} €`}</p>
                                 </div>
                                 <p className="mt-1 text-xs font-medium text-[#595959]">Tous frais inclus, déplacement compris — à régler sur place une fois la prestation terminée.</p>
 

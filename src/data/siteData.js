@@ -94,23 +94,13 @@ export const siteData = {
         { label: "Résultats", href: "/resultats" },
         { label: "Méthodes", href: "/nos-methodes-de-nettoyage" },
         { label: "Zones", href: "/nos-zones-d-intervention" },
-        { label: "FAQ", href: "/faq" },
-        { label: "Contact", href: "/contact" },
-        { label: "Réserver", href: "/reservation" },
     ],
     hero: {
         title: "Lavage auto à domicile – Nettoyage intérieur de voiture",
-        subtitle:
-            "Spécialiste du nettoyage intérieur automobile, Laveoo a développé une méthode professionnelle qui rend l’esthétique automobile haut de gamme accessible à tous, directement à votre domicile. Nous intervenons 7j/7, avec déplacement gratuit et paiement uniquement à la fin de la prestation.",
-        highlights: [
-            "Déplacement inclus",
-            "Autonome en eau",
-            "Matériel professionnel",
-            "Finition haut de gamme",
-        ],
+        subtitle: "Une voiture propre, sans que vous ayez à vous déplacer.",
         actions: [
             { label: "Découvrir les tarifs", href: "/tarifs", variant: "primary" },
-            { label: "Réserver en ligne", href: "/reservation", variant: "secondary" },
+            { label: "Réserver mon nettoyage", href: "/reservation", variant: "secondary" },
         ],
     },
     pricing: {
@@ -140,17 +130,37 @@ export const siteData = {
         intro:
             "Découvrez en images le résultat de nos prestations de nettoyage intérieur automobile à domicile.",
         comparisons: [
-            { id: "comparison-11", title: "Volant et poste de conduite", before: "/results/avant-011.webp", after: "/results/apres-011.webp", alt: "Avant-après du nettoyage d’un volant et d’un poste de conduite automobile", objectPosition: "center 25%" },
-            { id: "comparison-1", title: "Siège avant", before: "/results/avant-01.webp", after: "/results/apres-01.webp", alt: "Avant-après du nettoyage d’un siège avant de voiture" },
-            { id: "comparison-2", title: "Banquette arrière", before: "/results/avant-02.webp", after: "/results/apres-02.webp", alt: "Avant-après du nettoyage d’une banquette arrière de voiture" },
-            { id: "comparison-3", title: "Sol et moquette", before: "/results/avant-03.webp", after: "/results/apres-03.webp", alt: "Avant-après du nettoyage du sol et de la moquette d’une voiture" },
-            { id: "comparison-4", title: "Habitacle clair", before: "/results/avant-04.webp", after: "/results/apres-04.webp", alt: "Avant-après du nettoyage d’un habitacle automobile clair" },
-            { id: "comparison-5", title: "Poste de conduite", before: "/results/avant-05.webp", after: "/results/apres-05.webp", alt: "Avant-après du nettoyage d’un poste de conduite automobile" },
-            { id: "comparison-6", title: "Console centrale", before: "/results/avant-06.webp", after: "/results/apres-06.webp", alt: "Avant-après du nettoyage d’une console centrale automobile" },
-            { id: "comparison-7", title: "Banquette arrière", before: "/results/avant-07.webp", after: "/results/apres-07.webp", alt: "Avant-après du nettoyage d’une banquette arrière en tissu" },
-            { id: "comparison-8", title: "Assise arrière", before: "/results/avant-08.webp", after: "/results/apres-08.webp", alt: "Avant-après du nettoyage d’une assise arrière automobile" },
-            { id: "comparison-9", title: "Sièges avant", before: "/results/avant-09.webp", after: "/results/apres-09.webp", alt: "Avant-après du nettoyage des sièges avant d’une voiture" },
-            { id: "comparison-10", title: "Habitacle complet", before: "/results/avant-010.webp", after: "/results/apres-010.webp", alt: "Avant-après du nettoyage complet d’un habitacle automobile clair" },
+            // Tesla
+            { id: "comparison-13", title: "Plancher conducteur", before: "/results/nettoyage-plancher-conducteur-tesla-1-avant.webp", after: "/results/nettoyage-plancher-conducteur-tesla-1-apres.webp", alt: "Avant-après du nettoyage du plancher côté conducteur d’une Tesla" },
+            { id: "comparison-14", title: "Plancher conducteur", before: "/results/nettoyage-plancher-conducteur-tesla-2-avant.webp", after: "/results/nettoyage-plancher-conducteur-tesla-2-apres.webp", alt: "Avant-après du nettoyage du plancher côté conducteur d’une autre Tesla" },
+            { id: "comparison-17", title: "Plancher passager", before: "/results/nettoyage-plancher-passager-tesla-avant.webp", after: "/results/nettoyage-plancher-passager-tesla-apres.webp", alt: "Avant-après du nettoyage du plancher côté passager avant d’une Tesla" },
+            { id: "comparison-16", title: "Sièges et plancher arrière", before: "/results/nettoyage-sieges-plancher-arriere-tesla-avant.webp", after: "/results/nettoyage-sieges-plancher-arriere-tesla-apres.webp", alt: "Avant-après du nettoyage des sièges et du plancher arrière d’une Tesla" },
+            { id: "comparison-12", title: "Sol et banquette arrière", before: "/results/nettoyage-sol-banquette-arriere-tesla-1-avant.webp", after: "/results/nettoyage-sol-banquette-arriere-tesla-1-apres.webp", alt: "Avant-après du nettoyage du sol et de la banquette arrière d’une Tesla" },
+            { id: "comparison-15", title: "Sol banquette arrière", before: "/results/nettoyage-sol-banquette-arriere-tesla-2-avant.webp", after: "/results/nettoyage-sol-banquette-arriere-tesla-2-apres.webp", alt: "Avant-après du nettoyage du sol de la banquette arrière d’une Tesla" },
+            { id: "comparison-11", title: "Volant et poste de conduite", before: "/results/nettoyage-volant-poste-conduite-avant.webp", after: "/results/nettoyage-volant-poste-conduite-apres.webp", alt: "Avant-après du nettoyage d’un volant et d’un poste de conduite automobile", objectPosition: "center 25%" },
+            // BMW
+            { id: "comparison-18", title: "Sol banquette arrière", before: "/results/nettoyage-sol-arriere-voiture-avant.webp", after: "/results/nettoyage-sol-arriere-voiture-apres.webp", alt: "Avant-après du nettoyage du sol de la banquette arrière d’une BMW" },
+            { id: "comparison-19", title: "Banquette en cuir", before: "/results/nettoyage-banquette-arriere-cuir-avant.webp", after: "/results/nettoyage-banquette-arriere-cuir-apres.webp", alt: "Avant-après du nettoyage d’une banquette arrière en cuir de BMW" },
+            { id: "comparison-20", title: "Console centrale", before: "/results/nettoyage-console-centrale-voiture-avant.webp", after: "/results/nettoyage-console-centrale-voiture-apres.webp", alt: "Avant-après du nettoyage de la console centrale d’une BMW" },
+            // Mercedes (habitacle beige)
+            { id: "comparison-21", title: "Habitacle clair", before: "/results/nettoyage-habitacle-clair-mercedes-avant.webp", after: "/results/nettoyage-habitacle-clair-mercedes-apres.webp", alt: "Avant-après du nettoyage de l’habitacle clair d’une Mercedes" },
+            { id: "comparison-24", title: "Siège conducteur", before: "/results/nettoyage-siege-conducteur-mercedes-avant.webp", after: "/results/nettoyage-siege-conducteur-mercedes-apres.webp", alt: "Avant-après du nettoyage du siège conducteur d’une Mercedes" },
+            // MG (banquette tissu bleu)
+            { id: "comparison-25", title: "Banquette en tissu", before: "/results/nettoyage-banquette-arriere-tissu-mercedes-avant.webp", after: "/results/nettoyage-banquette-arriere-tissu-mercedes-apres.webp", alt: "Avant-après du nettoyage d’une banquette arrière en tissu de MG" },
+            // Peugeot 208
+            { id: "comparison-22", title: "Banquette arrière", before: "/results/nettoyage-banquette-arriere-208-avant.webp", after: "/results/nettoyage-banquette-arriere-208-apres.webp", alt: "Avant-après du nettoyage de la banquette arrière d’une Peugeot 208" },
+            { id: "comparison-23", title: "Siège conducteur", before: "/results/nettoyage-siege-conducteur-208-avant.webp", after: "/results/nettoyage-siege-conducteur-208-apres.webp", alt: "Avant-après du nettoyage du siège conducteur d’une Peugeot 208" },
+            // Le reste
+            { id: "comparison-1", title: "Siège avant", before: "/results/nettoyage-siege-avant-voiture-avant.webp", after: "/results/nettoyage-siege-avant-voiture-apres.webp", alt: "Avant-après du nettoyage d’un siège avant de voiture" },
+            { id: "comparison-2", title: "Banquette arrière", before: "/results/nettoyage-banquette-arriere-voiture-avant.webp", after: "/results/nettoyage-banquette-arriere-voiture-apres.webp", alt: "Avant-après du nettoyage d’une banquette arrière de voiture" },
+            { id: "comparison-3", title: "Sol et moquette", before: "/results/nettoyage-sol-moquette-voiture-avant.webp", after: "/results/nettoyage-sol-moquette-voiture-apres.webp", alt: "Avant-après du nettoyage du sol et de la moquette d’une voiture" },
+            { id: "comparison-5", title: "Poste de conduite", before: "/results/nettoyage-poste-conduite-voiture-avant.webp", after: "/results/nettoyage-poste-conduite-voiture-apres.webp", alt: "Avant-après du nettoyage d’un poste de conduite automobile" },
+            { id: "comparison-6", title: "Console centrale", before: "/results/nettoyage-console-centrale-automobile-avant.webp", after: "/results/nettoyage-console-centrale-automobile-apres.webp", alt: "Avant-après du nettoyage d’une console centrale automobile" },
+            { id: "comparison-7", title: "Banquette arrière", before: "/results/nettoyage-banquette-arriere-tissu-avant.webp", after: "/results/nettoyage-banquette-arriere-tissu-apres.webp", alt: "Avant-après du nettoyage d’une banquette arrière en tissu" },
+            { id: "comparison-8", title: "Assise arrière", before: "/results/nettoyage-assise-arriere-voiture-avant.webp", after: "/results/nettoyage-assise-arriere-voiture-apres.webp", alt: "Avant-après du nettoyage d’une assise arrière automobile" },
+            // Citroën C2
+            { id: "comparison-26", title: "Banquette rabattue", before: "/results/nettoyage-banquette-rabattue-c2-avant.webp", after: "/results/nettoyage-banquette-rabattue-c2-apres.webp", alt: "Avant-après du nettoyage de la banquette arrière rabattue d’une Citroën C2" },
+            { id: "comparison-27", title: "Banquette arrière", before: "/results/nettoyage-banquette-arriere-c2-avant.webp", after: "/results/nettoyage-banquette-arriere-c2-apres.webp", alt: "Avant-après du nettoyage de la banquette arrière d’une Citroën C2" },
         ],
     },
     process: {
@@ -164,13 +174,22 @@ export const siteData = {
     },
     method: {
         title: "Une méthode de nettoyage automobile professionnelle",
+        lead: "Spécialiste du nettoyage intérieur automobile, Laveoo a développé une méthode professionnelle qui rend l’esthétique automobile haut de gamme accessible à tous, directement à votre domicile. Nous intervenons 7j/7, avec déplacement gratuit et paiement uniquement à la fin de la prestation.",
         intro:
     "L’esthétique automobile est notre métier. Que ce soit pour un [nettoyage auto à domicile](/nettoyage-auto-domicile) complet ou pour le [nettoyage des sièges de voiture](/nettoyage-sieges-voiture) les plus délicats, air comprimé, vapeur, injection-extraction et gestes adaptés permettent d’obtenir un niveau de finition qu’un nettoyage classique ne peut pas offrir, tout en préservant le cuir, l’Alcantara et les surfaces sensibles.",
+        homeTitle: "Un protocole professionnel, directement chez vous",
+        homeIntro:
+            "Air comprimé, injection-extraction et un produit différent pour chaque matière : notre protocole va chercher la saleté là où un nettoyage classique s’arrête, sans agresser le cuir, l’Alcantara ni les plastiques sensibles. [Découvrez notre méthode étape par étape](/nos-methodes-de-nettoyage).",
+        homeHighlights: [
+            { title: "Habitacle complet", description: "Tapis, moquette, coffre et plastiques : chaque recoin reçoit le même niveau de soin, pas seulement les zones visibles." },
+            { title: "Cuir, tissu et Alcantara", description: "Un produit et une technique différents pour chaque matière, pour nettoyer en profondeur sans l’abîmer." },
+            { title: "Odeurs traitées, pas masquées", description: "Notre destructeur d’odeurs neutralise la cause à la source, une fois les taches et l’humidité traitées." },
+        ],
         items: [
-            { title: "Tapis et moquettes poussiéreux", description: "Même après avoir été tapés ou aspirés, la poussière et les miettes restent incrustées dans les fibres.", video: { src: "/videos/methode-shampoing.mp4", label: "Shampouinage professionnel des textiles automobiles" } },
-            { title: "Sièges tachés et marqués", description: "Auréoles de boissons, traces de nourriture, vomi d’enfant ou saletés du quotidien : les sièges textiles absorbent les taches et peuvent conserver les odeurs.", video: { src: "/videos/methode-aspiration.mp4", label: "Aspiration professionnelle d’un habitacle" } },
-            { title: "Tableau de bord et plastiques encrassés", description: "La poussière se loge dans chaque rainure, bouton et interstice. Avec le temps, les plastiques deviennent ternes, collants ou marqués par les traces.", video: { src: "/videos/methode-preparation.mp4", label: "Préparation du nettoyage des matériaux délicats" } },
-            { title: "Sièges en cuir marqués et ternis", description: "Traces d’usage, saletés incrustées, zones brillantes ou ternes : avec le temps, le cuir perd son aspect d’origine.", video: { src: "/videos/methode-finitions.mp4", label: "Finitions intérieures automobiles" } },
+            { title: "Tapis et moquettes poussiéreux", description: "Même après avoir été tapés ou aspirés, la poussière et les miettes restent incrustées dans les fibres.", image: { before: "/results/nettoyage-sol-banquette-arriere-tesla-2-avant.webp", after: "/results/nettoyage-sol-banquette-arriere-tesla-2-apres.webp", alt: "Avant-après du nettoyage du sol de la banquette arrière d’une Tesla" } },
+            { title: "Sièges tachés et marqués", description: "[Auréoles de boissons](/comment-nettoyer/aureole-siege-tissu), [taches de café](/comment-nettoyer/tache-de-cafe-siege-tissu), [poils d’animaux](/comment-nettoyer/poils-animaux-siege-tissu), [vomi d’enfant](/comment-nettoyer/tache-de-vomi-siege-tissu) ou [sièges très sales](/comment-nettoyer/nettoyer-siege-tissu-tres-sale-profondeur) : les sièges textiles absorbent les taches et peuvent conserver les odeurs.", image: { before: "/results/nettoyage-siege-avant-voiture-avant.webp", after: "/results/nettoyage-siege-avant-voiture-apres.webp", alt: "Avant-après du nettoyage d’un siège avant de voiture" } },
+            { title: "Tableau de bord et plastiques encrassés", description: "La poussière se loge dans chaque rainure, bouton et interstice. Avec le temps, les plastiques deviennent ternes, collants ou marqués par les traces.", image: { before: "/results/nettoyage-console-centrale-voiture-avant.webp", after: "/results/nettoyage-console-centrale-voiture-apres.webp", alt: "Avant-après du nettoyage de la console centrale d’une BMW" } },
+            { title: "Sièges en cuir marqués et ternis", description: "Traces d’usage, saletés incrustées, zones brillantes ou ternes : avec le temps, le cuir perd son aspect d’origine.", image: { before: "/results/nettoyage-banquette-arriere-cuir-avant.webp", after: "/results/nettoyage-banquette-arriere-cuir-apres.webp", alt: "Avant-après du nettoyage d’une banquette arrière en cuir de BMW" } },
         ],
         closingParagraphs: [
             "Nous prenons en charge ces problèmes avec un nettoyage intérieur complet : aspiration de l’habitacle et du coffre, traitement des taches de boissons, de graisse, de terre ou d’animaux, nettoyage approfondi des sièges en tissu ou entretien du cuir.",
@@ -207,7 +226,7 @@ export const siteData = {
         infoNote: "7j/7 de 8h à 21h · Déplacement inclus dans notre zone d’intervention",
         actions: [
             { label: "Appeler", href: "tel:0607112279", variant: "primary" },
-            { label: "WhatsApp", href: "https://wa.me/33607112279", variant: "primary", external: true },
+            { label: "WhatsApp", href: "https://wa.me/33607112279?text=Bonjour%2C+je+souhaite+r%C3%A9server+un+nettoyage+auto+%C3%A0+domicile.", variant: "primary", external: true },
             { label: "Envoyer un e-mail", href: "mailto:laveoocontact@gmail.com", variant: "secondary" },
         ],
     },
@@ -222,10 +241,7 @@ export const siteData = {
             { label: "Réserver", href: "/reservation" },
             { label: "Nettoyage à domicile", href: "/nettoyage-auto-domicile" },
             { label: "Nettoyage des sièges", href: "/nettoyage-sieges-voiture" },
-            { label: "Nos zones d'intervention", href: "/nos-zones-d-intervention" },
-            { label: "Nettoyage auto Essonne (91)", href: "/nettoyage-auto-essonne" },
-            { label: "Nettoyage auto Val-de-Marne (94)", href: "/nettoyage-auto-val-de-marne" },
-            { label: "Nettoyage auto Seine-et-Marne (77)", href: "/nettoyage-auto-seine-et-marne" },
+            { label: "Nos guides", href: "/comment-nettoyer" },
         ],
     },
 };

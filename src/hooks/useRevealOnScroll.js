@@ -2,6 +2,12 @@ import { useEffect } from "react";
 
 export default function useRevealOnScroll(dependency) {
     useEffect(() => {
+        // Pendant le pré-rendu (scripts/prerender.mjs), cet effet doit rester
+        // inactif : sinon le HTML statique capturerait data-revealed/--reveal-delay
+        // déjà posés, ce qui ne correspond plus au tout premier rendu React côté
+        // client et casse l'hydratation.
+        if (window.__PRERENDER__) return;
+
         const prefersReducedMotion = window.matchMedia(
             "(prefers-reduced-motion: reduce)"
         ).matches;

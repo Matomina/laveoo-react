@@ -1,66 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { vehicles } from "../data/vehicles";
-
-const normalize = (text) =>
-  text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim();
+import { findExactVehicle, searchVehicles } from "../utils/vehicleSearch";
 
 export default function VehicleSearch({ onVehicleFound }) {
   const [search, setSearch] = useState("");
   const [confirmed, setConfirmed] = useState(false);
 
-  const query = normalize(search);
-
   // Recherche exacte du véhicule
-  const vehicle = vehicles.find(
-    (item) =>
-      normalize(`${item.brand} ${item.model}`) === query ||
-      normalize(item.model) === query
-  );
+  const vehicle = findExactVehicle(search);
 
-  // Plusieurs suggestions possibles
-  const suggestions =
-    query.length >= 2
-      ? vehicles
-          .filter((item) => {
-            const model = normalize(item.model);
-            const brand = normalize(item.brand);
-            const fullName = normalize(`${item.brand} ${item.model}`);
-
-            return (
-              model.includes(query) ||
-              brand.includes(query) ||
-              fullName.includes(query)
-            );
-          })
-          .sort((first, second) => {
-            const firstModel = normalize(first.model);
-            const secondModel = normalize(second.model);
-
-            // Correspondance exacte en premier
-            if (firstModel === query && secondModel !== query) {
-              return -1;
-            }
-
-            if (firstModel !== query && secondModel === query) {
-              return 1;
-            }
-
-            // Puis les modèles qui commencent par la recherche
-            const firstStarts = firstModel.startsWith(query);
-            const secondStarts = secondModel.startsWith(query);
-
-            if (firstStarts && !secondStarts) return -1;
-            if (!firstStarts && secondStarts) return 1;
-
-            return firstModel.localeCompare(secondModel);
-          })
-          .slice(0, 6)
-      : [];
+  // Plusieurs suggestions possibles, tolérantes aux fautes de frappe et aux tirets
+  const suggestions = searchVehicles(search, 6);
 
   const handleSearchChange = (event) => {
     // On tape juste : on ne filtre/scroll qu'au clic sur une suggestion.
@@ -108,6 +58,7 @@ export default function VehicleSearch({ onVehicleFound }) {
         <input
           type="text"
           placeholder="Exemple : Peugeot 308"
+          aria-label="Rechercher votre modèle de véhicule"
           value={search}
           onChange={handleSearchChange}
           className="w-full rounded-2xl border border-[#1F3A5F]/15 bg-[#F8FAFC] py-4 pl-12 pr-5 font-medium text-[#1F3A5F] outline-none transition placeholder:text-[#1F3A5F]/35 focus:border-[#1F3A5F]/40 focus:bg-white focus:shadow-[0_0_0_4px_rgba(31,58,95,0.08)]"
@@ -162,7 +113,7 @@ export default function VehicleSearch({ onVehicleFound }) {
           </div>
 
           <Link
-            to={`/reservation?vehicule=${vehicle.category === 1 ? "citadines" : vehicle.category === 2 ? "compactes-berlines-suv-compacts" : "suv-familiaux-monospaces-breaks"}`}
+            to={`/reservation?vehicule=${vehicle.category === 1 ? "citadines" : vehicle.category === 2 ? "compactes-berlines-suv-compacts" : "suv-familiaux-monospaces-breaks"}&modele=${encodeURIComponent(search)}`}
             className="premium-button inline-flex min-h-12 items-center justify-center rounded-full bg-[#1769E8] px-6 py-3 font-bold text-white shadow-[0_12px_30px_rgba(23,105,232,0.22)]"
           >
             Réserver ce forfait

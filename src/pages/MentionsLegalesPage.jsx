@@ -1,10 +1,18 @@
+import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
 import PageHero from "../components/PageHero";
+import Breadcrumbs from "../components/Breadcrumbs";
+
+const breadcrumbItems = [
+    { name: "Accueil", to: "/" },
+    { name: "Mentions légales", to: "/mentions-legales" },
+].map((item) => ({ ...item, url: `https://www.laveoo.com${item.to === "/" ? "/" : item.to}` }));
 
 export default function MentionsLegalesPage() {
     return (
         <>
             <Seo title="Mentions légales" description="Mentions légales du site Laveoo." path="/mentions-legales" />
+            <Breadcrumbs items={breadcrumbItems} />
             <PageHero eyebrow="Informations légales" title="Mentions légales" />
             <section className="bg-[#F5F5F5] py-16 lg:py-20">
                 <div className="mx-auto max-w-3xl space-y-8 px-4 text-sm leading-7 text-[#595959] sm:px-6 lg:px-8">
@@ -45,11 +53,10 @@ export default function MentionsLegalesPage() {
                     <div>
                         <h2 className="text-lg font-black text-[#1F3A5F]">Données personnelles</h2>
                         <p className="mt-2">
-                            Les informations recueillies via le formulaire de réservation font l'objet d'un traitement
-                            décrit dans notre{" "}
-                            <a href="/politique-de-confidentialite" className="premium-link text-[#1769E8]">
+                            {"Les informations recueillies via le formulaire de réservation font l'objet d'un traitement décrit dans notre "}
+                            <Link to="/politique-de-confidentialite" className="premium-link text-[#1769E8]">
                                 politique de confidentialité
-                            </a>.
+                            </Link>.
                         </p>
                     </div>
                 </div>

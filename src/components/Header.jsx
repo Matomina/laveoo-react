@@ -23,7 +23,7 @@ export default function Header() {
 
                     <div className="flex items-center gap-2.5 sm:gap-3">
                         <Link to="/reservation" onClick={() => setIsMenuOpen(false)} className="premium-button hidden min-h-[54px] items-center justify-center gap-2 rounded-full bg-[#1769E8] px-6 py-2 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(23,105,232,0.25)] sm:inline-flex">
-                            Réserver en ligne
+                            Réserver mon nettoyage
                         </Link>
                         <a href={`tel:${contact.phone}`} className="premium-button inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full bg-[#102A59] px-5 py-2 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(31,58,95,0.20)] sm:min-h-[54px] sm:px-6">
                             <span aria-hidden="true">☎</span> Appeler
@@ -45,8 +45,8 @@ export default function Header() {
                                 {link.label}
                             </NavLink>
                         ))}
-                        <Link to="/reservation" onClick={() => setIsMenuOpen(false)} className="premium-button mt-2 inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-[#1769E8] px-4 py-3 text-sm font-semibold text-white">Réserver en ligne</Link>
-                        <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="premium-button inline-flex min-h-[52px] items-center justify-center rounded-2xl border border-[#1F3A5F]/15 bg-white px-4 py-3 text-sm font-semibold text-[#1F3A5F]">WhatsApp</a>
+                        <Link to="/reservation" onClick={() => setIsMenuOpen(false)} className="premium-button mt-2 inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-[#1769E8] px-4 py-3 text-sm font-semibold text-white">Réserver mon nettoyage</Link>
+                        <a href={`https://wa.me/${contact.whatsapp}?text=Bonjour%2C+je+souhaite+r%C3%A9server+un+nettoyage+auto+%C3%A0+domicile.`} target="_blank" rel="noopener noreferrer" className="premium-button inline-flex min-h-[52px] items-center justify-center rounded-2xl border border-[#1F3A5F]/15 bg-white px-4 py-3 text-sm font-semibold text-[#1F3A5F]">WhatsApp</a>
                     </nav>
                 </div>
             </div>

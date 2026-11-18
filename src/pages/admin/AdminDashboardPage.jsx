@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
+import { useAdminBadge } from "./AdminLayout";
 
 const STATUT_LABELS = {
     en_attente: "En attente",
@@ -17,12 +18,15 @@ const STATUT_STYLES = {
 };
 
 export default function AdminDashboardPage() {
+    const { getLastSeenAt, markReservationsSeen } = useAdminBadge();
     const [reservations, setReservations] = useState([]);
+    const [newIds, setNewIds] = useState(new Set());
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
         let active = true;
+        const cutoff = new Date(getLastSeenAt());
 
         supabase
             .from("reservations")
@@ -34,6 +38,8 @@ export default function AdminDashboardPage() {
                     setError("Impossible de charger les réservations.");
                 } else {
                     setReservations(data ?? []);
+                    setNewIds(new Set((data ?? []).filter((r) => new Date(r.created_at) > cutoff).map((r) => r.id)));
+                    markReservationsSeen();
                 }
                 setLoading(false);
             });
@@ -71,6 +77,8 @@ export default function AdminDashboardPage() {
                                 <th className="px-4 py-3">Reçue le</th>
                                 <th className="px-4 py-3">Client</th>
                                 <th className="px-4 py-3">Adresse</th>
+                                <th className="px-4 py-3">Véhicule(s) recherché(s)</th>
+                                <th className="px-4 py-3">Page de réservation</th>
                                 <th className="px-4 py-3">Date / créneau souhaités</th>
                                 <th className="px-4 py-3">Total</th>
                                 <th className="px-4 py-3">Statut</th>
@@ -79,17 +87,35 @@ export default function AdminDashboardPage() {
                         </thead>
                         <tbody>
                             {reservations.map((r) => (
-                                <tr key={r.id} className="border-t border-slate-100 align-top">
+                                <tr
+                                    key={r.id}
+                                    className={`border-t border-slate-100 align-top ${newIds.has(r.id) ? "admin-row-nouvelle" : ""}`}
+                                >
                                     <td className="whitespace-nowrap px-4 py-3">
                                         {new Date(r.created_at).toLocaleDateString("fr-FR")}
+                                        <br />
+                                        <span className="text-xs text-[#595959]">
+                                            {new Date(r.created_at).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
+                                        </span>
                                     </td>
                                     <td className="px-4 py-3">
+                                        {newIds.has(r.id) && (
+                                            <span className="mb-1 inline-block rounded-full bg-[#1769E8] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                                                Nouveau
+                                            </span>
+                                        )}
                                         <p className="font-semibold text-[#1F3A5F]">{r.nom}</p>
                                         <p className="text-xs text-[#595959]">{r.email}</p>
                                         <p className="text-xs text-[#595959]">{r.telephone}</p>
                                         {r.siret && <p className="text-xs text-[#595959]">SIRET : {r.siret}</p>}
                                     </td>
                                     <td className="px-4 py-3 text-[#595959]">{r.adresse}</td>
+                                    <td className="px-4 py-3 text-[#595959]">
+                                        {Array.isArray(r.vehicules) && r.vehicules.some((v) => v.modeleRecherche)
+                                            ? r.vehicules.map((v) => v.modeleRecherche).filter(Boolean).join(", ")
+                                            : "-"}
+                                    </td>
+                                    <td className="px-4 py-3 text-[#595959]">{r.page_source ?? "-"}</td>
                                     <td className="whitespace-nowrap px-4 py-3">
                                         {r.date_souhaitee
                                             ? new Date(r.date_souhaitee).toLocaleDateString("fr-FR")

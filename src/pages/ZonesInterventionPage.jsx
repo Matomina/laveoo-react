@@ -1,14 +1,45 @@
 import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
+import Breadcrumbs from "../components/Breadcrumbs";
 import PageHero from "../components/PageHero";
 import SectionCta from "../components/SectionCta";
 import { villes } from "../data/villes";
+import { companyInfo } from "../data/companyInfo";
+import { siteData } from "../data/siteData";
 
 const DEPARTEMENTS = [
     { code: "91", nom: "Essonne", slug: "essonne" },
     { code: "94", nom: "Val-de-Marne", slug: "val-de-marne" },
     { code: "77", nom: "Seine-et-Marne", slug: "seine-et-marne" },
 ];
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AutoWash",
+    name: companyInfo.name,
+    image: `https://www.laveoo.com${companyInfo.logo}`,
+    url: "https://www.laveoo.com/nos-zones-d-intervention",
+    telephone: companyInfo.phoneDisplay,
+    priceRange: "79 € - 119 €",
+    offers: siteData.pricing.items.map((item) => ({
+        "@type": "Offer",
+        name: item.shortLabel,
+        price: item.price,
+        priceCurrency: "EUR",
+    })),
+    openingHoursSpecification: companyInfo.openingHoursSpecification,
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: companyInfo.streetAddress,
+        addressLocality: companyInfo.addressLocality,
+        postalCode: companyInfo.postalCode,
+        addressCountry: "FR",
+    },
+    areaServed: DEPARTEMENTS.map((departement) => ({
+        "@type": "AdministrativeArea",
+        name: `${departement.nom} (${departement.code})`,
+    })),
+};
 
 export default function ZonesInterventionPage() {
     return (
@@ -17,7 +48,9 @@ export default function ZonesInterventionPage() {
                 title="Nos zones d'intervention"
                 description="Laveoo intervient dans le sud de l'Île-de-France : Essonne (91), Val-de-Marne (94) et Seine-et-Marne (77). Retrouvez toutes les villes desservies pour le nettoyage automobile à domicile."
                 path="/nos-zones-d-intervention"
+                jsonLd={jsonLd}
             />
+            <Breadcrumbs items={[{ name: "Accueil", to: "/" }, { name: "Nos zones d'intervention", to: "/nos-zones-d-intervention" }]} />
             <PageHero
                 eyebrow="Où intervenons-nous ?"
                 title="Nos zones d'intervention"
@@ -36,7 +69,7 @@ export default function ZonesInterventionPage() {
                                     to={`/nettoyage-auto-${departement.slug}`}
                                     className="text-xs font-black uppercase tracking-[0.22em] text-[#1F3A5F]/60 hover:text-[#1769E8]"
                                 >
-                                    {departement.nom} ({departement.code}) →
+                                    {`${departement.nom} (${departement.code}) →`}
                                 </Link>
                                 <div className="mt-5 flex flex-wrap gap-3">
                                     {villesDuDepartement.map((ville) => (
@@ -45,7 +78,7 @@ export default function ZonesInterventionPage() {
                                             to={`/nettoyage-auto/${ville.slug}`}
                                             className="rounded-full bg-[#F8FAFC] px-5 py-2.5 text-sm font-bold text-[#1769E8] shadow-sm transition hover:bg-[#EAF2FB] hover:shadow-md"
                                         >
-                                            Nettoyage auto à {ville.nom}
+                                            {`Nettoyage auto à ${ville.nom}`}
                                         </Link>
                                     ))}
                                 </div>
@@ -60,7 +93,7 @@ export default function ZonesInterventionPage() {
                     <SectionCta
                         title="Prêt à réserver votre créneau ?"
                         text="Choisissez votre forfait et réservez en ligne en quelques clics, paiement uniquement après la prestation."
-                        label="Réserver en ligne"
+                        label="Réserver mon nettoyage"
                         to="/reservation"
                         secondaryLabel="Nous contacter"
                         secondaryTo="/contact"

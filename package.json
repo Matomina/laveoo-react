@@ -7,16 +7,17 @@
     "dev": "vite",
     "build": "vite build",
     "prerender": "node scripts/prerender.mjs",
+    "vercel-build": "vite build && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.4",
     "@tailwindcss/vite": "^4.2.2",
+    "fuse.js": "^7.5.0",
     "jspdf": "^4.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-icons": "^5.6.0",
     "react-router-dom": "^7.18.1",
     "tailwindcss": "^4.2.2"
   },
@@ -30,6 +31,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "ffmpeg-static": "^5.3.0",
     "globals": "^17.4.0",
+    "png-to-ico": "^3.0.2",
     "puppeteer": "^25.9.0",
     "sharp": "^0.35.4",
     "vite": "^8.0.1"

@@ -32,3 +32,6 @@ desktop.ini
 Thumbs.db
 .vercel
 .env*
+
+# Claude Code local settings (personal, not shared)
+.claude/settings.local.json
