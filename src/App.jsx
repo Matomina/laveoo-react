@@ -42,6 +42,7 @@ const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const AdminDashboardPage = lazy(() => import("./pages/admin/AdminDashboardPage"));
 const AdminFacturesListPage = lazy(() => import("./pages/admin/AdminFacturesListPage"));
 const AdminNewFacturePage = lazy(() => import("./pages/admin/AdminNewFacturePage"));
+const AdminConversationsPage = lazy(() => import("./pages/admin/AdminConversationsPage"));
 const RequireAuth = lazy(() => import("./components/RequireAuth"));
 
 function SiteLayout() {
@@ -104,6 +105,7 @@ export default function App() {
                     <Route index element={<Suspense fallback={null}><AdminDashboardPage /></Suspense>} />
                     <Route path="factures" element={<Suspense fallback={null}><AdminFacturesListPage /></Suspense>} />
                     <Route path="factures/nouvelle" element={<Suspense fallback={null}><AdminNewFacturePage /></Suspense>} />
+                    <Route path="conversations" element={<Suspense fallback={null}><AdminConversationsPage /></Suspense>} />
                 </Route>
             </Route>
         </Routes>

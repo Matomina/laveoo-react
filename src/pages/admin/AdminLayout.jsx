@@ -87,6 +87,7 @@ export default function AdminLayout() {
                             </NavLink>
                             <NavLink to="/admin/factures" className={navLinkClass}>Factures</NavLink>
                             <NavLink to="/admin/factures/nouvelle" className={navLinkClass}>Nouvelle facture</NavLink>
+                            <NavLink to="/admin/conversations" className={navLinkClass}>Conversations</NavLink>
                         </nav>
                     </div>
                     <div className="flex items-center gap-4">
